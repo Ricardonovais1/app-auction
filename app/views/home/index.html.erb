@@ -1,4 +1,6 @@
-<h2>Novos lotes</h2>
+<div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
+
+<h2 class="mb-5">Lotes em andamento</h2>
 
 <h3><%= 'Nenhum lote cadastrado' if @lots.empty? %></h3>
  
@@ -8,15 +10,12 @@
 
     <% @lots.each do |lot| %>
 
-      <div class="col-sm-6 mb-3 mb-sm-0">
+      <div class="card col-3 ms-3 me-3 mb-3 p-0" style="width: 18rem;">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Lote <%= lot.code %></h5>
-            <p class="card-text">Data de início: <%= lot.start_date %></p>
-            <p class="card-text">Data limite para lances: <%= lot.limit_date %></p>
-            <p class="card-text">Valor mínimo para lance: R$<%= lot.minimum_bid_value %>,00</p>
-            <p class="card-text">Menor diferença permitida entre lances: R$<%= lot.minimum_bid_difference %>,00</p>
-            <a href="#" class="btn btn-primary">Fazer um lance</a>
+            <h5 class="card-title text-success"><strong>Lote <%= lot.code %></strong></h5>
+            <p class="card-text"><%= lot.start_date %> a  <%= lot.limit_date %></p></p>
+            <a href="#" class="btn btn-secondary">Fazer um lance</a>
           </div>
         </div>
       </div>
@@ -26,3 +25,6 @@
   <% end %>
 
 </div>
+</div>
+
+<%# col-sm-6 mb-3 mb-sm-0 %>
