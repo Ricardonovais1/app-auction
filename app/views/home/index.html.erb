@@ -1,5 +1,7 @@
-<h1>Tela inicial</h1>
+<h2>Novos lotes</h2>
 
+<h3><%= 'Nenhum lote cadastrado' if @lots.empty? %></h3>
+ 
 <div class="row">
 
   <% if @lots.any? %>
@@ -14,11 +16,11 @@
             <p class="card-text">Data limite para lances: <%= lot.limit_date %></p>
             <p class="card-text">Valor mínimo para lance: R$<%= lot.minimum_bid_value %>,00</p>
             <p class="card-text">Menor diferença permitida entre lances: R$<%= lot.minimum_bid_difference %>,00</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="#" class="btn btn-primary">Fazer um lance</a>
           </div>
         </div>
       </div>
-
+     
     <% end %>
 
   <% end %>

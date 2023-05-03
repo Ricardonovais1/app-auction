@@ -1,7 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+sample_lot_1 = Lot.create!(code: 'ZZZ000000', start_date: '2090-10-10', limit_date: '2090-10-20', 
+                        minimum_bid_value: 100, minimum_bid_difference: 10)
+sample_lot_2 = Lot.create!(code: 'YYY999999', start_date: '2090-10-20', limit_date: '2090-10-30', 
+                         minimum_bid_value: 200, minimum_bid_difference: 20) 

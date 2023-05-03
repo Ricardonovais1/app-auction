@@ -33,4 +33,14 @@ describe 'Usuário visita a página inicial' do
     expect(page).to have_content "Valor mínimo para lance: R$200,00"
     expect(page).to have_content "Menor diferença permitida entre lances: R$20,00"
   end
+
+  it 'e não há lotes cadastrados' do 
+    # Arrange 
+
+    # Act 
+    visit root_path
+
+    # Assert
+    expect(page).to have_content 'Nenhum lote cadastrado'
+  end
 end
