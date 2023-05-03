@@ -23,23 +23,18 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+              <% if user_signed_in? %>
+              <li class="nav-item nav-link ms-auto">
+                <%= 'Sair' %>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+              <li class="nav-item nav-link link-success">
+                <%= current_user.email %>
               </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
+              <% else %>
+              <li class="nav-item nav-link">
+                <%= link_to 'Entrar/ Cadastrar', new_user_session_path %>
               </li>
+              <% end %>
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -48,9 +43,15 @@
           </div>
         </div>
       </nav>
+      <div>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
     </div>
   </header>
   <body>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main> 
   </body>
 </html>
