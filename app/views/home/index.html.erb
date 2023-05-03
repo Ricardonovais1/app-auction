@@ -1,1 +1,26 @@
 <h1>Tela inicial</h1>
+
+<div class="row">
+
+  <% if @lots.any? %>
+
+    <% @lots.each do |lot| %>
+
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Lote <%= lot.code %></h5>
+            <p class="card-text">Data de início: <%= lot.start_date %></p>
+            <p class="card-text">Data limite para lances: <%= lot.limit_date %></p>
+            <p class="card-text">Valor mínimo para lance: R$<%= lot.minimum_bid_value %>,00</p>
+            <p class="card-text">Menor diferença permitida entre lances: R$<%= lot.minimum_bid_difference %>,00</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+
+  <% end %>
+
+</div>
