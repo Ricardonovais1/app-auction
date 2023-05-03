@@ -1,0 +1,15 @@
+
+<div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
+
+  <h2 class="mb-5"><%= Lot.model_name.human %><%= @lot.code %></h2>
+
+  <p><%= Lot.human_attribute_name(:code) %>: <%= @lot.code %> </p>
+  <p><%= Lot.human_attribute_name(:start_date) %>: <%= I18n.l(@lot.start_date) %> </p>
+  <p><%= Lot.human_attribute_name(:limit_date) %>: <%= I18n.l(@lot.limit_date) %> </p>
+  <p><%= Lot.human_attribute_name(:minimum_bid_value) %>: R$<%= @lot.minimum_bid_value %>,00 </p>
+  <p><%= Lot.human_attribute_name(:minimum_bid_difference) %>: R$<%= @lot.minimum_bid_difference %>,00 </p>
+
+  <%= link_to 'Tela inicial', root_path, class: "btn btn-secondary mb-3 mt-2"  %>
+
+</div>
+

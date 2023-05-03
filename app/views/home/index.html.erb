@@ -6,16 +6,15 @@
  
 <div class="row">
 
-  <% if @lots.any? %>
+  <% if @lots.any? %> 
 
     <% @lots.each do |lot| %>
 
       <div class="card col-3 ms-3 me-3 mb-3 p-0" style="width: 18rem;">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title text-success"><strong>Lote <%= lot.code %></strong></h5>
-            <p class="card-text"><%= lot.start_date %> a  <%= lot.limit_date %></p></p>
-            <a href="#" class="btn btn-secondary">Fazer um lance</a>
+            <%= link_to "#{Lot.model_name.human} #{lot.code}", lot_path(lot), class: "btn btn-success mb-3 mt-2"  %>
+            <p class="card-text"><%= I18n.l(lot.start_date) %> a <%= I18n.l(lot.limit_date) %></p></p>
           </div>
         </div>
       </div>
@@ -27,4 +26,3 @@
 </div>
 </div>
 
-<%# col-sm-6 mb-3 mb-sm-0 %>

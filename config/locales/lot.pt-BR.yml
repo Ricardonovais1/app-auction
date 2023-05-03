@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      lot:  
+        one: 'Lote'
+        other: 'Lotes'
+    attributes:
+      lot: 
+        code: 'Código'
+        start_date: 'Data de início'
+        limit_date: 'Data limite para lances'
+        minimum_bid_value: 'Valor mínimo para lance'
+        minimum_bid_difference: 'Menor diferença permitida entre lances'
+       
