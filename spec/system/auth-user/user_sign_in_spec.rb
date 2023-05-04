@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário faz login' do 
   it 'com sucesso' do 
     # Arrange 
-    user = User.create!(name: 'Ricardo', email: 'ricardo@amigoviolao.com', registration_number: 70535073607, password: 'password')
+    user = User.create!(name: 'Ricardo', email: 'ricardo@amigoviolao.com', registration_number: '70535073607', password: 'password')
     
     # Act 
     visit root_path
@@ -26,7 +26,7 @@ describe 'Usuário faz login' do
 
   it 'e faz logout' do 
     # Arrange 
-    user = User.create!(name: 'Ricardo', email: 'ricardo@amigoviolao.com', registration_number: 70535073607, password: 'password')
+    user = User.create!(name: 'Ricardo', email: 'ricardo@amigoviolao.com', registration_number: '70535073607', password: 'password')
 
     # Act 
     visit root_path 
@@ -43,7 +43,7 @@ describe 'Usuário faz login' do
     # Assert
     expect(page).to have_link 'Entrar'
     expect(page).not_to have_link 'Sair'
-    expect(page).to have_content 'Saiu com sucesso.'
+    expect(page).to have_content 'Logout efetuado com sucesso.'
     expect(page).not_to have_content 'ricardo@amigoviolao.com | Olá Ricardo!'
   end
 end

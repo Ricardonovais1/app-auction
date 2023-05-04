@@ -8,7 +8,7 @@ describe 'Usuário cria sua conta' do
     visit root_path
     click_on 'Entrar'
     click_on 'Criar conta'
-    fill_in 'Nome', with: ''
+    fill_in 'Nome', with: 'Ricardo'
     fill_in 'CPF', with: '70535073607'
     fill_in 'Email', with: 'ric@email.com'
     fill_in 'Senha', with: 'password'
