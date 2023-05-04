@@ -4,14 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :name, :registration_number, presence: true
-  validates :registration_number, uniqueness: true
+  validates :registration_number, presence: true, 
+                                  uniqueness: true, 
+                                  format: { with: /\A\d{11}\z/, message: "deve conter 11 dígitos" }
 
+  validates :name, presence: true
   validate :cpf_validator 
 
 
   def check_verifyer_digit_1(cpf)
-
+    return if cpf.size < 11
     cpf_arr = cpf.split('').map!(&:to_i)
     factor = 10
     index = 0
@@ -28,9 +30,12 @@ class User < ApplicationRecord
     rest = verification % 11
     first_verifyer = rest == 0 || rest == 1 ? 0 : 11 - rest
     first_verifyer == cpf_arr[9]
+
+    check_verifyer_digit_2(cpf)
   end
 
   def check_verifyer_digit_2(cpf)
+    return if cpf.size < 11
 
     cpf_arr = cpf.split('').map!(&:to_i)
     factor = 11
@@ -49,10 +54,7 @@ class User < ApplicationRecord
     first_verifyer == cpf_arr[10]
   end
 
-  def cpf_validator
-    false if registration_number.size > 11 || registration_number.size < 11
-    registration_number.gsub(/\.|\-/, '') 
+  def cpf_validator  
     check_verifyer_digit_1(registration_number)
-    check_verifyer_digit_2(registration_number)
   end
 end
