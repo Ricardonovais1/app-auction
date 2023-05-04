@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-describe 'Usuário se autentica' do 
+describe 'Usuário faz login' do 
   it 'com sucesso' do 
     # Arrange 
-    user = User.create!(email: 'ricardo@algumacoisa.com', password: 'password')
+    user = User.create!(name: 'Ricardo', email: 'ricardo@amigoviolao.com', registration_number: 70535073607, password: 'password')
     
     # Act 
     visit root_path
     within('nav') do
       click_on 'Entrar'
     end      
-    fill_in 'Email', with: 'ricardo@algumacoisa.com'
+    fill_in 'Email', with: 'ricardo@amigoviolao.com'
     fill_in 'Senha', with: 'password'
     within('.actions') do
       click_on 'Entrar'
@@ -22,5 +22,28 @@ describe 'Usuário se autentica' do
       expect(page).to have_content 'Sair'
       expect(page).to have_content user.email
     end 
+  end
+
+  it 'e faz logout' do 
+    # Arrange 
+    user = User.create!(name: 'Ricardo', email: 'ricardo@amigoviolao.com', registration_number: 70535073607, password: 'password')
+
+    # Act 
+    visit root_path 
+    click_on 'Entrar'
+    fill_in 'Email', with: 'ricardo@amigoviolao.com'
+    fill_in 'Senha', with: 'password'
+    within('.actions') do 
+      click_on 'Entrar'
+    end
+    within('.sair') do 
+      click_on 'Sair'
+    end
+
+    # Assert
+    expect(page).to have_link 'Entrar'
+    expect(page).not_to have_link 'Sair'
+    expect(page).to have_content 'Saiu com sucesso.'
+    expect(page).not_to have_content 'ricardo@amigoviolao.com | Olá Ricardo!'
   end
 end

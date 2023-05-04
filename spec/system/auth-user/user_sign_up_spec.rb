@@ -8,14 +8,15 @@ describe 'Usuário cria sua conta' do
     visit root_path
     click_on 'Entrar'
     click_on 'Criar conta'
-    fill_in 'Nome', with: 'Ricardo'
+    fill_in 'Nome', with: ''
+    fill_in 'CPF', with: '70535073607'
     fill_in 'Email', with: 'ric@email.com'
     fill_in 'Senha', with: 'password'
     fill_in 'Confirme sua senha', with: 'password'
     click_on 'Cadastrar'
     
     # Assert
-    expect(page).to have_content 'Login efetuado com sucesso. Se não foi autorizado, a confirmação será enviada por e-mail.' 
+    expect(page).to have_content 'Ótimo! Você realizou seu registro com sucesso.' 
     within('nav') do 
       expect(page).not_to have_content 'Entrar'
       expect(page).to have_content 'Sair'
