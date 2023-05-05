@@ -16,4 +16,16 @@ describe 'User Admin faz login' do
       expect(page).to have_content admin.email
     end 
   end
+
+  it 'e vê botão de criar lote' do 
+    # Arrange 
+    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
+
+    # Act 
+    login_as(admin)
+    visit root_path
+    # Assert
+
+    expect(page).to have_link 'Criar lote'
+  end
 end

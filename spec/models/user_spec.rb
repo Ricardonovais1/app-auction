@@ -41,5 +41,13 @@ RSpec.describe User, type: :model do
 
     expect(result).to eq false
   end
+
+  it 'admin true quando email termina em @leilaodogalpao.com.br' do 
+    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '92015867600', password: 'password')
+    
+    result = admin.admin
+
+    expect(result).to be true
+  end
  end
 end

@@ -46,4 +46,16 @@ describe 'Usuário faz login' do
     expect(page).to have_content 'Logout efetuado com sucesso.'
     expect(page).not_to have_content 'ricardo@amigoviolao.com | Olá Ricardo!'
   end
+
+  it 'e não vê botão de Criar lote' do 
+    # Arrange 
+    user = User.create!(name: 'Ricardo', email: 'ricardo@rock.com.br', registration_number: '70535073607', password: 'password')
+
+    # Act 
+    login_as(user)
+    visit root_path
+
+    # Assert
+    expect(page).not_to have_link 'Criar lote'
+  end
 end
