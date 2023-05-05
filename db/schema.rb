@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_04_234108) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_05_111851) do
   create_table "lots", force: :cascade do |t|
     t.string "code"
     t.date "start_date"
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_234108) do
     t.integer "minimum_bid_difference"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "by", default: "Não informado"
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,4 +36,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_234108) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
 end

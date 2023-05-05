@@ -32,7 +32,7 @@ admin:
             TELA DE CADASTRO DE ADMIN (NEW, CREATE)
             TELA DE EDIÇÃO DE ADMIN (EDIT, UPDATE)
 
-visitor:
+user (visitante):
 
     atributos:
 
@@ -82,6 +82,7 @@ lot:
     + diferença mínima entre os lances
     + nome do admin que criou o lote
     + nome do admin que aprovou o lote
+    + status (ativo / aguardando aprovação)
 
     ações:
 

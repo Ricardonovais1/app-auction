@@ -26,7 +26,7 @@
               <% if user_signed_in? %>
                 <% if current_user.admin? %>
                   <li class="nav-item nav-link ms-auto">
-                    <%= link_to 'Criar lote', root_path %>
+                    <%= link_to 'Criar lote', new_lot_path %>
                   </li>
                 <% end %>
                 <li class="sair nav-item nav-link ms-auto">

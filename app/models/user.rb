@@ -4,9 +4,6 @@ class User < ApplicationRecord
 
   after_create :set_admin_if_leilaodogalpao_email
 
-  # scope :visitor, -> { where(admin: false) }
-  # scope :admin, -> { where(admin: true) }
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -19,14 +16,12 @@ class User < ApplicationRecord
 
   # =================================================================
 
-
   def set_admin_if_leilaodogalpao_email
     self.admin = email.ends_with?('@leilaodogalpao.com.br')
     save!
   end
 
   # =================================================================
-
 
   def check_verifyer_digit_1(cpf)
     return if cpf.size < 11
