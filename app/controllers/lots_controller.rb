@@ -16,7 +16,7 @@ class LotsController < ApplicationController
     if @lot.save
       redirect_to @lot, notice: "Lote cadastrado com sucesso" 
     else  
-      flash.now[:notice] = 'Houve um erro ao cadastrar o lote'
+      flash.now[:alert] = 'Houve um erro ao cadastrar o lote'
       render :new
     end
   end
