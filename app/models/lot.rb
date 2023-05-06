@@ -1,10 +1,3 @@
 class Lot < ApplicationRecord
-  # attr_accessor :current_user
-  # after_create :set_by
-
-
-  # def set_by
-  #   self.by = :email
-  #   self.save!
-  # end
+  validates :code, :start_date, :limit_date, :minimum_bid_value, :minimum_bid_difference, presence: true
 end

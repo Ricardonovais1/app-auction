@@ -11,11 +11,14 @@ class LotsController < ApplicationController
 
   def create 
     @lot = Lot.new(set_params)
-    @lot.by = "#{current_user.name} | #{current_user.email}"
-    @lot.save
-    
-
-    redirect_to @lot
+    @lot.by = current_user.name
+    @lot.by_email = current_user.email
+    if @lot.save
+      redirect_to @lot, notice: "Lote cadastrado com sucesso" 
+    else  
+      flash.now[:notice] = 'Houve um erro ao cadastrar o lote'
+      render :new
+    end
   end
 
   def show
@@ -28,6 +31,12 @@ class LotsController < ApplicationController
   end
 
   def set_params
-    params.require(:lot).permit(:code, :start_date, :limit_date, :minimum_bid_value, :minimum_bid_difference, :by)
+    params.require(:lot).permit(:code, 
+                                :start_date, 
+                                :limit_date, 
+                                :minimum_bid_value, 
+                                :minimum_bid_difference, 
+                                :by, 
+                                :by_email)
   end
 end
