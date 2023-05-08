@@ -73,6 +73,13 @@ describe 'usuário admin cadastra lote' do
     expect(page).not_to have_content 'Valor mínimo para lance: R$100,00'
     expect(page).not_to have_content 'Menor diferença permitida entre lances: R$10,00'
     expect(page).not_to have_content 'Criado por: Ricardo | ricardo@leilaodogalpao.com.br'
+
+    expect(page).to have_content 'Data de início não pode ficar em branco'
+    expect(page).to have_content 'Data limite para lances não pode ficar em branco'
+    expect(page).to have_content 'Valor mínimo para lance não pode ficar em branco'
+    expect(page).to have_content 'Menor diferença permitida entre lances não pode ficar em branco'
+    expect(page).to have_content 'Código não pode ficar em branco'
+    expect(page).to have_content 'Código não possui o tamanho esperado (9 caracteres)'
   end
 end
 

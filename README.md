@@ -71,6 +71,10 @@ item:
     TELA DE CADASTRO DE ITEM (NEW, CREATE)
     TELA DE EDIÇÃO DE ITEM (EDIT, UPDATE)
 
+product_category 
+
+    + Name 
+
 lot:
 
     atributos:

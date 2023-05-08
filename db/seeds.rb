@@ -14,3 +14,9 @@ admin = User.create!(name: 'Sílvia', email: 'silvia@leilaodogalpao.com.br', reg
 
 user2 = User.create!(name: 'Carlos', email: 'c@c.com', registration_number: '43687476235', password: '111111')
 admin2 = User.create!(name: 'Deia', email: 'd@leilaodogalpao.com.br', registration_number: '63160693244', password: '111111')
+
+
+ProductCategory.create!(name: 'Computadores')
+ProductCategory.create!(name: 'Acessórios')
+ProductCategory.create!(name: 'Tablets')
+ProductCategory.create!(name: 'Celulares')
