@@ -58,18 +58,22 @@ describe 'Admin acessa página de cadastro de categoria de produto' do
   end
   
   
-  # it 'com sucesso' do 
-  #   # Arrange 
+  it 'sem preencher nome' do 
+    # Arrange 
+    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
 
-  #   # Act 
-  #   visit root_path
-  #   within('nav') do 
-  #     click_on 'Administrativo'
-  #     click_on 'Categoria de produto'
-  #   end  
-  #   fill_in 'Nome', with: 'Informática'
+    # Act 
+    login_as(admin)
+    visit root_path
+    within('nav') do 
+      click_on 'Administrativo'
+      click_on 'Categorias de produto'
+    end  
+    fill_in 'Nome', with: ''
+    click_on 'Salvar'
 
-  #   # Assert
-  #   expect(page).to have_content 'Categoria salva com sucesso'
-  # end
+    # Assert
+    expect(page).to have_content 'Nome não pode ficar em branco'
+    expect(page).to have_content 'Houve um problema'
+  end
 end

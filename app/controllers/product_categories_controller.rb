@@ -6,7 +6,11 @@ class ProductCategoriesController < ApplicationController
   def create 
     @product_category = ProductCategory.new(params.require(:product_category).permit(:name))
 
-    @product_category.save
-    redirect_to root_path, notice: 'Nova categoria de produto salva com sucesso'
+    if @product_category.save
+      redirect_to root_path, notice: 'Nova categoria de produto salva com sucesso'
+    else
+      flash.now[:alert] = 'Houve um problema'
+      render :new 
+    end
   end
 end
