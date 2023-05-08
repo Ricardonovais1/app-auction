@@ -20,3 +20,6 @@ ProductCategory.create!(name: 'Computadores')
 ProductCategory.create!(name: 'Acessórios')
 ProductCategory.create!(name: 'Tablets')
 ProductCategory.create!(name: 'Celulares')
+
+Item.create!(name: 'Teclado Logitech', description: 'Lindo teclado preto Logitech', weight: 200, height: 3, width: 60, depth: 15)
+Item.create!(name: 'Webcam HD 1080p', description: 'Segunda melhor câmera da Logitech', weight: 150, height: 10, width: 10, depth: 10)
