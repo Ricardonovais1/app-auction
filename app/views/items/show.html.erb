@@ -2,6 +2,7 @@
 
 <h2><%= Item.model_name.human %>: <%= @item.name %></h2>
 <p><%= Item.human_attribute_name(:description) %>: <%= @item.description %></p>
+<p><%= Item.human_attribute_name(:product_category_id) %>: <%= @product_category %></p>
 <p><%= Item.human_attribute_name(:weight) %>: <%= @item.weight %>g</p>
 <p>Dimensões: <%= @item.height %>cm (<%= Item.human_attribute_name(:height).downcase %>) x <%= @item.depth %>cm (<%= Item.human_attribute_name(:depth).downcase %>) x <%= @item.width %>cm (<%= Item.human_attribute_name(:width).downcase %>)</p>
 <p><%= Item.human_attribute_name(:code) %>: <%= @item.code %> </p>

@@ -29,7 +29,8 @@ describe 'Usuário visualiza produtos cadastrados' do
 
   it 'com sucesso' do 
     # Arrange 
-    item = Item.create!(name: 'Mouse exbom', description: 'Mouse com fio', weight: 100, width: 5, height: 3, depth: 8 )
+    prod_cat = ProductCategory.create!(name: 'Alguma')
+    item = Item.create!(name: 'Mouse exbom', description: 'Mouse com fio', weight: 100, width: 5, height: 3, depth: 8, product_category_id: prod_cat.id )
     admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
 
     # Act 

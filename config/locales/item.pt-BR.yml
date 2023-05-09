@@ -13,3 +13,5 @@ pt-BR:
         depth: 'Profundidade'
         width: 'Largura'
         code: 'Código'
+        product_category_id: 'Categoria'
+        product_category: 'Categoria'

@@ -43,6 +43,11 @@
     </div>
 
     <div>
+      <%= f.label :product_category_id %><br />
+      <%= f.collection_select :product_category_id, @product_categories, :id, :name %>
+    </div>
+
+    <div>
       <%= f.submit 'Salvar' %><br />
     </div>
   <% end %>

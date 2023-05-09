@@ -1,3 +1,13 @@
+# ==== LOTES EXPIRADOS:
+
+Lot.create!(code: 'ZZZ090909', start_date: 1.year.ago, limit_date: 1.month.ago, 
+  minimum_bid_value: 100, minimum_bid_difference: 10)
+Lot.create!(code: 'YYY090909', start_date: 1.year.ago, limit_date: 1.month.ago, 
+   minimum_bid_value: 200, minimum_bid_difference: 20) 
+Lot.create!(code: 'XXX090909', start_date: 1.year.ago, limit_date: 1.month.ago, 
+    minimum_bid_value: 300, minimum_bid_difference: 30)
+
+
 # ==== LOTES ATIVOS:
 
 Lot.create!(code: 'ZZZ111111', start_date: 1.day.ago, limit_date: 1.year.from_now, 
@@ -6,8 +16,7 @@ Lot.create!(code: 'YYY111111', start_date: 1.day.ago, limit_date: 1.year.from_no
    minimum_bid_value: 200, minimum_bid_difference: 20) 
 Lot.create!(code: 'XXX111111', start_date: 1.day.ago, limit_date: 1.year.from_now, 
     minimum_bid_value: 300, minimum_bid_difference: 30)
-Lot.create!(code: 'YYY111111', start_date: 1.day.ago, limit_date: 1.year.from_now, 
-     minimum_bid_value: 400, minimum_bid_difference: 40) 
+
 
 
 # ==== LOTES FUTUROS:

@@ -4,6 +4,7 @@ describe 'Usuário cria um novo ítem' do
   it 'com sucesso' do 
     # Arrange 
     admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
+    pc = ProductCategory.create!(name: 'Alguma')
     
     allow(SecureRandom).to receive(:alphanumeric).and_return('AXD45SIO87')
     # Act 
@@ -19,11 +20,13 @@ describe 'Usuário cria um novo ítem' do
     fill_in 'Altura', with: 45
     fill_in 'Profundidade', with: 20
     fill_in 'Largura', with: 60
+    select 'Alguma', from: 'Categoria'
     click_on 'Salvar'
 
     # Assert
     expect(page).to have_content 'Produto cadastrado com sucesso'
     expect(page).to have_content 'Produto: Monitor HP'
+    expect(page).to have_content 'Categoria: Alguma'
     expect(page).to have_content 'Descrição: Lindo monitor preto'
     expect(page).to have_content 'Peso: 1500g'
     expect(page).to have_content 'Dimensões: 45cm (altura) x 20cm (profundidade) x 60cm (largura)'

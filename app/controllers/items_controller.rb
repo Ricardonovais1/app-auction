@@ -10,11 +10,13 @@ class ItemsController < ApplicationController
 
   def new 
     @item = Item.new
+    @product_categories = ProductCategory.all
   end
 
   def create 
     @item = Item.new(set_params) 
-    
+    @product_categories = ProductCategory.all
+
     if @item.save 
       redirect_to @item, notice: 'Produto cadastrado com sucesso'
     else 
@@ -23,7 +25,10 @@ class ItemsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    # id = @item.id
+    @product_category = ProductCategory.find(params[:id]).name
+  end
 
   private 
 
@@ -38,7 +43,8 @@ class ItemsController < ApplicationController
                                 :height,
                                 :depth,
                                 :width,
-                                :code)
+                                :code,
+                                :product_category_id)
   end
 
   def check_admin_user 
