@@ -21,6 +21,7 @@ describe 'Usuário cria um novo ítem' do
     fill_in 'Profundidade', with: 20
     fill_in 'Largura', with: 60
     select 'Alguma', from: 'Categoria'
+    attach_file 'Imagem', Rails.root.join("spec/support/img/campus_code_logo.png")
     click_on 'Salvar'
 
     # Assert
@@ -31,6 +32,7 @@ describe 'Usuário cria um novo ítem' do
     expect(page).to have_content 'Peso: 1500g'
     expect(page).to have_content 'Dimensões: 45cm (altura) x 20cm (profundidade) x 60cm (largura)'
     expect(page).to have_content 'Código: AXD45SIO87'
+    expect(page).to have_css("img[src*='campus_code_logo']")
   end
 
   it 'sem preencher os campos' do 
