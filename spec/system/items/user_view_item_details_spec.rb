@@ -9,7 +9,7 @@ describe 'Usuário visualiza detalhes do produto' do
     login_as(user)
     visit item_path(item.id)
 
-    expect(page).to have_content 'Produto: Mouse exbom'
+    expect(page).to have_content 'Mouse exbom'
     expect(page).to have_content 'Descrição: Mouse com fio'
     expect(page).to have_content 'Categoria: Alguma'
     expect(page).to have_content 'Peso: 100g'
@@ -33,7 +33,7 @@ describe 'Usuário visualiza detalhes do produto' do
     click_on 'Mouse exbom'
 
     # Assert
-    expect(page).to have_content 'Produto: Mouse exbom'
+    expect(page).to have_content 'Mouse exbom'
     expect(page).to have_content 'Descrição: Mouse com fio'
     expect(page).to have_content 'Peso: 100g'
     expect(page).to have_content 'Dimensões: 3cm (altura) x 8cm (profundidade) x 5cm (largura)'

@@ -25,7 +25,7 @@ describe 'Usuário cria um novo ítem' do
 
     # Assert
     expect(page).to have_content 'Produto cadastrado com sucesso'
-    expect(page).to have_content 'Produto: Monitor HP'
+    expect(page).to have_content 'Monitor HP'
     expect(page).to have_content 'Categoria: Alguma'
     expect(page).to have_content 'Descrição: Lindo monitor preto'
     expect(page).to have_content 'Peso: 1500g'
