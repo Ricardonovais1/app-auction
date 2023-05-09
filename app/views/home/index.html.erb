@@ -2,13 +2,41 @@
 
 <h2 class="mb-5">Lotes em andamento</h2>
 
-<h3><%= 'Nenhum lote cadastrado' if @lots.empty? %></h3>
+<h3><%= 'Nenhum lote cadastrado' if @active_lots.empty? %></h3>
  
 <div class="row">
 
-  <% if @lots.any? %> 
+  <% if @active_lots.any? %> 
 
-    <% @lots.each do |lot| %>
+    <% @active_lots.each do |lot| %>
+
+      <div class="card col-3 ms-3 me-3 mb-3 p-0" style="width: 18rem;">
+        <div class="card">
+          <div class="card-body">
+            <%= link_to "#{Lot.model_name.human} #{lot.code}", lot_path(lot), class: "btn btn-success mb-3 mt-2"  %>
+            <p class="card-text"><%= I18n.l(lot.start_date) %> a <%= I18n.l(lot.limit_date) %></p></p>
+          </div>
+        </div>
+      </div>
+     
+    <% end %>
+
+  <% end %>
+
+</div>
+</div>
+
+<div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
+
+<h2 class="mb-5">Lotes futuros</h2>
+
+<h3><%= 'Nenhum lote cadastrado' if @future_lots.empty? %></h3>
+ 
+<div class="row">
+
+  <% if @future_lots.any? %> 
+
+    <% @future_lots.each do |lot| %>
 
       <div class="card col-3 ms-3 me-3 mb-3 p-0" style="width: 18rem;">
         <div class="card">

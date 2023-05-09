@@ -1,11 +1,12 @@
 class LotsController < ApplicationController
   before_action :set_lot, only: [:show]
-  before_action :authenticate_user!, only: [:new]
-  before_action :check_admin_user, only: [:new]
+  before_action :authenticate_user!, only: [:new, :expired]
+  before_action :check_admin_user, only: [:new, :expired]
 
-  def index 
+  def expired 
+    @expired_lots = Lot.expired
     @lots = Lot.all
-  end
+  end 
 
   def new 
     @lot = Lot.new

@@ -6,8 +6,14 @@ class Lot < ApplicationRecord
                    length: { is: 9 }
 
   validate :code_format_validation
-  validate :start_date_validation
-  validate :limit_date_validation
+ 
+  # ================ DATES SCOPES ===================== 
+
+  scope :active,  -> { where('start_date <= ? AND limit_date >= ?', Date.today, Date.today) }
+  scope :future,  -> { where('start_date > ?', Date.today) }
+  scope :expired, -> { where('limit_date < ?', Date.today) }
+
+  # ================ CUSTOM METHODS =================== 
 
   def validate_characters(str)
     str.match?(/\A[a-zA-Z]+\z/)
@@ -25,18 +31,6 @@ class Lot < ApplicationRecord
    
     if !validate_characters(characters) || !validate_numbers(numbers) 
       errors.add(:code, message: 'deve ter 3 letras e 6 números')
-    end
-  end
-
-  def start_date_validation
-    if self.start_date.present? && self.start_date <= Date.today
-      self.errors.add(:start_date, ' deve ser futura')
-    end
-  end
-
-  def limit_date_validation
-    if self.start_date.present? && self.limit_date.present? && self.start_date >= self.limit_date
-      self.errors.add(:limit_date, ' deve ser maior que a data de início')
     end
   end
 end

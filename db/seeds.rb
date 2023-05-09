@@ -1,3 +1,17 @@
+# ==== LOTES ATIVOS:
+
+Lot.create!(code: 'ZZZ111111', start_date: 1.day.ago, limit_date: 1.year.from_now, 
+  minimum_bid_value: 100, minimum_bid_difference: 10)
+Lot.create!(code: 'YYY111111', start_date: 1.day.ago, limit_date: 1.year.from_now, 
+   minimum_bid_value: 200, minimum_bid_difference: 20) 
+Lot.create!(code: 'XXX111111', start_date: 1.day.ago, limit_date: 1.year.from_now, 
+    minimum_bid_value: 300, minimum_bid_difference: 30)
+Lot.create!(code: 'YYY111111', start_date: 1.day.ago, limit_date: 1.year.from_now, 
+     minimum_bid_value: 400, minimum_bid_difference: 40) 
+
+
+# ==== LOTES FUTUROS:
+
 Lot.create!(code: 'ZZZ000600', start_date: '05-06-2090', limit_date: '04-07-2090', 
                         minimum_bid_value: 100, minimum_bid_difference: 10)
 Lot.create!(code: 'YYY999399', start_date: '20-10-2090', limit_date: '24-12-2090', 
