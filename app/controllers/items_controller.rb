@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
 
   before_action :set_item, only: [:show]
-  before_action :authenticate_user!, only: [:index, :new]
-  before_action :check_admin_user, only: [:index, :new]
+  before_action :authenticate_user!, only: [:new]
+  before_action :check_admin_user, only: [:new]
 
   def index 
     @items = Item.all
@@ -44,7 +44,8 @@ class ItemsController < ApplicationController
                                 :depth,
                                 :width,
                                 :code,
-                                :product_category_id)
+                                :product_category_id,
+                                :image)
   end
 
   def check_admin_user 

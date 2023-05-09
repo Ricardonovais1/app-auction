@@ -1,5 +1,8 @@
 class Item < ApplicationRecord
   belongs_to :product_category
+
+  has_one_attached :image
+
   validates :name, :description, :weight, :height, :depth, :width, presence: true
 
   validates :weight, :height, :width, :depth, numericality: { greater_than: 0 }

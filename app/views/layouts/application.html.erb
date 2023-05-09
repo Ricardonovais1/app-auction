@@ -22,7 +22,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <%= link_to 'Home', root_path, class: 'nav-link active', 'aria-current': 'page' %>
+                  <%= link_to 'Home', root_path, class: 'nav-link', 'aria-current': 'page' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'Produtos cadastrados', items_path, class: 'nav-link', 'aria-current': 'page' %>
                 </li>
                 <% if user_signed_in? %>
                   <% if current_user.admin? %>
@@ -33,7 +36,6 @@
                   <ul class="dropdown-menu">
                     <li><%= link_to 'Categorias de produto', new_product_category_path, class: 'dropdown-item' %></li>
                     <li><%= link_to 'Criar lote', new_lot_path, class: 'dropdown-item' %></li>
-                    <li><%= link_to 'Produtos cadastrados', items_path, class: 'dropdown-item' %></li>
                     <li><%= link_to 'Novo produto', new_item_path, class: 'dropdown-item' %></li>
                     <li><%= link_to 'Lotes expirados', expired_lots_path, class: 'dropdown-item' %></li>
                   </ul>

@@ -1,22 +1,6 @@
 require 'rails_helper'
 
 describe 'Usuário visualiza produtos cadastrados' do 
-  it 'se estiver autenticado' do 
-    visit items_path
-
-    expect(current_path).to eq new_user_session_path
-  end 
-
-  it 'se estiver autenticado como admin' do 
-    user = User.create!(name: 'Ricardo', email: 'ricardo@amigoviolao.com', registration_number: '70535073607', password: 'password')
-
-    login_as(user)
-    visit items_path
-
-    expect(page).to have_content 'Você não tem permissão para acessar esta página'
-    expect(current_path).to eq root_path
-  end 
-
   it 'se estiver autenticado como admin' do 
     admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
 

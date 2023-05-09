@@ -1,11 +1,25 @@
 <div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
 
-<h2><%= @item.name %></h2>
-<p><%= Item.human_attribute_name(:description) %>: <%= @item.description %></p>
-<p><%= Item.human_attribute_name(:product_category_id) %>: <%= @product_category %></p>
-<p><%= Item.human_attribute_name(:weight) %>: <%= @item.weight %>g</p>
-<p>Dimensões: <%= @item.height %>cm (<%= Item.human_attribute_name(:height).downcase %>) x <%= @item.depth %>cm (<%= Item.human_attribute_name(:depth).downcase %>) x <%= @item.width %>cm (<%= Item.human_attribute_name(:width).downcase %>)</p>
-<p><%= Item.human_attribute_name(:code) %>: <%= @item.code %> </p>
+<div class="card mb-3" style="width:100%; height: 100%">
+  <div class="row g-0">
+    <div class="col-md-4">
+    <% if @item.image.attached? %>
+      <%= image_tag(@item.image, class:"img-fluid rounded-start", style:"") %>
+    <% end %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title" ><%= @item.name%></h2>
+        <p class="card-text"><strong><%= Item.human_attribute_name(:description) %>: </strong><%= @item.description %></p>
+        <p class="card-text"><strong><%= Item.human_attribute_name(:product_category_id) %>: </strong><%= @product_category %></p>
+        <p class="card-text"><strong><%= Item.human_attribute_name(:weight) %>: </strong><%= @item.weight %>g</p>
+        <p class="card-text"><strong>Dimensões: </strong><%= @item.height %>cm (<%= Item.human_attribute_name(:height).downcase %>) x <%= @item.depth %>cm (<%= Item.human_attribute_name(:depth).downcase %>) x <%= @item.width %>cm (<%= Item.human_attribute_name(:width).downcase %>)</p>
+        <p class="card-text"><strong><%= Item.human_attribute_name(:code) %>: </strong><%= @item.code %>g</p>
+        <p class="card-text"><small class="text-body-secondary">Criado em <%= I18n.l(@item.created_at, format: '%d de %B de %Y') %> </small></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 

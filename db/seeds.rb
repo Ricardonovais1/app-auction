@@ -39,10 +39,10 @@ user2 = User.create!(name: 'Carlos', email: 'c@c.com', registration_number: '436
 admin2 = User.create!(name: 'Deia', email: 'd@leilaodogalpao.com.br', registration_number: '63160693244', password: '111111')
 
 
-ProductCategory.create!(name: 'Computadores')
-ProductCategory.create!(name: 'Acessórios')
-ProductCategory.create!(name: 'Tablets')
-ProductCategory.create!(name: 'Celulares')
+com = ProductCategory.create!(name: 'Computadores')
+ace = ProductCategory.create!(name: 'Acessórios')
+tab = ProductCategory.create!(name: 'Tablets')
+cel = ProductCategory.create!(name: 'Celulares')
 
-Item.create!(name: 'Teclado Logitech', description: 'Lindo teclado preto Logitech', weight: 200, height: 3, width: 60, depth: 15)
-Item.create!(name: 'Webcam HD 1080p', description: 'Segunda melhor câmera da Logitech', weight: 150, height: 10, width: 10, depth: 10)
+# Item.create!(name: 'Teclado Logitech', description: 'Lindo teclado preto Logitech', weight: 200, height: 3, width: 60, depth: 15, )
+# Item.create!(name: 'Webcam HD 1080p', description: 'Segunda melhor câmera da Logitech', weight: 150, height: 10, width: 10, depth: 10)
