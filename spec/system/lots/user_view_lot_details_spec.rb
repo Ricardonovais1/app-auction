@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário vê a tela de detalhes do lote' do 
+describe 'Usuário vê a tela de detalhes do lote' do  
+
   it 'e visualiza informações adicionais' do 
     # Arrange 
     lot = Lot.create!(code: 'AAA000000', start_date: '2090-10-20', limit_date: '2090-10-30', 

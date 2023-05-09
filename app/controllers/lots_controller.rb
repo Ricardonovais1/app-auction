@@ -1,5 +1,7 @@
 class LotsController < ApplicationController
   before_action :set_lot, only: [:show]
+  before_action :authenticate_user!, only: [:new]
+  before_action :check_admin_user, only: [:new]
 
   def index 
     @lots = Lot.all
@@ -38,5 +40,11 @@ class LotsController < ApplicationController
                                 :minimum_bid_difference, 
                                 :by, 
                                 :by_email)
+  end
+
+  def check_admin_user
+    unless current_user.admin?
+      redirect_to root_path, alert: 'Você não tem permissão para acessar esta página'
+    end
   end
 end

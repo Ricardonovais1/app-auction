@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
 
   before_action :set_item, only: [:show]
+  before_action :authenticate_user!
+  before_action :check_admin_user
 
   def index 
     @items = Item.all
@@ -37,5 +39,11 @@ class ItemsController < ApplicationController
                                 :depth,
                                 :width,
                                 :code)
+  end
+
+  def check_admin_user 
+    unless current_user.admin?
+      redirect_to root_path, alert: "Você não tem permissão para acessar esta página"
+    end
   end
 end
