@@ -6,6 +6,8 @@ class Lot < ApplicationRecord
                    length: { is: 9 }
 
   validate :code_format_validation
+
+  enum status: { pending: 0, active: 5 }
  
   # ================ DATES SCOPES ===================== 
 

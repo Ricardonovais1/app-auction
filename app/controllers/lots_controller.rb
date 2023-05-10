@@ -1,5 +1,5 @@
 class LotsController < ApplicationController
-  before_action :set_lot, only: [:show]
+  before_action :set_lot, only: [:show, :active]
   before_action :authenticate_user!, only: [:new, :expired]
   before_action :check_admin_user, only: [:new, :expired]
 
@@ -27,6 +27,11 @@ class LotsController < ApplicationController
   def show
   end
 
+  def active 
+    @lot.active!
+    redirect_to @lot
+  end
+
   private 
 
   def set_lot 
@@ -40,7 +45,8 @@ class LotsController < ApplicationController
                                 :minimum_bid_value, 
                                 :minimum_bid_difference, 
                                 :by, 
-                                :by_email)
+                                :by_email,
+                                :status)
   end
 
   def check_admin_user

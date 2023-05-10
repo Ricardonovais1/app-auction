@@ -1,4 +1,6 @@
 pt-BR:
+  pending: 'Aguardando aprovação'
+  active: 'Ativo'
   activerecord:
     models:
       lot:  
@@ -11,4 +13,5 @@ pt-BR:
         limit_date: 'Data limite para lances'
         minimum_bid_value: 'Valor mínimo para lance'
         minimum_bid_difference: 'Menor diferença permitida entre lances'
+        status: 'Situação do lote'
        

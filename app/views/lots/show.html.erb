@@ -8,9 +8,13 @@
   <p><%= Lot.human_attribute_name(:limit_date) %>: <%= I18n.l(@lot.limit_date) %> </p>
   <p><%= Lot.human_attribute_name(:minimum_bid_value) %>: R$<%= @lot.minimum_bid_value %>,00 </p>
   <p><%= Lot.human_attribute_name(:minimum_bid_difference) %>: R$<%= @lot.minimum_bid_difference %>,00 </p>
+  <p><%= Lot.human_attribute_name(:status) %>: <%= I18n.t(@lot.status) %></p>
+  
   <% if current_user.present? && current_user.admin? %>
     <p>Criado por: <%= @lot.by %> | <%= @lot.by_email %></p>
   <% end %>
+
+    <%= button_to "Aprovar lote", active_lot_path(@lot.id) %>
 
   <%= link_to 'Tela inicial', root_path, class: "btn btn-secondary mb-3 mt-2"  %>
 
