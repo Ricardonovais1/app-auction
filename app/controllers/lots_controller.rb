@@ -1,5 +1,5 @@
 class LotsController < ApplicationController
-  before_action :set_lot, only: [:show, :active]
+  before_action :set_lot, only: [:show, :approved, :pending_approval]
   before_action :authenticate_user!, only: [:new, :expired, :pending]
   before_action :check_admin_user, only: [:new, :expired, :pending]
 
@@ -32,8 +32,13 @@ class LotsController < ApplicationController
   def show
   end
 
-  def active 
+  def approved 
     @lot.approved!
+    redirect_to @lot
+  end
+
+  def pending_approval 
+    @lot.pending_approval!
     redirect_to @lot
   end
 
