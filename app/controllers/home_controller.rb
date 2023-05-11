@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index 
     @lots = Lot.all
-    @active_lots = Lot.active
+    @current_lots = Lot.approved
     @future_lots = Lot.future
   end
 end

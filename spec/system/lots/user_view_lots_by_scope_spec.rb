@@ -5,9 +5,9 @@ describe 'Usuário visualiza lotes' do
     it 'na página inicial' do 
       # Arrange 
       future_lot = Lot.create!(code: 'AAA101010', start_date: '2090-10-20', limit_date: '2090-10-30', 
-                               minimum_bid_value: 100, minimum_bid_difference: 10)
+                               minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved)
       
-      current_lot = Lot.create!(code: 'BBB121212', start_date: 1.day.ago, limit_date: 1.week.from_now, 
+      current_lot = Lot.create!(code: 'BBB131212', start_date: 1.day.ago, limit_date: 1.year.from_now, 
                                 minimum_bid_value: 200, minimum_bid_difference: 20)
       
       past_lot = Lot.create!(code: 'CCC131313', start_date: 1.month.ago, limit_date: 1.week.ago, 
@@ -18,7 +18,7 @@ describe 'Usuário visualiza lotes' do
 
       # Assert 
       expect(page).to have_content 'AAA101010'
-      expect(page).to have_content 'BBB121212'
+      expect(page).not_to have_content 'BBB131212'
       expect(page).not_to have_content 'CCC131313'
     end
   end
@@ -85,6 +85,30 @@ describe 'Usuário visualiza lotes' do
       expect(page).not_to have_content 'BBB121212'
       expect(page).to have_content 'CCC131313'
 
+    end
+  end
+
+  context 'pendentes' do
+    it 'na página de lotes pendentes' do 
+      admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
+
+      future_lot_1 = Lot.create!(code: 'AAA101010', start_date: '2090-10-20', limit_date: '2090-10-30', 
+                                  minimum_bid_value: 100, minimum_bid_difference: 10)
+      future_lot_2 = Lot.create!(code: 'ABC191919', start_date: '2090-10-20', limit_date: '2090-10-30', 
+                                  minimum_bid_value: 100, minimum_bid_difference: 10)  
+
+      # Act 
+      login_as(admin)
+      visit root_path
+      within('nav') do 
+        click_on 'Administrativo'
+        click_on 'Lotes pendentes'
+      end
+
+      # Assert
+      expect(page).to have_content 'Lotes pendentes'
+      expect(page).to have_content 'AAA101010'
+      expect(page).to have_content 'ABC191919'
     end
   end
 end

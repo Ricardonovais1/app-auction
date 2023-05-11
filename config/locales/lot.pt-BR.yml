@@ -1,6 +1,6 @@
 pt-BR:
-  pending: 'Aguardando aprovação'
-  active: 'Ativo'
+  pending_approval: 'Aguardando aprovação'
+  approved: 'Ativo'
   activerecord:
     models:
       lot:  

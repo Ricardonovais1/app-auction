@@ -1,12 +1,17 @@
 class LotsController < ApplicationController
   before_action :set_lot, only: [:show, :active]
-  before_action :authenticate_user!, only: [:new, :expired]
-  before_action :check_admin_user, only: [:new, :expired]
+  before_action :authenticate_user!, only: [:new, :expired, :pending]
+  before_action :check_admin_user, only: [:new, :expired, :pending]
 
   def expired 
     @expired_lots = Lot.expired
     @lots = Lot.all
   end 
+
+  def pending 
+    @pending_lots = Lot.pending_approval
+    @lots = Lot.all
+  end
 
   def new 
     @lot = Lot.new
@@ -28,7 +33,7 @@ class LotsController < ApplicationController
   end
 
   def active 
-    @lot.active!
+    @lot.approved!
     redirect_to @lot
   end
 

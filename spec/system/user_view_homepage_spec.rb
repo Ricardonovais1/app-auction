@@ -14,9 +14,9 @@ describe 'Usuário visita a página inicial' do
   it 'e vê lotes cadastrados' do 
     # Arrange 
     first_lot = Lot.create!(code: 'AAA000000', start_date: '08-10-2090', limit_date: '20-10-2090', 
-                            minimum_bid_value: 100, minimum_bid_difference: 10) 
+                            minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved) 
     second_lot = Lot.create!(code: 'BBB111111', start_date: '05-06-2090', limit_date: '04-07-2090', 
-                            minimum_bid_value: 200, minimum_bid_difference: 20) 
+                            minimum_bid_value: 200, minimum_bid_difference: 20, status: :approved) 
     # Act 
     visit root_path
     

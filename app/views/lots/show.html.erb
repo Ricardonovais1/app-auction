@@ -14,7 +14,8 @@
     <p>Criado por: <%= @lot.by %> | <%= @lot.by_email %></p>
   <% end %>
 
-    <%= button_to "Aprovar lote", active_lot_path(@lot.id) %>
+
+  <%= button_to "Aprovar lote", active_lot_path(@lot.id) %>
 
   <%= link_to 'Tela inicial', root_path, class: "btn btn-secondary mb-3 mt-2"  %>
 

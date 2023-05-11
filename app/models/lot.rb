@@ -7,11 +7,11 @@ class Lot < ApplicationRecord
 
   validate :code_format_validation
 
-  enum status: { pending: 0, active: 5 }
+  enum status: { pending_approval: 0, approved: 5 }
  
   # ================ DATES SCOPES ===================== 
 
-  scope :active,  -> { where('start_date <= ? AND limit_date >= ?', Date.today, Date.today) }
+  scope :current,  -> { where('start_date <= ? AND limit_date >= ?', Date.today, Date.today) }
   scope :future,  -> { where('start_date > ?', Date.today) }
   scope :expired, -> { where('limit_date < ?', Date.today) }
 

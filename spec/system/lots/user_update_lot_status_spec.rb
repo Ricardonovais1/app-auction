@@ -11,6 +11,10 @@ describe 'Admin muda status do lote para ativo' do
     # Act 
     login_as(admin_2)
     visit root_path
+    within('nav') do 
+      click_on 'Administrativo'
+      click_on 'Lotes pendentes'
+    end
     click_on 'ABC123987'
     click_on 'Aprovar lote'
 
