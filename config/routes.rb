@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "home#index"
   resources :lots, only: [:index, :show, :new, :create] do 
+    resources :lot_items, only: [:new, :create]
     get 'expired', on: :collection
     post 'approved', on: :member
     get 'pending', on: :collection

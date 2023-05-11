@@ -8,6 +8,9 @@ class Lot < ApplicationRecord
   validate :code_format_validation
 
   enum status: { pending_approval: 0, approved: 5 }
+
+  has_many :lot_items
+  has_many :items, through: :lot_items
  
   # ================ DATES SCOPES ===================== 
 
@@ -34,5 +37,9 @@ class Lot < ApplicationRecord
     if !validate_characters(characters) || !validate_numbers(numbers) 
       errors.add(:code, message: 'deve ter 3 letras e 6 números')
     end
+  end
+
+  def available_items 
+    Item.where.not(id: items.pluck(:id)) 
   end
 end

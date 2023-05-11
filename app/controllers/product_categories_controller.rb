@@ -1,4 +1,8 @@
 class ProductCategoriesController < ApplicationController
+  def index
+
+  end
+
   def new 
     @product_category = ProductCategory.new
   end

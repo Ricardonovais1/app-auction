@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      lot_item:  
+        one: 'Item do lote'
+        other: 'Itens do lote'
+    attributes:
+      lot_item: 
+        lot_id: 'Lote'
+        item_id: 'Produto'
+        

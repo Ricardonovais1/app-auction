@@ -1,0 +1,14 @@
+<div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
+
+  <h2 class="mb-5 display-6">Adicione produtos ao lote</h2> 
+
+  <%= form_with(model: [@lot, @lot_item]) do |f| %>
+    <div>
+      <%= f.label :item_id %>
+      <%= f.collection_select :item_id, @lot.available_items, :id, :name %>
+    </div><br />
+    <div>
+      <%= f.submit 'Gravar' %>
+    </div>
+  <% end %>
+</div>

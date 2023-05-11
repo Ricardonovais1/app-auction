@@ -9,6 +9,9 @@ class Item < ApplicationRecord
 
   before_validation :generate_code
 
+  has_one :lot_item
+  has_one :lot, through: :lot_item
+
   def generate_code 
     self.code = SecureRandom.alphanumeric(10).upcase
   end

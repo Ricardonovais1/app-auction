@@ -28,4 +28,31 @@ describe 'Usuário visualiza produtos cadastrados' do
     # Assert 
     expect(page).to have_content 'Mouse exbom'
   end
+
+  # it 'por categoria' do 
+  #   # Arrange 
+  #   prod_cat_a = ProductCategory.create!(name: 'Alguma')
+  #   prod_cat_b = ProductCategory.create!(name: 'Outra')
+  #   prod_cat_c = ProductCategory.create!(name: 'Terceira')
+  #   item_a = Item.create!(name: 'Mouse exbom', description: 'Mouse com fio', 
+  #                       weight: 100, width: 5, height: 3, depth: 8, 
+  #                       product_category_id: prod_cat_a.id )
+  #   item_b = Item.create!(name: 'Teclado logitech', description: 'Teclado honesto', 
+  #                       weight: 100, width: 5, height: 3, depth: 8, 
+  #                       product_category_id: prod_cat_b.id )
+  #   item_c = Item.create!(name: 'Computador Dell', description: 'Excelente PC', 
+  #                       weight: 100, width: 5, height: 3, depth: 8, 
+  #                       product_category_id: prod_cat_c.id )
+  #   # Act 
+  #   visit root_path
+  #   within('nav') do  
+  #     click_on "Produtos cadastrados"
+  #   end
+
+  #   # Assert
+  #   expect(page).to have_content 'Alguma'
+  #   expect(page).to have_content 'Outra'
+  #   expect(page).to have_content 'Terceira'
+
+  # end
 end
