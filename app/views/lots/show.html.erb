@@ -41,9 +41,7 @@
             <%= button_to "Aprovar lote", approved_lot_path(@lot.id), class: "btn btn-success mb-3 mt-2 me-2"%>
           </div>
         <% else %>
-          <div class="d-inline-flex ">
-            <%= button_to "Marcar pendente", pending_approval_lot_path(@lot.id), class: "btn btn-success mb-3 mt-2 me-2"%>
-          </div>
+          <p><strong>Aprovado por:</strong> <%= @lot.approved_by %> | <%= @lot.approved_by_email %></p>
         <% end %>
 
       <% end %>

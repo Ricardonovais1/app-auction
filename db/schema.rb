@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_132200) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_12_013247) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -73,6 +73,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_132200) do
     t.string "by", default: "Não informado"
     t.string "by_email", default: "Email não informado"
     t.integer "status", default: 0
+    t.string "approved_by", default: "none"
+    t.string "approved_by_email", default: "none"
   end
 
   create_table "product_categories", force: :cascade do |t|

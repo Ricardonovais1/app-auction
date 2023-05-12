@@ -42,4 +42,6 @@ class Lot < ApplicationRecord
   def available_items 
     Item.where.not(id: items.pluck(:id)) 
   end
+
+  
 end

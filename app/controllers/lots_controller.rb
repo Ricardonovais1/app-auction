@@ -33,6 +33,8 @@ class LotsController < ApplicationController
   end
 
   def approved 
+    @lot.approved_by = current_user.name
+    @lot.approved_by_email = current_user.email
     @lot.approved!
     redirect_to @lot
   end
