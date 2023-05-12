@@ -1,5 +1,5 @@
 class LotsController < ApplicationController
-  before_action :set_lot, only: [:show, :approved, :pending_approval]
+  before_action :set_lot, only: [:show, :approved, :pending_approval, :remove]
   before_action :authenticate_user!, only: [:new, :expired, :pending]
   before_action :check_admin_user, only: [:new, :expired, :pending]
 
@@ -40,6 +40,10 @@ class LotsController < ApplicationController
   def pending_approval 
     @lot.pending_approval!
     redirect_to @lot
+  end
+
+  def remove 
+    @lot_item = @lot.lot_items.find(params[:id])
   end
 
   private 

@@ -11,16 +11,21 @@
   <p><strong><%= Lot.human_attribute_name(:minimum_bid_difference) %>:</strong> R$<%= @lot.minimum_bid_difference %>,00 </p>
   <p><strong><%= Lot.human_attribute_name(:status) %>:</strong> <%= I18n.t(@lot.status) %></p><br />
   
-  <div>
-    <%= link_to 'Adicionar item', new_lot_lot_item_path(lot_id: @lot.id) %>
-  </div><br />
+  <% if !@lot.approved? %>
+    <div>
+      <%= link_to 'Adicionar item', new_lot_lot_item_path(lot_id: @lot.id) %>
+    </div><br />
+  <% end %>
   
   <% if @lot.lot_items.any? %>
     <div class="mb-4">
       <h4 class="mb-2"><strong>Itens do lote:</strong></h4> 
 
       <% @lot.lot_items.each do |i| %>
-          <p><strong><%= i.item.name %></strong> - cód. <%= i.item.code %> </p>
+        <div class="lot-items">
+          <p><strong><%= i.item.name %></strong> - cód. <%= i.item.code %></p> 
+          <%= button_to 'Remover', remove_lot_lot_item_path(@lot, i), method: :delete %>
+        </div>
       <% end %>
     </div>
   <% end %>
