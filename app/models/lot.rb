@@ -6,8 +6,17 @@ class Lot < ApplicationRecord
                    length: { is: 9 }
 
   validate :code_format_validation
+  validate :bid_value_validation
+  validate :bid_value_to_beat
 
   enum status: { pending_approval: 0, approved: 5 }
+
+  # ================ BID ASSOCIATIONS ================
+
+  has_many :bids
+  has_many :users, through: :bids
+
+  # ================ LOT_ITEM ASSOCIATIONS ===========
 
   has_many :lot_items
   has_many :items, through: :lot_items
@@ -43,5 +52,24 @@ class Lot < ApplicationRecord
     Item.where.not(id: items.pluck(:id)) 
   end
 
-  
+  def bid_value_validation 
+    bid_value = bid_value_to_beat 
+    if bid_value.present? && bid_value <= minimum_bid_value.to_i
+      minimum_bid_value.to_i
+    else  
+      bid_value.to_i 
+    end
+  end
+
+
+  def bid_value_to_beat 
+    min_value = minimum_bid_value
+    last_bid = bids.last
+    if last_bid && last_bid.value >= min_value 
+      min_value = last_bid.value + minimum_bid_difference
+    elsif last_bid && last_bid.value < min_value
+      false
+    end
+    min_value 
+  end
 end

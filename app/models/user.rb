@@ -14,6 +14,11 @@ class User < ApplicationRecord
   validates :name, presence: true
   validate :cpf_validator 
 
+  # ================ BID ASSOCIATIONS ================
+
+  has_many :bids
+  has_one  :lot, through: :bids 
+
   # =================================================================
 
   def set_admin_if_leilaodogalpao_email

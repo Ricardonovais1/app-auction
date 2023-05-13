@@ -43,7 +43,7 @@ describe 'usuário admin cadastra lote' do
     expect(page).to have_content 'Código: DKP111222'
     expect(page).to have_content 'Data de início: 20/12/2029'
     expect(page).to have_content 'Data limite para lances: 20/01/2030'
-    expect(page).to have_content 'Valor mínimo para lance: R$100,00'
+    expect(page).to have_content 'Valor mínimo para lance inicial: R$100,00'
     expect(page).to have_content 'Menor diferença permitida entre lances: R$10,00'
     expect(page).to have_content 'Situação do lote: Aguardando aprovação'
     expect(page).to have_content 'Criado por: Ricardo | ricardo@leilaodogalpao.com.br'
