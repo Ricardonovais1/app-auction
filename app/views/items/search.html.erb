@@ -1,0 +1,16 @@
+<div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
+
+<h1>Resultado da pesquisa para o termo '<%= @code %>':</h1>
+<br />
+<h2><%= @items_code.count %> <%= Item.model_name.human(count: @items_code.count) %> <%= I18n.t(:found, count: @items_code.count) %>:</h2>
+<br />
+<hr>
+<% @items_code.each do |item| %>
+  <br />
+    <%= render item %>
+  <br />
+    <hr>
+  <br />
+<% end %>
+
+</div>

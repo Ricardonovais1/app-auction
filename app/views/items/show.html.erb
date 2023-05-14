@@ -14,7 +14,7 @@
         <p class="card-text"><strong><%= Item.human_attribute_name(:product_category_id) %>: </strong><%= @product_category %></p>
         <p class="card-text"><strong><%= Item.human_attribute_name(:weight) %>: </strong><%= @item.weight %>g</p>
         <p class="card-text"><strong>Dimensões: </strong><%= @item.height %>cm (<%= Item.human_attribute_name(:height).downcase %>) x <%= @item.depth %>cm (<%= Item.human_attribute_name(:depth).downcase %>) x <%= @item.width %>cm (<%= Item.human_attribute_name(:width).downcase %>)</p>
-        <p class="card-text"><strong><%= Item.human_attribute_name(:code) %>: </strong><%= @item.code %>g</p>
+        <p class="card-text"><strong><%= Item.human_attribute_name(:code) %>: </strong><%= @item.code %></p>
         <p class="card-text"><small class="text-body-secondary">Criado em <%= I18n.l(@item.created_at, format: '%d de %B de %Y') %> </small></p>
       </div>
     </div>

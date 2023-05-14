@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     post 'pending_approval', on: :member
   end
   resources :product_categories, only: [:new, :create]
-  resources :items, only: [:index, :new, :create, :show]
+  resources :items, only: [:index, :new, :create, :show] do 
+    get 'search', on: :collection
+  end
 end

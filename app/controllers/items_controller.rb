@@ -26,8 +26,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    # id = @item.id
     @product_category = ProductCategory.find(params[:id]).name
+  end
+
+  def search
+    @code = params[:query]
+    @items_code = Item.where('code LIKE ?', "%#{@code}%")
   end
 
   private 

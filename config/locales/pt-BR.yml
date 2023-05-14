@@ -1,0 +1,5 @@
+pt-BR:
+  hello: 'Bom dia Mundo!'
+  found: 
+    one: 'encontrado'
+    other: 'encontrados'
