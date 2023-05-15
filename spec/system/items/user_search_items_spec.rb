@@ -1,6 +1,19 @@
 require 'rails_helper'
 
 describe 'Usuário busca por um pedido' do 
+  it 'e precisa estar logado' do 
+    # Arrange 
+
+    # Act 
+    visit root_path
+    within('nav') do
+      click_on 'Buscar'
+    end
+
+    # Assert
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'a partir do menu' do 
     # Arrange 
     user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', 
@@ -20,10 +33,13 @@ describe 'Usuário busca por um pedido' do
   
   it 'e encontra um produto pelo código' do 
     # Arrange
+    user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', 
+                        registration_number: '70535073607', password: 'password')
     prod_cat = ProductCategory.create!(name: 'Alguma')
     item = Item.create!(name: 'Mouse exbom', description: 'Mouse com fio', weight: 100, height: 3, depth: 8, width: 5, product_category_id: prod_cat.id )
 
     # Act 
+    login_as(user)
     visit root_path 
     within('nav') do
       fill_in 'Buscar produto', with: item.code
@@ -39,6 +55,9 @@ describe 'Usuário busca por um pedido' do
 
   it 'e encontra múltiplos produtos pelos código' do 
     # Arrange
+    user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', 
+                        registration_number: '70535073607', password: 'password')
+
     prod_cat = ProductCategory.create!(name: 'Alguma')
 
     allow(SecureRandom).to receive(:alphanumeric).and_return('PAI1234567')
@@ -48,6 +67,7 @@ describe 'Usuário busca por um pedido' do
     item_2 = Item.create!(name: 'Teclado Logitech', description: 'Teclado preto muito bom', weight: 100, height: 3, depth: 8, width: 5, product_category_id: prod_cat.id )
 
     # Act 
+    login_as(user)
     visit root_path 
     within('nav') do
       fill_in 'Buscar produto', with: 'PAI'
@@ -64,27 +84,31 @@ describe 'Usuário busca por um pedido' do
   end
 
 
-  # it 'e encontra múltiplos produtos pelos nome' do 
-  #   # Arrange
-  #   prod_cat = ProductCategory.create!(name: 'Alguma')
+  it 'e encontra múltiplos produtos pelos nome' do 
+    # Arrange
+    user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', 
+                        registration_number: '70535073607', password: 'password')
 
-  #   item_1 = Item.create!(name: 'Teclado Zoom', description: 'Teclado sem fio', weight: 100, height: 3, depth: 8, width: 5, product_category_id: prod_cat.id )
+    prod_cat = ProductCategory.create!(name: 'Alguma')
+
+    item_1 = Item.create!(name: 'Teclado Zoom', description: 'Teclado sem fio', weight: 100, height: 3, depth: 8, width: 5, product_category_id: prod_cat.id )
     
-  #   item_2 = Item.create!(name: 'Teclado Logitech', description: 'Teclado preto muito bom', weight: 100, height: 3, depth: 8, width: 5, product_category_id: prod_cat.id )
+    item_2 = Item.create!(name: 'Teclado Logitech', description: 'Teclado preto muito bom', weight: 100, height: 3, depth: 8, width: 5, product_category_id: prod_cat.id )
 
-  #   # Act 
-  #   visit root_path 
-  #   within('nav') do
-  #     fill_in 'Buscar produto', with: 'Teclado'
-  #     click_on 'Buscar'
-  #   end
+    # Act 
+    login_as(user)
+    visit root_path 
+    within('nav') do
+      fill_in 'Buscar produto', with: 'Teclado'
+      click_on 'Buscar'
+    end
 
-  #   # Assert
-  #   expect(page).to have_content "Resultado da pesquisa para o termo 'Teclado':"
-  #   expect(page).to have_content "2 Produtos encontrados"
-  #   expect(page).to have_content 'Teclado Zoom'
-  #   expect(page).to have_content 'Teclado sem fio'
-  #   expect(page).to have_content 'Teclado Logitech'
-  #   expect(page).to have_content 'Teclado preto muito bom'
-  # end
+    # Assert
+    expect(page).to have_content "Resultado da pesquisa para o termo 'Teclado':"
+    expect(page).to have_content "2 Produtos encontrados"
+    expect(page).to have_content 'Teclado Zoom'
+    expect(page).to have_content 'Teclado sem fio'
+    expect(page).to have_content 'Teclado Logitech'
+    expect(page).to have_content 'Teclado preto muito bom'
+  end
 end

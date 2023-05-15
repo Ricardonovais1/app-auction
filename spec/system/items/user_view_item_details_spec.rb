@@ -28,7 +28,7 @@ describe 'Usuário visualiza detalhes do produto' do
     visit root_path
     within('nav') do 
       click_on 'Administrativo'
-      click_on 'Produtos cadastrados'
+      click_on 'Produtos'
     end
     click_on 'Mouse exbom'
 

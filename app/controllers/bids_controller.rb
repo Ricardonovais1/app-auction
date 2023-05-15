@@ -2,7 +2,6 @@ class BidsController < ApplicationController
   before_action :set_lot, only: [:new, :create]
   before_action :authenticate_user!
 
-
   def new 
     @bid = Bid.new
   end

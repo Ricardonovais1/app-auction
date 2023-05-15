@@ -70,7 +70,7 @@ class Lot < ApplicationRecord
   end
 
   def available_items 
-    Item.where.not(id: items.pluck(:id)) 
+    Item.where.not(id: LotItem.pluck(:item_id)) 
   end
 
   def bid_value_validation 
@@ -95,12 +95,24 @@ class Lot < ApplicationRecord
   end
 
   def date_range_validation
-    # if start_date > limit_date
-    #   false
-    # else  
-    #   true
-    # end
+    
     errors.add(:start_date, 'deve ser anterior à data limite') if start_date.present? && limit_date.present? && start_date >= limit_date
 
+  end
+
+  def get_successful_bidder_name
+    bids.last.user.name
+  end
+
+  def get_successful_bidder_email
+    bids.last.user.email
+  end
+
+  def get_successful_bid_value
+    bids.last.value
+  end
+
+  def successful_bid_data
+    "#{bids.last.user.name} | #{bids.last.user.email} | #{bids.last.value}"
   end
 end

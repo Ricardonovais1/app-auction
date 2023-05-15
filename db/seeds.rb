@@ -44,5 +44,5 @@ ace = ProductCategory.create!(name: 'Acessórios')
 tab = ProductCategory.create!(name: 'Tablets')
 cel = ProductCategory.create!(name: 'Celulares')
 
-# Item.create!(name: 'Teclado Logitech', description: 'Lindo teclado preto Logitech', weight: 200, height: 3, width: 60, depth: 15, )
-# Item.create!(name: 'Webcam HD 1080p', description: 'Segunda melhor câmera da Logitech', weight: 150, height: 10, width: 10, depth: 10)
+Item.create!(name: 'Teclado Logitech', description: 'Lindo teclado preto Logitech', weight: 200, height: 3, width: 60, depth: 15, )
+Item.create!(name: 'Webcam HD 1080p', description: 'Segunda melhor câmera da Logitech', weight: 150, height: 10, width: 10, depth: 10)

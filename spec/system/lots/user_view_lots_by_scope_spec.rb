@@ -105,6 +105,31 @@ describe 'Usuário visualiza lotes' do
       expect(page).not_to have_button 'Fazer um lance a partir de'
       expect(page).to have_content 'Lote expirado'
     end
+
+    it 'e lote expirado sem nenhum lance aparece como cancelado' do 
+      # Arrange 
+      admin = User.create!(name: 'Alice', email: 'alice@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
+      past_lot = Lot.create!(code: 'CCC131313', start_date: 1.month.ago, limit_date: 1.week.ago, 
+                            minimum_bid_value: 300, minimum_bid_difference: 30, 
+                            by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br')
+        
+      # Act 
+      login_as(admin)
+      visit expired_lots_path
+      click_on 'CCC131313'
+
+      # Assert 
+      expect(page).not_to have_content 'Adicionar item'
+      expect(page).not_to have_button 'Aprovar lote'
+      expect(page).not_to have_content 'Valor mínimo para lance atual'
+      expect(page).not_to have_button 'Fazer um lance a partir de'
+      expect(page).to have_content 'Lote expirado'
+      expect(page).to have_content 'Cancelado por falta de lances'
+      within('main') do
+        expect(page).not_to have_content 'Arrematante'
+      end
+    end
+
   end
 
   context 'pendentes' do

@@ -1,9 +1,17 @@
 
 <div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
 
-  <h2 class="mb-5 display-6"><%= Lot.model_name.human %> <%= @lot.code %></h2> 
+  <h2 class="mb-5 display-6"><%= Lot.model_name.human %> <%= @lot.code.upcase %></h2> 
 
-  <p><strong><%= Lot.human_attribute_name(:code) %>:</strong> <%= @lot.code %> </p>
+  <% if @lot.expired? && @lot.bids.count == 0 %>
+    <h3 class="bg-danger text-white" style="--bs-text-opacity: .75; padding: 1rem">Cancelado por falta de lances</h3><br />
+  <% elsif @lot.expired? && @lot.bids.count >= 1 %>
+    <h3 class="bg-success text-white" style="--bs-text-opacity: .75; padding: 1rem"><strong>Arrematante: </strong><%= @lot.get_successful_bidder_name %> |  
+                                                                                                                  <%= @lot.get_successful_bidder_email %> | 
+                                                                                                                  R$<%= @lot.get_successful_bid_value %>,00</h3><br />
+  <% end %>
+
+  <p><strong><%= Lot.human_attribute_name(:code) %>:</strong> <%= @lot.code.upcase %> </p>
   <p><strong><%= Lot.human_attribute_name(:start_date) %>:</strong> <%= I18n.l(@lot.start_date) %> </p>
   <p><strong><%= Lot.human_attribute_name(:limit_date) %>:</strong> <%= I18n.l(@lot.limit_date) %> </p>
   <p><strong><%= Lot.human_attribute_name(:minimum_bid_value) %> inicial:</strong> R$<%= @lot.minimum_bid_value %>,00 </p>
@@ -27,7 +35,8 @@
     <p class="text-danger"><strong><%= Lot.model_name.human  %> expirado</strong></p><br />
   <% end %>
 
-  <% if !@lot.approved? && !@expired_lots.any? %>
+  <%# <% if !@lot.approved? && !@expired_lots.any? %> 
+  <% if !@lot.approved? && @lot.future? %>
     <div>
       <%= link_to 'Adicionar item', new_lot_lot_item_path(lot_id: @lot.id) %>
     </div><br />

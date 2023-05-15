@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     post 'approved', on: :member
     get 'pending', on: :collection
     post 'pending_approval', on: :member
+    get 'successfull_bids', on: :collection
   end
   resources :product_categories, only: [:new, :create]
   resources :items, only: [:index, :new, :create, :show] do 

@@ -1,13 +1,12 @@
 class ProductCategoriesController < ApplicationController
-  def index
-
-  end
 
   def new 
     @product_category = ProductCategory.new
+    @product_categories = ProductCategory.all
   end
 
-  def create 
+  def create
+    @product_categories = ProductCategory.all 
     @product_category = ProductCategory.new(params.require(:product_category).permit(:name))
 
     if @product_category.save

@@ -22,7 +22,7 @@ describe 'Usuário visualiza produtos cadastrados' do
     visit root_path
     within('nav') do 
       click_on 'Administrativo'
-      click_on 'Produtos cadastrados'
+      click_on 'Produtos'
     end
 
     # Assert 

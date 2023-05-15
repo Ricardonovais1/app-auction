@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :set_item, only: [:show]
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:new, :search]
   before_action :check_admin_user, only: [:new]
 
   def index 
@@ -30,8 +30,9 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @code = params[:query]
-    @items_code = Item.where('code LIKE ?', "%#{@code}%")
+    @query = params[:query]
+    @items_code = Item.where('code LIKE ?', "%#{@query}%")
+              .or(Item.where('name LIKE :query', query: "%#{@query}%"))
   end
 
   private 

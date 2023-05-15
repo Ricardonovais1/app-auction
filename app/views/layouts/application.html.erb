@@ -25,7 +25,10 @@
                   <%= link_to 'Home', root_path, class: 'nav-link', 'aria-current': 'page' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to 'Produtos cadastrados', items_path, class: 'nav-link', 'aria-current': 'page' %>
+                  <%= link_to 'Produtos', items_path, class: 'nav-link', 'aria-current': 'page' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'Arrematantes', successfull_bids_lots_path, class: 'nav-link', 'aria-current': 'page' %>
                 </li>
                 <% if user_signed_in? %>
                   <% if current_user.admin? %>
