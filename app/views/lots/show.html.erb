@@ -8,11 +8,26 @@
   <p><strong><%= Lot.human_attribute_name(:limit_date) %>:</strong> <%= I18n.l(@lot.limit_date) %> </p>
   <p><strong><%= Lot.human_attribute_name(:minimum_bid_value) %> inicial:</strong> R$<%= @lot.minimum_bid_value %>,00 </p>
   <p><strong><%= Lot.human_attribute_name(:minimum_bid_difference) %>:</strong> R$<%= @lot.minimum_bid_difference %>,00 </p>
-  <p><strong><%= Lot.human_attribute_name(:minimum_bid_value) %> atual:</strong> R$<%= @lot.bid_value_to_beat %>,00 </p>
-  <p><strong>Lances feitos:</strong> <%= @lot.bids.count %></p>
-  <p><strong><%= Lot.human_attribute_name(:status) %>:</strong> <%= I18n.t(@lot.status) %></p><br />
+  
+  <% if !@lot.expired? %>
+    <p><strong><%= Lot.human_attribute_name(:minimum_bid_value) %> atual:</strong> R$<%= @lot.bid_value_to_beat %>,00 </p>
+  <% end %>
 
-  <% if !@lot.approved? %>
+  <% if !@lot.expired? || !@lot.current? %>
+    <p><strong>Lances feitos:</strong> <%= @lot.bids.count %></p>
+  <% end %>
+
+  <% if @lot.current? || @lot.future? %>
+    <p><strong><%= Lot.human_attribute_name(:status) %>:</strong> <%= I18n.t(@lot.status) %></p><br />
+  <% end %>
+
+  <% if @lot.future? %>
+    <p class="text-primary"><strong>Data de início: <%= I18n.l(@lot.start_date) %> </strong><br />
+  <% elsif @lot.expired? %>
+    <p class="text-danger"><strong><%= Lot.model_name.human  %> expirado</strong></p><br />
+  <% end %>
+
+  <% if !@lot.approved? && !@expired_lots.any? %>
     <div>
       <%= link_to 'Adicionar item', new_lot_lot_item_path(lot_id: @lot.id) %>
     </div><br />
@@ -25,7 +40,7 @@
       <% @lot.lot_items.each do |i| %>
         <div class="lot-items">
           <p><strong><%= i.item.name %></strong> - cód. <%= i.item.code %></p> 
-          <% if !@lot.approved? %>
+          <% if !@lot.approved? && current_user.email == @lot.by_email %>
             <%= button_to 'Remover', remove_lot_lot_item_path(@lot, i), method: :delete %>
           <% end %>
         </div>
@@ -39,7 +54,7 @@
 
       <% if current_user.email != @lot.by_email %>
 
-        <% if @lot.pending_approval? %>
+        <% if @lot.pending_approval? && !@lot.expired? %>
           <div class="d-inline-flex ">
             <%= button_to "Aprovar lote", approved_lot_path(@lot.id), class: "btn btn-success mb-3 mt-2 me-2"%>
           </div>
@@ -51,7 +66,7 @@
     <% end %>
   </span>
 
-  <% if @lot.approved? %>
+  <% if @lot.approved? && @lot.current? %>
     <%= button_to "Fazer um lance a partir de R$#{@lot.bid_value_to_beat},00", new_lot_bid_path(@lot), method: :get, class: "btn btn-primary mb-3 mt-2 me-2" %>
   <% end %>
 

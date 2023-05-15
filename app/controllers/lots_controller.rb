@@ -30,6 +30,8 @@ class LotsController < ApplicationController
   end
 
   def show
+    @lot = Lot.find(params[:id])
+    @expired_lots = Lot.expired
   end
 
   def approved 

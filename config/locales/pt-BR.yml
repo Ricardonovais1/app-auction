@@ -3,3 +3,6 @@ pt-BR:
   found: 
     one: 'encontrado'
     other: 'encontrados'
+  expired:
+    one: 'expirado'
+    other: 'expirados'

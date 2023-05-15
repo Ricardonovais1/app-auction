@@ -8,8 +8,9 @@ class Lot < ApplicationRecord
   validate :code_format_validation
   validate :bid_value_validation
   validate :bid_value_to_beat
+  validate :date_range_validation
 
-  enum status: { pending_approval: 0, approved: 5 }
+  enum status: { pending_approval: 0, approved: 5, ended: 10 }
 
   # ================ BID ASSOCIATIONS ================
 
@@ -23,9 +24,29 @@ class Lot < ApplicationRecord
  
   # ================ DATES SCOPES ===================== 
 
-  scope :current,  -> { where('start_date <= ? AND limit_date >= ?', Date.today, Date.today) }
-  scope :future,  -> { where('start_date > ?', Date.today) }
-  scope :expired, -> { where('limit_date < ?', Date.today) }
+  scope :current, -> { where('start_date <= ? AND limit_date >= ?', Date.today, Date.today) }
+  scope :future,  -> { where('start_date > ? AND limit_date > ?', Date.today, Date.today ) }
+  scope :expired, -> { where('start_date < ? AND limit_date < ?', Date.today, Date.today) }
+
+  after_find :check_expired_status
+
+  def check_expired_status
+    if expired?
+      self.status = :ended unless ended?
+    end
+  end
+  
+  def expired? 
+    Date.today > limit_date
+  end
+
+  def current?
+    start_date <= Date.today && limit_date >= Date.today
+  end
+
+  def future?
+    start_date > Date.today
+  end
 
   # ================ CUSTOM METHODS =================== 
 
@@ -71,5 +92,15 @@ class Lot < ApplicationRecord
       false
     end
     min_value 
+  end
+
+  def date_range_validation
+    # if start_date > limit_date
+    #   false
+    # else  
+    #   true
+    # end
+    errors.add(:start_date, 'deve ser anterior à data limite') if start_date.present? && limit_date.present? && start_date >= limit_date
+
   end
 end

@@ -84,5 +84,16 @@ RSpec.describe Lot, type: :model do
         expect(result).to eq false
       end
     end
+
+    context 'data de início e fim' do 
+      it 'falso se data de início é posterior à data limite' do 
+        lot = Lot.new(code: 'AAA000000', start_date: '2090-03-20', limit_date: '2090-03-05', 
+                      minimum_bid_value: '200', minimum_bid_difference: '20') 
+
+        result = lot.valid?
+
+        expect(result).to eq false
+      end
+    end
   end
 end

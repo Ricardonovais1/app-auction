@@ -19,7 +19,8 @@ describe 'Admin muda status do lote para ativo' do
     admin_1 = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
     admin_2 = User.create!(name: 'Ana', email: 'ana@leilaodogalpao.com.br', registration_number: '98512692049', password: 'password')
     lot = Lot.create!(code: 'ABC123987', start_date: '2090-10-20', limit_date: '2090-10-30', 
-                      minimum_bid_value: 100, minimum_bid_difference: 10, by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br', status: :pending_approval)
+                      minimum_bid_value: 100, minimum_bid_difference: 10, 
+                      by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br')
     
     # Act 
     login_as(admin_2)
@@ -32,7 +33,7 @@ describe 'Admin muda status do lote para ativo' do
     click_on 'Aprovar lote'
 
     # Assert
-    expect(page).to have_content 'Situação do lote: Ativo'
+    expect(page).to have_content 'Situação do lote: Aprovado'
   end
 
   # it 'e botão de marcar pendente volta status para pendente de aprovação' do 
@@ -62,7 +63,8 @@ describe 'Admin muda status do lote para ativo' do
     admin_1 = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
     admin_2 = User.create!(name: 'Ana', email: 'ana@leilaodogalpao.com.br', registration_number: '98512692049', password: 'password')
     lot = Lot.create!(code: 'ABC123987', start_date: '2090-10-20', limit_date: '2090-10-30', 
-                      minimum_bid_value: 100, minimum_bid_difference: 10, by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br') 
+                      minimum_bid_value: 100, minimum_bid_difference: 10, 
+                      by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br') 
 
     # Act 
     login_as(admin_2)
@@ -118,7 +120,7 @@ describe 'Admin muda status do lote para ativo' do
     click_on 'Aprovar lote'
 
     # Assert
-    expect(page).not_to have_button 'Aprovar lote'
+    expect(page).not_to have_content 'Aprovar lote'
     expect(page).not_to have_content 'Adicionar item'
   end
 

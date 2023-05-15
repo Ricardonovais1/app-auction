@@ -10,7 +10,7 @@
 
     <% @current_lots.each do |lot| %>
 
-      <% if lot.approved? %>
+      <% if lot.current? %>
 
         <div class="card col-3 ms-3 me-3 mb-3 p-0" style="width: 18rem;">
           <div class="card">
@@ -42,7 +42,7 @@
 
     <% @future_lots.each do |lot| %>
 
-      <% if lot.approved? %>
+      <% if lot.future? %>
 
         <div class="card col-3 ms-3 me-3 mb-3 p-0" style="width: 18rem;">
           <div class="card">
