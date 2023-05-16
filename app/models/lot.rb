@@ -1,4 +1,5 @@
 class Lot < ApplicationRecord
+  before_save :expired?
   validates :start_date, :limit_date, :minimum_bid_value, :minimum_bid_difference, presence: true
 
   validates :code, presence: true, 
@@ -11,6 +12,11 @@ class Lot < ApplicationRecord
   validate :date_range_validation
 
   enum status: { pending_approval: 0, approved: 5, ended: 10 }
+
+  # ================ QUESTION ASSOCIATIONS ===========
+
+  has_many :questions
+  has_many :users, through: :questions
 
   # ================ BID ASSOCIATIONS ================
 
@@ -38,6 +44,7 @@ class Lot < ApplicationRecord
   
   def expired? 
     Date.today > limit_date
+    
   end
 
   def current?
@@ -100,19 +107,12 @@ class Lot < ApplicationRecord
 
   end
 
-  def get_successful_bidder_name
-    bids.last.user.name
-  end
-
-  def get_successful_bidder_email
-    bids.last.user.email
-  end
-
-  def get_successful_bid_value
-    bids.last.value
-  end
-
   def successful_bid_data
-    "#{bids.last.user.name} | #{bids.last.user.email} | #{bids.last.value}"
+    bl = bids.last
+    if bl
+      "#{bl.user.name} | #{bl.user.email} | R$#{bl.value},00 | Lote #{code.upcase}"
+    else
+      "Nenhum lance para o Lote #{code}"
+    end
   end
 end

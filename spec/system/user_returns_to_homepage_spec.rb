@@ -6,7 +6,6 @@ describe 'Usuário retorna à página inicial' do
 
     # Act 
     visit root_path
-    click_on 'Entrar/ Cadastrar'
     within('nav') do 
       click_on 'Home'
     end
@@ -20,7 +19,6 @@ describe 'Usuário retorna à página inicial' do
 
     # Act 
     visit root_path
-    click_on 'Entrar/ Cadastrar'
     within('nav') do 
       click_on 'Leilões de Estoque'
     end

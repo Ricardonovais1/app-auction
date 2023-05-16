@@ -79,7 +79,32 @@
     <%= button_to "Fazer um lance a partir de R$#{@lot.bid_value_to_beat},00", new_lot_bid_path(@lot), method: :get, class: "btn btn-primary mb-3 mt-2 me-2" %>
   <% end %>
 
+  <p><i>Tem alguma dúvida? </i></p>
+
+  <%= form_with(model: [@lot, @question]) do |f| %>
+    <div>
+      <%= f.text_area :body, placeholder: 'Escreva aqui' %>
+    </div>
+    <div>
+      <%= f.submit 'Enviar' %>
+    </div>
+    
+  <% end %>
+
+  <% if @questions.any? %>
+    <% @questions.each do |question| %>
+      <br />
+        <p><i><%= I18n.l(question.created_at, format: '%d de %B de %Y')  %> </i></p>
+        <p><strong><%= question.body %></strong></p>
+      <br />
+    <% end %>
+  <% else %>
+      <p><i>Nenhuma pergunta</i></p>
+  <% end %>
+
   <%= link_to 'Tela inicial', root_path, class: "btn btn-success mb-3 mt-2 me-2"  %>
 
 </div>
+
+
 

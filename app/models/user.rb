@@ -14,6 +14,11 @@ class User < ApplicationRecord
   validates :name, presence: true
   validate :cpf_validator 
 
+  # ================ QUESTION ASSOCIATIONS ===========
+
+  has_many :questions
+  has_many :lots, through: :questions
+
   # ================ BID ASSOCIATIONS ================
 
   has_many :bids

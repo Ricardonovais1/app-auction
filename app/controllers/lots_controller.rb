@@ -19,6 +19,7 @@ class LotsController < ApplicationController
 
   def new 
     @lot = Lot.new
+    @lot_item = LotItem.new
   end
 
   def create 
@@ -36,6 +37,8 @@ class LotsController < ApplicationController
   def show
     @lot = Lot.find(params[:id])
     @expired_lots = Lot.expired
+    @question = Question.new
+    @questions = @lot.questions
   end
 
   def approved 

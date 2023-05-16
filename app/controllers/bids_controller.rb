@@ -8,6 +8,8 @@ class BidsController < ApplicationController
 
   def create 
     @bid = Bid.new(set_params)
+    @bid.user = current_user
+    @bid.lot = @lot
     
       if @bid.save
         redirect_to @lot, notice: "Lance realizado com sucesso."
@@ -24,6 +26,6 @@ class BidsController < ApplicationController
   end
 
   def set_params 
-    params.require(:bid).permit(:value, :lot_id, :user_id)
+    params.require(:bid).permit(:value)
   end
 end
