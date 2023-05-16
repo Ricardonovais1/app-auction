@@ -69,7 +69,13 @@ describe 'Usuário visualiza lances vencedores' do
     end
 
     # Assert
-    expect(page).to have_content "Ana | ana@exemplo.com.br | R$600,00 | Lote AAA000000"
-    expect(page).to have_content "Sarah | sarah@exemplo.com.br | R$999,00 | Lote ZZZ111111"
+    expect(page).to have_content "Ana"
+    expect(page).to have_content "AAA000000"
+    expect(page).to have_content "ana@exemplo.com.br"
+    expect(page).to have_content "R$600,00"
+    expect(page).to have_content "Sarah"
+    expect(page).to have_content "sarah@exemplo.com.br"
+    expect(page).to have_content "R$999,00"
+    expect(page).to have_content "ZZZ111111"
   end
 end

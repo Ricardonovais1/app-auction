@@ -4,25 +4,25 @@
   <h2>Entre com sua conta</h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="field input-group input-group-lg mt-4" >
+      <%= f.label :email, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"   %><br />
+      <%= f.email_field :email, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
     </div>
 
-    <div class="field">
-      <%= f.label :password, 'Senha' %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
+    <div class="field input-group input-group-lg mt-4" >
+      <%= f.label :password, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %><br />
+      <%= f.password_field :password, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autocomplete: "current-password" %>
     </div>
 
     <% if devise_mapping.rememberable? %>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me, "lembre de mim" %>
+      <div class="form-check form-switch mt-3">
+        <%= f.check_box :remember_me, class: "form-check-input", role: "switch", id: "remember_me" %>
+        <%= f.label :remember_me, "Lembre de mim", class: "form-check-label", for: "remember_me" %>
       </div>
     <% end %>
 
-    <div class="actions">
-      <%= f.submit "Entrar", data: {turbo: false} %>
+    <div class="actions d-grid">
+      <%= f.submit "Entrar", class: "btn btn-success mb-3 mt-5 btn-lg" , data: {turbo: false} %>
     </div>
   <% end %>
 

@@ -29,6 +29,18 @@ describe 'Usuário visualiza produtos cadastrados' do
     expect(page).to have_content 'Mouse exbom'
   end
 
+  it 'e não há produtos cadastrados' do 
+    # Arrange
+    Item.destroy_all 
+    
+    # Act 
+    visit root_path
+    click_on 'Produtos'
+
+    # Assert
+    expect(page).to have_content 'Não há produtos cadastrados'
+  end
+
   # it 'por categoria' do 
   #   # Arrange 
   #   prod_cat_a = ProductCategory.create!(name: 'Alguma')

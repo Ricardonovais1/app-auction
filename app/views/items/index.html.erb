@@ -2,8 +2,14 @@
 
   <h1>Produtos cadastrados</h1>
 
+  <% if @items.any? %>
+
   <% @items.each do |item| %>
     <%= link_to item.name, item_path(item.id) %><br />
+  <% end %>
+
+  <% else %>
+    <p class="alert alert-warning mt-4" role="alert">Não há produtos cadastrados</p>
   <% end %>
 
 </div>

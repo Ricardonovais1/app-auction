@@ -21,9 +21,9 @@ describe 'Usuário visita a página inicial' do
     visit root_path
     
     # Assert
-    expect(page).to have_content 'Lote AAA000000'
+    expect(page).to have_content 'AAA000000'
     expect(page).to have_content "08/10/2090 a 20/10/2090" 
-    expect(page).to have_content 'Lote BBB111111'
+    expect(page).to have_content 'BBB111111'
     expect(page).to have_content "05/06/2090 a 04/07/2090" 
   end
 

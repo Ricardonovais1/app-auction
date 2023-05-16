@@ -89,7 +89,6 @@ class Lot < ApplicationRecord
     end
   end
 
-
   def bid_value_to_beat 
     min_value = minimum_bid_value
     last_bid = bids.last
@@ -101,16 +100,43 @@ class Lot < ApplicationRecord
     min_value 
   end
 
-  def date_range_validation
-    
+  def date_range_validation  
     errors.add(:start_date, 'deve ser anterior à data limite') if start_date.present? && limit_date.present? && start_date >= limit_date
+  end
 
+  def successful_bidder
+    bl = bids.last
+    if bl
+      "#{bl.user.name} | #{bl.user.email} | R$#{bl.value},00"
+    else
+      "Nenhum arrematante para este lote"
+    end
+  end
+
+  def successful_bidder_name 
+    bids.last.user.name
+  end
+
+  def successful_bidder_email 
+    bids.last.user.email
+  end
+
+  def successful_bidder_value 
+    "R$#{bids.last.value},00"
+  end
+
+  def successful_bidder_lot 
+    code.upcase
+  end
+
+  def successful_bidder_lot_expired_date
+    I18n.l(limit_date, format: '%d de %B de %Y')
   end
 
   def successful_bid_data
     bl = bids.last
     if bl
-      "#{bl.user.name} | #{bl.user.email} | R$#{bl.value},00 | Lote #{code.upcase}"
+      "#{bl.user.name} | #{bl.user.email} | R$#{bl.value},00 | Lote #{code.upcase} | Lote expirado em #{I18n.l(limit_date, format: '%d de %B de %Y')}"
     else
       "Nenhum lance para o Lote #{code}"
     end

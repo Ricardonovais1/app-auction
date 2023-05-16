@@ -10,7 +10,7 @@ describe 'Usuário vê a tela de detalhes do lote' do
     # Act 
     visit root_path
     within('.future') do
-      click_on 'Lote AAA000000'
+      click_on 'AAA000000'
     end
 
     # Assert
@@ -29,7 +29,7 @@ describe 'Usuário vê a tela de detalhes do lote' do
     # Act 
     visit root_path
     within('.future') do
-      click_on 'Lote AAA000000'
+      click_on 'AAA000000'
     end
     click_on "Tela inicial"
 
@@ -48,7 +48,7 @@ describe 'Usuário vê a tela de detalhes do lote' do
     login_as(user)
     visit root_path
     within('.future') do
-      click_on 'Lote AAA000000'
+      click_on 'AAA000000'
     end
     # Assert
     expect(page).to have_content 'Código: AAA000000'

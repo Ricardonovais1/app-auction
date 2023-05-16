@@ -11,7 +11,7 @@ describe 'Usuário vê link de fazer lances na página do lote' do
     # Act 
     login_as(user)
     visit root_path
-    click_on 'Lote ABC121117'
+    click_on 'ABC121117'
 
     # Assert
     expect(page).to have_button 'Fazer um lance'

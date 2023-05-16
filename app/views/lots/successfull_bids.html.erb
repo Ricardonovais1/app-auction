@@ -1,20 +1,45 @@
-<div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
-<h1>Lances vencedores</h1>
+<div class="mx-auto p-4" style="width: 75%;">
+
+<h1 class="mb-5">Lances vencedores:</h1>
 
 
 
 <% if @expired_lots.any?  %>
 
+<%# ====================== INÍCIO DA TABELA ============================= %>
+
+      <table class="table table-success table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Arrematante</th>
+            <th scope="col">Email</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Lote</th>
+            <th scope="col">Expirado em</th>
+          </tr>
+        </thead>
+        <tbody>
+
   <% @expired_lots.each do |lot| %>
 
     <% if lot.bids.any? %>
-
-      <p><strong>Arrematante: </strong> <%= lot.successful_bid_data %></p>
+     
+        
+          <tr>
+            <th scope="row"><%= lot.successful_bidder_name %></th>
+            <td><%= lot.successful_bidder_email %></td>
+            <td><%= lot.successful_bidder_value %></td>
+            <td><%= lot.successful_bidder_lot %></td>
+            <td><%= lot.successful_bidder_lot_expired_date %></td>
+          </tr>
+        
 
     <% end %>
 
   <% end %>
-
+  <%# ====================== FIM DA TABELA: ============================= %>
+         </tbody>
+      </table>
   <% else %>
 
     <h3><%= 'Nenhum lance vencedor' %></h3>

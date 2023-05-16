@@ -9,7 +9,7 @@ describe 'Usuário faz um lance' do
 
     # Act 
     visit root_path
-    click_on 'Lote ABC121117'
+    click_on 'ABC121117'
     click_on 'Fazer um lance'
 
     # Assert
@@ -28,7 +28,7 @@ describe 'Usuário faz um lance' do
     # Act 
     login_as(user)
     visit root_path
-    click_on 'Lote ABC121117'
+    click_on 'ABC121117'
     click_on 'Fazer um lance'
 
     # Assert
@@ -45,7 +45,7 @@ describe 'Usuário faz um lance' do
     # Act 
     login_as(user)
     visit root_path
-    click_on 'Lote ABC121117'
+    click_on 'ABC121117'
     click_on 'Fazer um lance'
     fill_in 'Valor', with: 200
     click_on 'Confirmar lance'
@@ -66,7 +66,7 @@ describe 'Usuário faz um lance' do
     # Act 
     login_as(user)
     visit root_path
-    click_on 'Lote ABC121117'
+    click_on 'ABC121117'
     click_on 'Fazer um lance'
     fill_in 'Valor', with: 105
     click_on 'Confirmar lance'
@@ -86,7 +86,7 @@ describe 'Usuário faz um lance' do
     # Act 
     login_as(user)
     visit root_path
-    click_on 'Lote ABC121117'
+    click_on 'ABC121117'
     click_on 'Fazer um lance'
     fill_in 'Valor', with: 90
     click_on 'Confirmar lance'
