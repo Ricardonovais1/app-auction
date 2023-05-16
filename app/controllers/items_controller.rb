@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-  before_action :set_item, only: [:show]
+  before_action :set_item, only: [:show, :edit, :update]
   before_action :authenticate_user!, only: [:new, :search]
   before_action :check_admin_user, only: [:new]
 
@@ -22,6 +22,19 @@ class ItemsController < ApplicationController
     else 
       flash.now[:alert] = 'Houve um problema para cadastrar o produto'
       render :new  
+    end
+  end
+
+  def edit 
+    @product_categories = ProductCategory.all
+  end
+
+  def update 
+    if @item.update(set_params)
+      redirect_to @item, notice: "Produto atualizado com sucesso"
+    else  
+      flash.now[:notice] = 'Não foi possível atualizar o produto'
+      render 'edit'
     end
   end
 

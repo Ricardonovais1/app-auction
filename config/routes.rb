@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     get 'successfull_bids', on: :collection
   end
   resources :product_categories, only: [:new, :create]
-  resources :items, only: [:index, :new, :create, :show] do 
+  resources :items, only: [:index, :new, :create, :show, :edit, :update] do 
     get 'search', on: :collection
   end
 end

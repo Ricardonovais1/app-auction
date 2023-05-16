@@ -4,8 +4,4 @@ class HomeController < ApplicationController
     @current_lots = Lot.approved
     @future_lots = Lot.future
   end
-
-  def future?
-
-  end
 end
