@@ -4,14 +4,14 @@
 
   <%= form_with(model: [@lot, @bid]) do |f| %>
 
-    <div>
-      <%= f.label :value %>
-      <%= f.number_field :value, autofocus: true %>
+    <div class="input-group input-group-lg mt-4">
+      <%= f.label :value, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %>
+      <%= f.number_field :value, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" , autofocus: true %>
       <%= f.hidden_field :lot_id, value: @lot.id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
     </div>
-    <div>
-      <%= f.submit 'Confirmar lance' %>
+    <div class="d-grid">
+      <%= f.submit 'Confirmar lance', class: "btn btn-success mb-3 mt-5 btn-lg" %>
     </div>
     
 

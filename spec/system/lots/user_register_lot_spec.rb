@@ -17,7 +17,7 @@ describe 'usuário admin cadastra lote' do
     expect(page).to have_field 'Data de início'
     expect(page).to have_field 'Data limite para lances'
     expect(page).to have_field 'Valor mínimo para lance'
-    expect(page).to have_field 'Menor diferença permitida entre lances'
+    expect(page).to have_field 'Menor diferença entre lances'
   end
 
   it 'com sucesso' do 
@@ -34,7 +34,7 @@ describe 'usuário admin cadastra lote' do
     fill_in 'Data de início', with: '20/12/2029'
     fill_in 'Data limite para lances', with: '20/01/2030'
     fill_in 'Valor mínimo para lance', with: '100'
-    fill_in 'Menor diferença permitida entre lances', with: '10'
+    fill_in 'Menor diferença entre lances', with: '10'
     click_on 'Cadastrar lote'
 
     # Assert
@@ -44,7 +44,7 @@ describe 'usuário admin cadastra lote' do
     expect(page).to have_content 'Data de início: 20/12/2029'
     expect(page).to have_content 'Data limite para lances: 20/01/2030'
     expect(page).to have_content 'Valor mínimo para lance inicial: R$100,00'
-    expect(page).to have_content 'Menor diferença permitida entre lances: R$10,00'
+    expect(page).to have_content 'Menor diferença entre lances: R$10,00'
     expect(page).to have_content 'Situação do lote: Aguardando aprovação'
     expect(page).to have_content 'Criado por: Ricardo | ricardo@leilaodogalpao.com.br'
   end
@@ -63,7 +63,7 @@ describe 'usuário admin cadastra lote' do
     fill_in 'Data de início', with: ''
     fill_in 'Data limite para lances', with: ''
     fill_in 'Valor mínimo para lance', with: ''
-    fill_in 'Menor diferença permitida entre lances', with: ''
+    fill_in 'Menor diferença entre lances', with: ''
     click_on 'Cadastrar lote'
 
     # Assert
@@ -72,13 +72,13 @@ describe 'usuário admin cadastra lote' do
     expect(page).not_to have_content 'Data de início: 20/12/2029'
     expect(page).not_to have_content 'Data limite para lances: 20/01/2030'
     expect(page).not_to have_content 'Valor mínimo para lance: R$100,00'
-    expect(page).not_to have_content 'Menor diferença permitida entre lances: R$10,00'
+    expect(page).not_to have_content 'Menor diferença entre lances: R$10,00'
     expect(page).not_to have_content 'Criado por: Ricardo | ricardo@leilaodogalpao.com.br'
 
     expect(page).to have_content 'Data de início não pode ficar em branco'
     expect(page).to have_content 'Data limite para lances não pode ficar em branco'
     expect(page).to have_content 'Valor mínimo para lance não pode ficar em branco'
-    expect(page).to have_content 'Menor diferença permitida entre lances não pode ficar em branco'
+    expect(page).to have_content 'Menor diferença entre lances não pode ficar em branco'
     expect(page).to have_content 'Código não pode ficar em branco'
     expect(page).to have_content 'Código não possui o tamanho esperado (9 caracteres)'
   end

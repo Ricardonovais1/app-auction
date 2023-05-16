@@ -67,8 +67,12 @@
           </div>
       </nav>
       <div>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <% if notice %>
+          <br /><p class="alert alert-success" role="alert"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <br /><p class="alert alert-warning" role="alert"><%= alert %></p>
+        <% end %>
       </div>
     </div>
   </header>

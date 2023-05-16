@@ -53,4 +53,27 @@ describe 'Usuário faz pegunta a respeito de um lote' do
     # Assert
     expect(page).to have_content 'Mensagem muito curta...'
   end
+
+  it 'a menos que o lote esteja expirado' do
+    # Arrange 
+    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
+    lot = Lot.create!(code: 'ABC123987', start_date: 1.month.ago, limit_date: 1.week.ago, 
+                      minimum_bid_value: 100, minimum_bid_difference: 10, 
+                      by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br')
+
+    # Act 
+    login_as(admin)
+    visit root_path
+    within('nav') do
+      click_on 'Administrativo'
+      click_on 'Lotes expirados'
+    end
+    click_on 'ABC123987'
+
+    # Assert
+    puts lot.expired?
+    expect(page).not_to have_content 'Tem alguma dúvida?'
+    expect(page).not_to have_field 'Escreva aqui'
+    expect(page).not_to have_button 'Enviar'
+  end
 end

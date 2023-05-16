@@ -6,9 +6,7 @@
   <% if @lot.expired? && @lot.bids.count == 0 %>
     <h3 class="bg-danger text-white" style="--bs-text-opacity: .75; padding: 1rem">Cancelado por falta de lances</h3><br />
   <% elsif @lot.expired? && @lot.bids.count >= 1 %>
-    <h3 class="bg-success text-white" style="--bs-text-opacity: .75; padding: 1rem"><strong>Arrematante: </strong><%= @lot.get_successful_bidder_name %> |  
-                                                                                                                  <%= @lot.get_successful_bidder_email %> | 
-                                                                                                                  R$<%= @lot.get_successful_bid_value %>,00</h3><br />
+    <h3 class="bg-success text-white" style="--bs-text-opacity: .75; padding: 1rem"><strong>Arrematante: </strong><%= @lot.successful_bid_data %></h3><br />
   <% end %>
 
   <p><strong><%= Lot.human_attribute_name(:code) %>:</strong> <%= @lot.code.upcase %> </p>
@@ -79,29 +77,31 @@
     <%= button_to "Fazer um lance a partir de R$#{@lot.bid_value_to_beat},00", new_lot_bid_path(@lot), method: :get, class: "btn btn-primary mb-3 mt-2 me-2" %>
   <% end %>
 
-  <p><i>Tem alguma dúvida? </i></p>
+  <% if !@lot.expired? %>
 
-  <%= form_with(model: [@lot, @question]) do |f| %>
-    <div>
-      <%= f.text_area :body, placeholder: 'Escreva aqui' %>
-    </div>
-    <div>
-      <%= f.submit 'Enviar' %>
-    </div>
-    
-  <% end %>
+    <p><i>Tem alguma dúvida? </i></p>
 
-  <% if @questions.any? %>
-    <% @questions.each do |question| %>
-      <br />
-        <p><i><%= I18n.l(question.created_at, format: '%d de %B de %Y')  %> </i></p>
-        <p><strong><%= question.body %></strong></p>
-      <br />
+    <%= form_with(model: [@lot, @question]) do |f| %>
+      <div>
+        <%= f.text_area :body, placeholder: 'Escreva aqui' %>
+      </div>
+      <div>
+        <%= f.submit 'Enviar' %>
+      </div>
+      
     <% end %>
-  <% else %>
-      <p><i>Nenhuma pergunta</i></p>
-  <% end %>
 
+    <% if @questions.any? %>
+      <% @questions.each do |question| %>
+        <br />
+          <p><i><%= I18n.l(question.created_at, format: '%d de %B de %Y')  %> </i></p>
+          <p><strong><%= question.body %></strong></p>
+        <br />
+      <% end %>
+    <% else %>
+        <p><i>Nenhuma pergunta</i></p>
+    <% end %>
+  <% end %>
   <%= link_to 'Tela inicial', root_path, class: "btn btn-success mb-3 mt-2 me-2"  %>
 
 </div>

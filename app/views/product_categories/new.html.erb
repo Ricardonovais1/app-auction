@@ -12,12 +12,12 @@
   <h1>Nova categoria de produto</h1>
 
   <%= form_with(model: @product_category) do |f| %>
-    <div>
-      <%= f.label :name %><br />
-      <%= f.text_field :name, autofocus: true %>
+    <div class="input-group input-group-lg mt-4">
+      <%= f.label :name, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %><br />
+      <%= f.text_field :name, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
     </div>
-    <div>
-      <%= f.submit "Salvar" %>
+    <div class="d-grid">
+      <%= f.submit "Salvar", class: "btn btn-success mb-3 mt-5 btn-lg" %>
     </div>
 
   <% end %>

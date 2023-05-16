@@ -1,15 +1,15 @@
-<div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
+<div class="mx-auto p-0 mt-5" style="width: 75%;">
 
 <div class="card mb-3" style="width:100%; height: 100%">
   <div class="row g-0">
-    <div class="col-md-4">
-    <% if @item.image.attached? %>
-      <%= image_tag(@item.image, class:"img-fluid rounded-start", style:"") %>
-    <% end %>
+    <div class="col-md-4 p-5">
+      <% if @item.image.attached? %>
+        <%= image_tag(@item.image, class:"img-fluid rounded-start", style:"") %>
+      <% end %>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 d-flex align-items-center justify-content-center">
       <div class="card-body">
-        <h2 class="card-title" ><%= @item.name%></h2>
+        <h2 class="card-title mb-4" ><%= @item.name%></h2>
         <p class="card-text"><strong><%= Item.human_attribute_name(:description) %>: </strong><%= @item.description %></p>
         <p class="card-text"><strong><%= Item.human_attribute_name(:product_category_id) %>: </strong><%= @product_category %></p>
         <p class="card-text"><strong><%= Item.human_attribute_name(:weight) %>: </strong><%= @item.weight %>g</p>

@@ -13,39 +13,38 @@
 
     <%= form_with(model: @lot) do |f|  %>
 
-      <div>
-        <%= f.label :code %><br />
-        <%= f.text_field :code, autofocus: true %>
+      <div class="input-group input-group-lg mt-4">
+        <%= f.label :code, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %><br />
+        <%= f.text_field :code, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
       </div>
 
-      <div>
-        <%= f.label :start_date %><br />
-        <%= f.date_field :start_date %>
+      <div class="input-group input-group-lg mt-4">
+        <%= f.label :start_date, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+        <%= f.date_field :start_date, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
       </div>
 
-      <div>
-        <%= f.label :limit_date %><br />
-        <%= f.date_field :limit_date %>
+      <div class="input-group input-group-lg mt-4">
+        <%= f.label :limit_date, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+        <%= f.date_field :limit_date, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
       </div>
 
-      <div>
-        <%= f.label :minimum_bid_value %><br />
-        <em>R$ </em>
-        <%= f.number_field :minimum_bid_value %>
-        <em>,00</em>
+      
+      <div class="input-group input-group-lg mt-4">
+        <%= f.label :minimum_bid_value, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"   %><br />
+        <%= f.number_field :minimum_bid_value, placeholder: 'Insira apenas números', class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
       </div>
 
-      <div>
-        <%= f.label :minimum_bid_difference %><br />
-        <em>R$ </em>
-        <%= f.number_field :minimum_bid_difference %>
-        <em>,00</em>
+      <div class="input-group input-group-lg mt-4">
+        <%= f.label :minimum_bid_difference, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+        <%= f.number_field :minimum_bid_difference, placeholder: 'Insira apenas números', class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true%> 
       </div>
 
-      <div>
-        <%= f.submit 'Cadastrar lote' %>
+      <div class="d-grid">
+        <%= f.submit 'Cadastrar lote', class: "btn btn-success mb-3 mt-5 btn-lg" %>
       </div>
 
     <% end %>
 
 </div>
+
+
