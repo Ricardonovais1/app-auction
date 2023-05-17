@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "home#index"
   resources :lots, only: [:index, :show, :new, :create] do 
-    resources :questions, only: [:create]
+    resources :questions, only: [:new, :create, :show] do 
+      resources :answers, only: [:new, :create]
+    end
     resources :bids, only: [:new, :create] 
     resources :lot_items, only: [:new, :create, :destroy] do 
       delete 'remove', on: :member

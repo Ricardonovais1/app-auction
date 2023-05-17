@@ -33,7 +33,6 @@
     <p class="text-danger"><strong><%= Lot.model_name.human  %> expirado</strong></p><br />
   <% end %>
 
-  <%# <% if !@lot.approved? && !@expired_lots.any? %> 
   <% if !@lot.approved? && @lot.future? %>
     <div>
       <%= link_to 'Adicionar item', new_lot_lot_item_path(lot_id: @lot.id) %>
@@ -94,9 +93,36 @@
     <% if @questions.any? %>
       <% @questions.each do |question| %>
         <br />
-          <p><i><%= I18n.l(question.created_at, format: '%d de %B de %Y')  %> </i></p>
-          <p><strong><%= question.body %></strong></p>
-        <br />
+          <div class="d-flex gap-2"> 
+            <p><i><%= I18n.l(question.created_at, format: '%d de %B de %Y') %> - Usuário(a): <%= question.user.name %></i></p>
+            <% if current_user.image.attached? %>
+              <%= image_tag url_for(current_user.image), alt: current_user.name, class: 'rounded-circle', size: '35x35' %>
+            <% end %>
+          </div>
+          <p><strong><%= question.body %></strong></p><br />
+          <% if question.answers.any? %>
+            <% question.answers.each do |answer| %>
+              <div class="ms-5 d-flex flex-column gap-2"> 
+                <% if answer.created_at %>
+                  <p><i><%= I18n.l(answer.created_at, format: '%d de %B de %Y') %> - Admin: <%= current_user.name %></i></p>
+                <% end %>
+                <% if current_user.image.attached? %>
+                  <%= image_tag url_for(current_user.image), alt: current_user.name, class: 'rounded-circle', size: '35x35' %>
+                <% end %>
+                <p><i><strong><%= answer.reply %></strong></i></p><br />
+              </div>
+            <% end %>
+          <% end %>
+          <%= form_with(model: [@lot, question, question.answers.build]) do |f| %>
+            <div>
+              <%= f.text_area :reply, placeholder: 'Responda aqui' %>
+            </div>
+            <div>
+              <%= f.submit 'Responder' %>
+            </div>    
+          <% end %>
+
+          
       <% end %>
     <% else %>
         <p><i>Nenhuma pergunta</i></p>

@@ -13,9 +13,11 @@ describe 'Usuário cria sua conta' do
     fill_in 'Email', with: 'ric@email.com'
     fill_in 'Senha', with: 'password'
     fill_in 'Confirme sua senha', with: 'password'
+    attach_file 'Imagem', Rails.root.join("spec/support/img/homem_3.jpeg")
     click_on 'Cadastrar'
     
     # Assert
+   
     expect(page).to have_content 'Ótimo! Você realizou seu registro com sucesso.' 
     within('nav') do 
       expect(page).not_to have_content 'Entrar'

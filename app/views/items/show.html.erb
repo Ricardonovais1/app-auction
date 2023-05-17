@@ -17,7 +17,9 @@
         <p class="card-text"><strong><%= Item.human_attribute_name(:code) %>: </strong><%= @item.code %></p>
         <p class="card-text"><small class="text-body-secondary">Criado em <%= I18n.l(@item.created_at, format: '%d de %B de %Y') %> </small></p>
         <div class="d-flex gap-2">
-          <%= button_to 'Editar', edit_item_path(@item), method: :get, class: "btn btn-success" %>
+          <% if current_user.admin? %>
+            <%= button_to 'Editar', edit_item_path(@item), method: :get, class: "btn btn-success" %>
+          <% end %>
           <%= button_to 'Todos os produtos', items_path, method: :get, class: "btn btn-success" %>
         </div>
       </div>

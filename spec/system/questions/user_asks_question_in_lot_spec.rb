@@ -34,6 +34,7 @@ describe 'Usuário faz pegunta a respeito de um lote' do
     # Assert
     expect(page).to have_content 'Sua pergunta foi enviada com sucesso'
     expect(page).to have_content "Este lote inclui o produto XPTO?"
+    expect(page).to have_content "Usuário(a): Ricardo"
   end
 
   it 'clica enviar sem escrever nada' do 
@@ -75,5 +76,26 @@ describe 'Usuário faz pegunta a respeito de um lote' do
     expect(page).not_to have_content 'Tem alguma dúvida?'
     expect(page).not_to have_field 'Escreva aqui'
     expect(page).not_to have_button 'Enviar'
+  end
+
+  it 'e recebe uma resposta' do
+    admin = User.create!(name: 'Fernanda', email: 'fernanda@exemplo.com.br', registration_number: '70535073607', password: 'password')
+    user = User.create!(name: 'Sérgio', email: 'sergio@exemplo.com.br', registration_number: '87451252019', password: 'password') 
+    lot = Lot.create!(code: 'ABC123987', start_date: 1.day.ago, limit_date: 1.week.from_now, 
+                      minimum_bid_value: 100, minimum_bid_difference: 10, 
+                      by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br',
+                      status: :approved)
+    question = Question.create!(body: "É possível fazer um lance e ainda hoje? Obrigado!", lot_id: lot.id, user_id: user.id)
+  
+    login_as(admin)
+    visit root_path
+    click_on "ABC123987"
+    fill_in "Responda aqui", with: "É sim. boa sorte!"
+    click_on "Responder"
+
+    expect(page).to have_content "Resposta enviada com sucesso"
+    expect(page).to have_content "Usuário(a): Sérgio"
+    expect(page).to have_content "É possível fazer um lance e ainda hoje? Obrigado!"
+    expect(page).to have_content "É sim. boa sorte!"
   end
 end

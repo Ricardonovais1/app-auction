@@ -32,6 +32,20 @@ describe 'Usuário edita produto' do
   end
 
   it 'só ser for admin' do
+    prod_cat = ProductCategory.create!(name: 'Alguma')
+    item = Item.create!(name: 'Mouse exbom', description: 'Mouse com fio', weight: 100, height: 3, depth: 8, width: 5, product_category_id: prod_cat.id )
+    user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', registration_number: '70535073607', password: 'password')
+  
 
+    login_as(user)
+    visit root_path
+    within('nav') do
+      click_on 'Produtos'
+    end
+    within("#item_#{item.id}") do
+      click_on 'Ver detalhes'
+    end
+
+    expect(page).not_to have_button 'Editar'
   end
 end

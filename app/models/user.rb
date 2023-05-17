@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_one_attached :image
 
   after_create :set_admin_if_leilaodogalpao_email
 
@@ -13,6 +14,11 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validate :cpf_validator 
+
+  # ================ ANSWER ASSOCIATIONS =============
+
+  has_many :answers
+  has_many :questions, through: :answers
 
   # ================ QUESTION ASSOCIATIONS ===========
 

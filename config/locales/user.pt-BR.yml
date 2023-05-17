@@ -9,4 +9,5 @@ pt-BR:
         name: 'Nome'
         registration_number: 'CPF'
         email: 'Email'
+        image: 'Imagem'
         
