@@ -6,13 +6,16 @@ describe 'Usuário edita produto' do
     item = Item.create!(name: 'Mouse exbom', description: 'Mouse com fio', weight: 100, height: 3, depth: 8, width: 5, product_category_id: prod_cat.id )
     admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
   
-    
+
     login_as(admin)
     visit root_path
     within('nav') do
       click_on 'Produtos'
     end
-    click_on item.name
+    within("#item_#{item.id}") do
+      click_on 'Ver detalhes'
+    end
+    
     click_on 'Editar'
     fill_in 'Nome', with: 'Mouse exbom XP'
     fill_in 'Descrição', with: 'Mouse com fio com luz de LED azul'
@@ -26,5 +29,9 @@ describe 'Usuário edita produto' do
     expect(page).to have_content 'Categoria: Alguma'
     expect(page).to have_content 'Peso: 100g'
     expect(page).to have_content 'Dimensões: 3cm (altura) x 8cm (profundidade) x 5cm (largura)' 
+  end
+
+  it 'só ser for admin' do
+
   end
 end

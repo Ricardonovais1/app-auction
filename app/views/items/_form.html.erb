@@ -1,0 +1,45 @@
+<%= form_with(model: @item) do |f| %>
+    <div class="input-group input-group-lg mt-4">
+      <%= f.label :name, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+      <%= f.text_field :name, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
+    </div>
+
+    <div class="input-group input-group-lg mt-4">
+      <%= f.label :description, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+      <%= f.text_field :description, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
+    </div>
+
+    <div class="input-group input-group-lg mt-4">
+      <%= f.label :weight, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+      <%= f.number_field :weight, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
+    </div>
+
+    <div class="input-group input-group-lg mt-4">
+      <%= f.label :height, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+      <%= f.number_field :height, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
+    </div>
+
+    <div class="input-group input-group-lg mt-4">
+      <%= f.label :depth, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+      <%= f.number_field :depth, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
+    </div>
+
+    <div class="input-group input-group-lg mt-4">
+      <%= f.label :width, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+      <%= f.number_field :width, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
+    </div>
+
+    <div class="input-group input-group-lg mt-4">
+      <%= f.label :product_category_id, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+      <%= f.collection_select :product_category_id, @product_categories, :id, :name, {}, { class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" } %>
+    </div>
+
+    <div class="input-group input-group-lg mt-4">
+      <%= f.label :image, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %>
+      <%= f.file_field :image, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
+    </div>
+
+    <div class="d-grid">
+      <%= f.submit 'Salvar', class: "btn btn-success mb-3 mt-5 btn-lg"  %><br />
+    </div>
+  <% end %>

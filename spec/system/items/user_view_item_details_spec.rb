@@ -30,7 +30,9 @@ describe 'Usuário visualiza detalhes do produto' do
       click_on 'Administrativo'
       click_on 'Produtos'
     end
-    click_on 'Mouse exbom'
+    within("#item_#{item.id}") do
+      click_on 'Ver detalhes'
+    end
 
     # Assert
     expect(page).to have_content 'Mouse exbom'

@@ -16,7 +16,10 @@
         <p class="card-text"><strong>Dimensões: </strong><%= @item.height %>cm (<%= Item.human_attribute_name(:height).downcase %>) x <%= @item.depth %>cm (<%= Item.human_attribute_name(:depth).downcase %>) x <%= @item.width %>cm (<%= Item.human_attribute_name(:width).downcase %>)</p>
         <p class="card-text"><strong><%= Item.human_attribute_name(:code) %>: </strong><%= @item.code %></p>
         <p class="card-text"><small class="text-body-secondary">Criado em <%= I18n.l(@item.created_at, format: '%d de %B de %Y') %> </small></p>
-        <%= button_to 'Editar', edit_item_path(@item), method: :get, class: "btn btn-success" %>
+        <div class="d-flex gap-2">
+          <%= button_to 'Editar', edit_item_path(@item), method: :get, class: "btn btn-success" %>
+          <%= button_to 'Todos os produtos', items_path, method: :get, class: "btn btn-success" %>
+        </div>
       </div>
     </div>
   </div>
