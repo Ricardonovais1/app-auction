@@ -3,6 +3,10 @@
 
   <h2 class="mb-5 display-6"><%= Lot.model_name.human %> <%= @lot.code.upcase %></h2> 
 
+   <% if @lot.approved? && @lot.current? %>
+    <%= button_to "Fazer um lance a partir de R$#{@lot.bid_value_to_beat},00", new_lot_bid_path(@lot), method: :get, class: "btn btn-primary mb-3 mt-2 me-2" %>
+  <% end %>
+
   <% if @lot.expired? && @lot.bids.count == 0 %>
     <h3 class="bg-danger text-white" style="--bs-text-opacity: .75; padding: 1rem">Cancelado por falta de lances</h3><br />
   <% elsif @lot.expired? && @lot.bids.count >= 1 %>
@@ -53,9 +57,10 @@
       <% end %>
     </div>
   <% end %>
-  
+   
   <span class="align-items-center">
     <% if user_signed_in? && current_user.admin? %>
+     <hr><br />
       <p><strong>Criado por:</strong> <%= @lot.by %> | <%= @lot.by_email %></p>
 
       <% if current_user.email != @lot.by_email %>
@@ -69,16 +74,15 @@
         <% end %>
 
       <% end %>
+       <br /><hr><br />
     <% end %>
   </span>
 
-  <% if @lot.approved? && @lot.current? %>
-    <%= button_to "Fazer um lance a partir de R$#{@lot.bid_value_to_beat},00", new_lot_bid_path(@lot), method: :get, class: "btn btn-primary mb-3 mt-2 me-2" %>
-  <% end %>
+ 
 
   <% if !@lot.expired? %>
 
-    <p><i>Tem alguma dúvida? </i></p>
+    <h3>Tem alguma dúvida? Pergunte aqui:</h3><br />
 
     <%= form_with(model: [@lot, @question]) do |f| %>
       <div>
@@ -96,30 +100,50 @@
           <div class="d-flex gap-2"> 
             <p><i><%= I18n.l(question.created_at, format: '%d de %B de %Y') %> - Usuário(a): <%= question.user.name %></i></p>
             <% if current_user.image.attached? %>
-              <%= image_tag url_for(current_user.image), alt: current_user.name, class: 'rounded-circle', size: '35x35' %>
+              <%= image_tag url_for(current_user.image), alt: current_user.name, class: 'rounded-circle', size: '30x30' %>
             <% end %>
           </div>
-          <p><strong><%= question.body %></strong></p><br />
-          <% if question.answers.any? %>
+          <div class="d-flex gap-2">
+            <% if question.visible? %>
+                <p><strong><%= question.body %></strong></p><br />
+            <% else %>
+                <p class="ms-5 text-secondary text-opacity: .5"><i>Esta pergunta fere as normas do site</i></p>
+            <% end %>
+            <% if user_signed_in? && current_user.admin? %>
+              <% if question.visible? %>
+                <p><%= link_to 'Ocultar', hidden_lot_question_path(@lot, question) %></p>
+              <% else %>
+                <p><%= link_to 'Tornar visível', visible_lot_question_path(@lot, question) %></p>
+              <% end %>
+            <% end %>
+          </div>
+          
+          <% if question.answers.any? && question.visible? %>
             <% question.answers.each do |answer| %>
               <div class="ms-5 d-flex flex-column gap-2"> 
-                <% if answer.created_at %>
-                  <p><i><%= I18n.l(answer.created_at, format: '%d de %B de %Y') %> - Admin: <%= current_user.name %></i></p>
-                <% end %>
-                <% if current_user.image.attached? %>
-                  <%= image_tag url_for(current_user.image), alt: current_user.name, class: 'rounded-circle', size: '35x35' %>
-                <% end %>
+                <div class="d-flex gap-2">
+                  <% if answer.created_at %>
+                    <p><i><%= I18n.l(answer.created_at, format: '%d de %B de %Y') %> - Admin: <%= current_user.name %></i></p>
+                  <% end %>
+                  <% if current_user.image.attached? %>
+                    <%= image_tag url_for(current_user.image), alt: current_user.name, class: 'rounded-circle', size: '30x30' %>
+                  <% end %>
+                
+                </div>
+                
                 <p><i><strong><%= answer.reply %></strong></i></p><br />
               </div>
             <% end %>
           <% end %>
-          <%= form_with(model: [@lot, question, question.answers.build]) do |f| %>
-            <div>
-              <%= f.text_area :reply, placeholder: 'Responda aqui' %>
-            </div>
-            <div>
-              <%= f.submit 'Responder' %>
-            </div>    
+          <% if user_signed_in? && current_user.admin? && question.visible? %>
+            <%= form_with(model: [@lot, question, question.answers.build]) do |f| %>
+              <div>
+                <%= f.text_area :reply, placeholder: 'Responda aqui' %>
+              </div>
+              <div>
+                <%= f.submit 'Responder' %>
+              </div>    
+            <% end %>
           <% end %>
 
           
