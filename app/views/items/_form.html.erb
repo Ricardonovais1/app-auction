@@ -1,4 +1,5 @@
-<%= form_with(model: @item) do |f| %>
+<%= form_with model: @item do |f| %>
+
     <div class="input-group input-group-lg mt-4">
       <%= f.label :name, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
       <%= f.text_field :name, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>

@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :new, :create, :show, :edit, :update] do 
     get 'search', on: :collection
   end
+  resources :blocked_cpfs, only: [:new, :create]
 end

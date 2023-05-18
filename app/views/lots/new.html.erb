@@ -2,16 +2,16 @@
 
 <% if @lot.errors.any? %>
   <p>Verifique os erros abaixo:</p>
-        <ul>
-            <% @lot.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>  
-            <% end %>
-        </ul>
+    <ul>
+      <% @lot.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>  
+      <% end %>
+    </ul>
 <% end %>
 
   <h2>Criar um novo lote</h2>
 
-    <%= form_with(model: @lot) do |f|  %>
+    <%= form_with model: @lot, local: true do |f|  %>
 
       <div class="input-group input-group-lg mt-4">
         <%= f.label :code, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %><br />

@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validate :cpf_validator 
+  validate :cpf_must_not_be_blocked
+
 
   # ================ ANSWER ASSOCIATIONS =============
 
@@ -83,5 +85,11 @@ class User < ApplicationRecord
 
   def cpf_validator  
     check_verifyer_digit_1(registration_number)
+  end
+
+  def cpf_must_not_be_blocked
+    if BlockedCpf.where(cpf: self.registration_number, blocked: true).exists?
+      errors.add(:registration_number, "está bloqueado")
+    end
   end
 end

@@ -99,8 +99,8 @@
         <br />
           <div class="d-flex gap-2"> 
             <p><i><%= I18n.l(question.created_at, format: '%d de %B de %Y') %> - Usuário(a): <%= question.user.name %></i></p>
-            <% if current_user.image.attached? %>
-              <%= image_tag url_for(current_user.image), alt: current_user.name, class: 'rounded-circle', size: '30x30' %>
+            <% if question.user.image.attached? %>
+              <%= image_tag url_for(question.user.image), alt: question.user.name, class: 'rounded-circle', size: '30x30' %>
             <% end %>
           </div>
           <div class="d-flex gap-2">
@@ -123,10 +123,10 @@
               <div class="ms-5 d-flex flex-column gap-2"> 
                 <div class="d-flex gap-2">
                   <% if answer.created_at %>
-                    <p><i><%= I18n.l(answer.created_at, format: '%d de %B de %Y') %> - Admin: <%= current_user.name %></i></p>
+                    <p><i><%= I18n.l(answer.created_at, format: '%d de %B de %Y') %> - Admin: <%= answer.user.name %></i></p>
                   <% end %>
                   <% if current_user.image.attached? %>
-                    <%= image_tag url_for(current_user.image), alt: current_user.name, class: 'rounded-circle', size: '30x30' %>
+                    <%= image_tag url_for(answer.user.image), alt: current_user.name, class: 'rounded-circle', size: '30x30' %>
                   <% end %>
                 
                 </div>

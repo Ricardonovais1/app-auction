@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
       redirect_to @item, notice: 'Produto cadastrado com sucesso'
     else 
       flash.now[:alert] = 'Houve um problema para cadastrar o produto'
-      render :new  
+      render 'new' 
     end
   end
 
