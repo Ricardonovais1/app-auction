@@ -14,8 +14,23 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validate :cpf_validator 
-  validate :cpf_must_not_be_blocked
+  validate :cpf_must_not_be_blocked_create_account, on: :create
 
+  def cpf_must_not_be_blocked_create_account
+    cpf_must_not_be_blocked(:create_account)
+  end
+
+  validate :cpf_must_not_be_blocked_bid_on_lot, on: :bid_on_lot
+
+  def cpf_must_not_be_blocked_bid_on_lot
+    cpf_must_not_be_blocked(:bid_on_lot)
+  end
+
+  validate :cpf_must_not_be_blocked_blocked_by_cpf, on: :blocked_by_cpf
+
+  def cpf_must_not_be_blocked_blocked_by_cpf
+    cpf_must_not_be_blocked(:blocked_by_cpf)
+  end
 
   # ================ ANSWER ASSOCIATIONS =============
 
@@ -87,9 +102,22 @@ class User < ApplicationRecord
     check_verifyer_digit_1(registration_number)
   end
 
-  def cpf_must_not_be_blocked
+  # def cpf_must_not_be_blocked
+  #   if BlockedCpf.where(cpf: self.registration_number, blocked: true).exists?
+  #     errors.add(:registration_number, "está bloqueado")
+  #   end
+  # end
+
+  def cpf_must_not_be_blocked(action)
     if BlockedCpf.where(cpf: self.registration_number, blocked: true).exists?
-      errors.add(:registration_number, "está bloqueado")
+      case action
+      when :create_account
+        errors.add(:registration_number, "está bloqueado")
+      when :bid_on_lot
+        errors.add(:registration_number, "bloqueado. Lance não permitido")
+      when :blocked_by_cpf
+        errors.add(:registration_number, "bloqueado. Mensagens não permitidas")
+      end
     end
   end
 end

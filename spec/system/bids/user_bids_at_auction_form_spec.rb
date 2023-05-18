@@ -15,11 +15,10 @@ describe 'Usuário faz um lance' do
     puts 2.day.ago
     visit root_path
     click_on 'ABC121117'
-    click_on 'Fazer um lance'
    
     # Assert
-    expect(current_path).to eq new_user_session_path
-    
+    expect(page).not_to have_button 'Fazer um lance'
+    expect(page).to have_content "Para fazer lances entre com sua conta"
   end
 
 
@@ -106,6 +105,5 @@ describe 'Usuário faz um lance' do
     # Assert
     expect(page).to have_content "Valor mínimo para lance atual: R$100,00"
     expect(page).to have_content "Fazer um lance a partir de R$100,00"
-    # expect(page).to have_content 'Não foi possível realizar o lance.'
   end
 end

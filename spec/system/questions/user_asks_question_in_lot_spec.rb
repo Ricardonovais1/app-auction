@@ -177,4 +177,23 @@ describe 'Usuário faz pegunta a respeito de um lote' do
       expect(page).not_to have_content "Tornar visível"
     end
   end
+
+  it 'a menos que seu CPF esteja bloqueado' do 
+    user = User.create!(name: 'Sérgio', email: 'sergio@exemplo.com.br', registration_number: '87451252019', password: 'password') 
+    blocked_cpf = BlockedCpf.create!(cpf: '87451252019', blocked: true) 
+    travel_to Time.current - 2.days do
+      lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+                        minimum_bid_value: 100, minimum_bid_difference: 10, 
+                        by: 'Fernanda', by_email: 'fernanda@leilaodogalpao.com.br',
+                        status: :approved)
+    
+      login_as user
+      visit root_path
+      click_on 'ABC123987'
+      fill_in 'Escreva aqui', with: "Este lote inclui o produto XPTO?"
+      click_on 'Enviar'
+
+      expect(page).to have_content 'CPF bloqueado. Mensagens não permitidas'
+    end
+  end
 end

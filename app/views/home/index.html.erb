@@ -1,4 +1,4 @@
-<div class="mx-auto p-4 border border-3 border-success p-2 mb-2 border-opacity-50  rounded-4" style="width: 75%;">
+<div class="mx-auto p-4 bg-success bg-opacity-10 border border-3 border-success p-2 mb-2 border-opacity-50  rounded-4" style="width: 75%;">
 
 <h2 class="mb-5 ms-4 text-success">Lotes em andamento</h2>
 
@@ -18,10 +18,10 @@
             <div class="card-header bg-success bg-opacity-75 text-white">              
               Lance mínimo agora: R$<%= lot.bid_value_to_beat %>,00
             </div>
-            <div class="card-body bg-success bg-opacity-10 text-success">
+            <div class="card-body bg-success bg-opacity-25 text-success">
               <h5 class="card-title">Lote aberto até:</h5>
               <p class="card-text"><%= I18n.l(lot.limit_date) %></p>
-              <%= link_to "#{lot.code}", lot_path(lot), class: "btn btn-success mb-3 mt-2"  %>
+              <%= link_to "#{lot.code.upcase}", lot_path(lot), class: "btn btn-success mb-3 mt-2"  %>
             </div>
           </div>
           <%#  %>
@@ -36,7 +36,7 @@
 </div>
 </div><br /><br />
 
-<div class="mx-auto p-4 border border-3 border-secondary p-2 mb-2 border-opacity-50 rounded-4" style="width: 75%;">
+<div class="mx-auto p-4 bg-secondary bg-opacity-10 border border-3 border-secondary p-2 mb-2 border-opacity-50 rounded-4" style="width: 75%;">
 
 <h2 class="mb-5 ms-4 text-secondary">Lotes futuros</h2>
 
@@ -52,10 +52,10 @@
 
         <div class="card col-3 ms-4 me-4 mb-3 p-0" style="width: 20rem;">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body bg-secondary bg-opacity-25">
               <h5 class="card-title">Previsão de abertura:</h5>
               <p class="card-text"><%= I18n.l(lot.start_date) %></p>
-              <%= link_to "#{lot.code}", lot_path(lot), class: "btn btn-secondary mb-3 mt-2"  %>
+              <%= link_to "#{lot.code.upcase}", lot_path(lot), class: "btn btn-secondary mb-3 mt-2"  %>
               <p class="card-text"><%= I18n.l(lot.start_date) %> a <%= I18n.l(lot.limit_date) %></p>
             </div>
           </div>

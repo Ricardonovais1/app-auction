@@ -15,6 +15,7 @@ class BlockedCpfsController < ApplicationController
     end
   end
 
+
   private 
 
   def blocked_cpf_params 

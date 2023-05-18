@@ -3,8 +3,10 @@
 
   <h2 class="mb-5 display-6"><%= Lot.model_name.human %> <%= @lot.code.upcase %></h2> 
 
-   <% if @lot.approved? && @lot.current? %>
-    <%= button_to "Fazer um lance a partir de R$#{@lot.bid_value_to_beat},00", new_lot_bid_path(@lot), method: :get, class: "btn btn-primary mb-3 mt-2 me-2" %>
+   <% if @lot.approved? && @lot.current? && user_signed_in? %>
+      <%= button_to "Fazer um lance a partir de R$#{@lot.bid_value_to_beat},00", bid_on_lot_lot_path(@lot.id), method: :post, class: "btn btn-primary mb-3 mt-2 me-2" %>
+    <% else %>
+      <h4>Para fazer lances entre com sua conta</h4>
   <% end %>
 
   <% if @lot.expired? && @lot.bids.count == 0 %>
@@ -79,18 +81,19 @@
   </span>
 
  
-
+  <div>
+  <div>
   <% if !@lot.expired? %>
 
     <h3>Tem alguma dúvida? Pergunte aqui:</h3><br />
 
-    <%= form_with(model: [@lot, @question]) do |f| %>
-      <div>
-        <%= f.text_area :body, placeholder: 'Escreva aqui' %>
+    <%= form_with(model: [@lot, @question], url: block_by_cpf_lot_question_path(@lot), method: :post) do |f| %>
+      <div class="d-flex">
+        <%= f.text_area :body, class: "form-control", style: "width: 30vw;", placeholder: 'Escreva aqui' %>
       </div>
-      <div>
-        <%= f.submit 'Enviar' %>
-      </div>
+      <div >
+        <%= f.submit 'Enviar', class: 'btn btn-primary mt-2'%>
+    </div>
       
     <% end %>
 
@@ -138,10 +141,10 @@
           <% if user_signed_in? && current_user.admin? && question.visible? %>
             <%= form_with(model: [@lot, question, question.answers.build]) do |f| %>
               <div>
-                <%= f.text_area :reply, placeholder: 'Responda aqui' %>
+                <%= f.text_area :reply, class: "form-control bg-secondary bg-opacity-10", style: "width: 30vw;", placeholder: 'Responda aqui' %>
               </div>
               <div>
-                <%= f.submit 'Responder' %>
+                <%= f.submit 'Responder', class: 'btn btn-warning mt-2' %>
               </div>    
             <% end %>
           <% end %>
@@ -152,7 +155,13 @@
         <p><i>Nenhuma pergunta</i></p>
     <% end %>
   <% end %>
-  <%= link_to 'Tela inicial', root_path, class: "btn btn-success mb-3 mt-2 me-2"  %>
+  <div class="d-flex gap-1">
+    <%= link_to 'Tela inicial', root_path, class: "btn btn-success mb-3 mt-2 me-2"  %>
+    <% if user_signed_in? && current_user.admin? %>
+      <%= link_to 'Editar lote', edit_lot_path(@lot), class: "btn btn-success mb-3 mt-2 me-2"  %>
+    <% end %>
+  <div>
+  
 
 </div>
 

@@ -1,0 +1,50 @@
+<div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
+
+<% if @lot.errors.any? %>
+  <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @lot.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>  
+      <% end %>
+    </ul>
+<% end %>
+
+  <h2>Atualize o lote</h2>
+
+    <%= form_with model: @lot, local: true do |f|  %>
+
+      <div class="input-group input-group-lg mt-4">
+        <%= f.label :code, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %><br />
+        <%= f.text_field :code, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
+      </div>
+
+      <div class="input-group input-group-lg mt-4">
+        <%= f.label :start_date, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+        <%= f.date_field :start_date, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
+      </div>
+
+      <div class="input-group input-group-lg mt-4">
+        <%= f.label :limit_date, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+        <%= f.date_field :limit_date, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
+      </div>
+
+      
+      <div class="input-group input-group-lg mt-4">
+        <%= f.label :minimum_bid_value, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"   %><br />
+        <%= f.number_field :minimum_bid_value, placeholder: 'Insira apenas números', class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
+      </div>
+
+      <div class="input-group input-group-lg mt-4">
+        <%= f.label :minimum_bid_difference, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
+        <%= f.number_field :minimum_bid_difference, placeholder: 'Insira apenas números', class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true%> 
+      </div>
+
+      <div class="d-grid">
+        <%= f.submit 'Salvar', class: "btn btn-success mb-3 mt-5 btn-lg" %>
+      </div>
+
+    <% end %>
+
+</div>
+
+

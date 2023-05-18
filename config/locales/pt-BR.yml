@@ -6,3 +6,6 @@ pt-BR:
   expired:
     one: 'expirado'
     other: 'expirados'
+  date:
+    formats:
+      default: "%d/%m/%Y"

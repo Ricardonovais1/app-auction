@@ -1,7 +1,7 @@
 class LotsController < ApplicationController
-  before_action :set_lot, only: [:show, :approved, :pending_approval, :remove]
-  before_action :authenticate_user!, only: [:new, :expired, :pending, :successfull_bids]
-  before_action :check_admin_user, only: [:new, :expired, :pending]
+  before_action :set_lot, only: [:show, :approved, :pending_approval, :remove, :edit, :update, :bid_on_lot]
+  before_action :authenticate_user!, only: [:new, :expired, :pending, :successfull_bids, :edit]
+  before_action :check_admin_user, only: [:new, :expired, :pending, :edit]
 
   def successfull_bids
     @expired_lots = Lot.expired
@@ -34,6 +34,17 @@ class LotsController < ApplicationController
     end
   end
 
+  def bid_on_lot
+    cpf = current_user.registration_number if user_signed_in?
+
+    if BlockedCpf.where(cpf: cpf, blocked: true).exists?
+      flash[:alert] = "CPF bloqueado. Lance não permitido"
+      redirect_to lot_path(params[:id])
+    else
+      redirect_to new_lot_bid_path(@lot)
+    end
+  end
+
   def show
     @lot = Lot.find(params[:id])
     @expired_lots = Lot.expired
@@ -56,6 +67,19 @@ class LotsController < ApplicationController
   def remove 
     @lot_item = @lot.lot_items.find(params[:id])
   end
+
+  def edit; end
+
+  def update 
+    if @lot.update(set_params)
+      redirect_to @lot, notice: 'Lote atualizado com sucesso'
+    else  
+      flash.now[:alert] = 'Houve um problema ao atualizar o lote'
+      render "edit"
+    end
+  end
+
+ 
 
   private 
 
