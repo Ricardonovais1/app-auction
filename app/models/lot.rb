@@ -6,6 +6,9 @@ class Lot < ApplicationRecord
                    uniqueness: true,
                    length: { is: 9 }
 
+  validates :start_date, comparison: { greater_than: :min_date }
+  validates :limit_date, comparison: { greater_than: :start_date}
+
   validate :code_format_validation
   validate :bid_value_validation
   validate :bid_value_to_beat
@@ -140,5 +143,9 @@ class Lot < ApplicationRecord
     else
       "Nenhum lance para o Lote #{code}"
     end
+  end
+
+  def min_date
+    Time.current
   end
 end

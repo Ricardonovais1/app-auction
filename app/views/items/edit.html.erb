@@ -2,11 +2,11 @@
 
 <% if @item.errors.any? %>
   <p>Verifique os erros abaixo:</p>
-        <ul>
-            <% @item.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>  
-            <% end %>
-        </ul>
+    <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>  
+      <% end %>
+    </ul>
 <% end %>
 
   <h1>Edite as informações do produto:</h1>

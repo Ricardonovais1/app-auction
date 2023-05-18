@@ -1,12 +1,16 @@
 require 'rails_helper'
+include ActiveSupport::Testing::TimeHelpers
+
 
 describe 'Usuário vê link de fazer lances na página do lote' do
   it 'com sucesso' do 
     # Arrange 
     user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', registration_number: '70535073607', password: 'password')
-    lot = Lot.create!(code: 'ABC121117', start_date: 1.day.ago, limit_date: 1.week.from_now, 
-                      minimum_bid_value: 100, minimum_bid_difference: 10, 
-                      by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br', status: :approved) 
+    travel_to Time.current - 2.days do
+      lot = Lot.create!(code: 'ABC121117', start_date: 1.days.from_now, limit_date: 1.weeks.from_now, 
+                        minimum_bid_value: 100, minimum_bid_difference: 10, 
+                        by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br', status: :approved) 
+    end
 
     # Act 
     login_as(user)

@@ -1,4 +1,6 @@
 require  'rails_helper'
+include ActiveSupport::Testing::TimeHelpers
+
 
 describe 'Usuário visualiza lances vencedores' do 
   it 'através do menu' do 
@@ -52,30 +54,38 @@ describe 'Usuário visualiza lances vencedores' do
                         registration_number: '00450794040', password: 'password')
     user_d = User.create!(name: 'Sarah', email: 'sarah@exemplo.com.br', 
                         registration_number: '82485876061', password: 'password')
-    past_lot_a = Lot.create!(code: 'AAA000000', start_date: 1.week.ago, limit_date: 2.day.ago, 
+    
+                     
+    lot_a = Lot.create!(code: 'AAA000000', start_date: 1.day.from_now, limit_date: 2.week.from_now, 
                             minimum_bid_value: 300, minimum_bid_difference: 30, status: :ended) 
-    past_lot_b = Lot.create!(code: 'ZZZ111111', start_date: 1.week.ago, limit_date: 2.day.ago, 
+    lot_b = Lot.create!(code: 'ZZZ111111', start_date: 1.day.from_now, limit_date: 2.week.from_now, 
                             minimum_bid_value: 100, minimum_bid_difference: 10, status: :ended) 
-    bid_a_1 = Bid.create!(value: 500, lot_id: past_lot_a.id, user_id: user_a.id)
-    bid_a_2 = Bid.create!(value: 600, lot_id: past_lot_a.id, user_id: user_b.id)
-    bid_b_1 = Bid.create!(value: 789, lot_id: past_lot_b.id, user_id: user_c.id)
-    bid_b_2 = Bid.create!(value: 999, lot_id: past_lot_b.id, user_id: user_d.id)
-
-    # Act 
-    login_as(user_a)
-    visit root_path
-    within('nav') do
-      click_on 'Arrematantes'
+    
+    
+    travel_to lot_a.limit_date + 2.days do 
+      bid_a_1 = Bid.create!(value: 500, lot_id: lot_a.id, user_id: user_a.id)
+      bid_a_2 = Bid.create!(value: 600, lot_id: lot_a.id, user_id: user_b.id)
+    
+      bid_b_1 = Bid.create!(value: 789, lot_id: lot_b.id, user_id: user_c.id)
+      bid_b_2 = Bid.create!(value: 999, lot_id: lot_b.id, user_id: user_d.id)
+    
+    
+      # Act 
+      login_as(user_a)
+      visit root_path
+      within('nav') do
+        click_on 'Arrematantes'
+      end
+  
+      # Assert
+      expect(page).to have_content "Ana"
+      expect(page).to have_content "AAA000000"
+      expect(page).to have_content "ana@exemplo.com.br"
+      expect(page).to have_content "R$600,00"
+      expect(page).to have_content "Sarah"
+      expect(page).to have_content "sarah@exemplo.com.br"
+      expect(page).to have_content "R$999,00"
+      expect(page).to have_content "ZZZ111111"
     end
-
-    # Assert
-    expect(page).to have_content "Ana"
-    expect(page).to have_content "AAA000000"
-    expect(page).to have_content "ana@exemplo.com.br"
-    expect(page).to have_content "R$600,00"
-    expect(page).to have_content "Sarah"
-    expect(page).to have_content "sarah@exemplo.com.br"
-    expect(page).to have_content "R$999,00"
-    expect(page).to have_content "ZZZ111111"
   end
 end

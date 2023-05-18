@@ -1,4 +1,6 @@
 require 'rails_helper'
+include ActiveSupport::Testing::TimeHelpers
+
 
 describe 'Usuário visualiza lotes' do 
   context 'em andamento e futuros' do 
@@ -6,27 +8,35 @@ describe 'Usuário visualiza lotes' do
       # Arrange 
       future_lot = Lot.create!(code: 'AAA101010', start_date: '2090-10-20', limit_date: '2090-10-30', 
                                minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved)
-      
-      current_lot = Lot.create!(code: 'BBB131212', start_date: 1.day.ago, limit_date: 1.year.from_now, 
-                                minimum_bid_value: 200, minimum_bid_difference: 20)
-      
-      past_lot = Lot.create!(code: 'CCC131313', start_date: 1.month.ago, limit_date: 1.week.ago, 
-                                minimum_bid_value: 300, minimum_bid_difference: 30)
 
+      travel_to Time.current - 1.week do
+        past_lot = Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 5.days.from_now, 
+                                  minimum_bid_value: 300, minimum_bid_difference: 30)
+        past_lot.save(validate: false)
+      end
+
+      travel_to Time.current - 2.days do
+        current_lot = Lot.create!(code: 'BBB131212', start_date: 1.days.from_now, limit_date: 1.month.from_now, 
+                                  minimum_bid_value: 200, minimum_bid_difference: 20, status: :approved)
+      end
+      
+      
       # Act 
       visit root_path
 
       # Assert 
       expect(page).to have_content 'AAA101010'
-      expect(page).not_to have_content 'BBB131212'
+      expect(page).to have_content 'BBB131212'
       expect(page).not_to have_content 'CCC131313'
     end
   end
 
   context 'expirados' do 
     it 'e precisa estar logado' do 
-      past_lot = Lot.create!(code: 'CCC131313', start_date: 1.month.ago, limit_date: 1.week.ago, 
-                             minimum_bid_value: 300, minimum_bid_difference: 30)
+      travel_to Time.current - 2.months do 
+        past_lot = Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 1.week.from_now, 
+                              minimum_bid_value: 300, minimum_bid_difference: 30)
+      end
       
       visit expired_lots_path
 
@@ -34,8 +44,10 @@ describe 'Usuário visualiza lotes' do
     end 
 
     it 'e precisa estar logado como admin' do 
-      past_lot = Lot.create!(code: 'CCC131313', start_date: 1.month.ago, limit_date: 1.week.ago, 
-                             minimum_bid_value: 300, minimum_bid_difference: 30)
+      travel_to Time.current - 2.months do 
+        past_lot = Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 1.week.from_now, 
+                              minimum_bid_value: 300, minimum_bid_difference: 30)
+      end
       user = User.create!(name: 'Ricardo', email: 'ricardo@algumservidor.com.br', registration_number: '70535073607', password: 'password')
 
       login_as(user)
@@ -47,8 +59,10 @@ describe 'Usuário visualiza lotes' do
 
     it 'pelo menu' do 
       # Arrange 
-      past_lot = Lot.create!(code: 'CCC131313', start_date: 1.month.ago, limit_date: 1.week.ago, 
-                             minimum_bid_value: 300, minimum_bid_difference: 30)
+      travel_to Time.current - 2.months do 
+        past_lot = Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 1.week.from_now, 
+                              minimum_bid_value: 300, minimum_bid_difference: 30)
+      end
       admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
 
       # Act 
@@ -68,11 +82,16 @@ describe 'Usuário visualiza lotes' do
       future_lot = Lot.create!(code: 'AAA101010', start_date: '2090-10-20', limit_date: '2090-10-30', 
                                minimum_bid_value: 100, minimum_bid_difference: 10)
 
-      current_lot = Lot.create!(code: 'BBB121212', start_date: 1.day.ago, limit_date: 1.week.from_now, 
-                                minimum_bid_value: 200, minimum_bid_difference: 20)
-
-      past_lot = Lot.create!(code: 'CCC131313', start_date: 1.month.ago, limit_date: 1.week.ago, 
-                             minimum_bid_value: 300, minimum_bid_difference: 30)
+      travel_to Time.current - 10.days do 
+        past_lot = Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 5.days.from_now, 
+                                  minimum_bid_value: 300, minimum_bid_difference: 30)
+        past_lot.save(validate: false)
+      end
+      
+      travel_to Time.current - 3.days do 
+        current_lot = Lot.create!(code: 'BBB121212', start_date: 2.days.from_now, limit_date: 1.week.from_now, 
+                                  minimum_bid_value: 200, minimum_bid_difference: 20)
+      
       admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
         
 
@@ -85,14 +104,17 @@ describe 'Usuário visualiza lotes' do
       expect(page).not_to have_content 'BBB121212'
       expect(page).to have_content 'CCC131313'
     end
+    end
 
     it 'e lotes expirados não possuem opção de adicionar item nem de serem aprovados' do 
       # Arrange 
       admin = User.create!(name: 'Alice', email: 'alice@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
-      past_lot = Lot.create!(code: 'CCC131313', start_date: 1.month.ago, limit_date: 1.week.ago, 
-                             minimum_bid_value: 300, minimum_bid_difference: 30, 
-                             by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br')
-        
+      travel_to Time.current - 2.months do
+        past_lot = Lot.create!(code: 'CCC131313', start_date: 1.month.from_now, limit_date: 6.weeks.from_now, 
+                              minimum_bid_value: 300, minimum_bid_difference: 30, 
+                              by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br')
+      end
+
       # Act 
       login_as(admin)
       visit expired_lots_path
@@ -109,9 +131,11 @@ describe 'Usuário visualiza lotes' do
     it 'e lote expirado sem nenhum lance aparece como cancelado' do 
       # Arrange 
       admin = User.create!(name: 'Alice', email: 'alice@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
-      past_lot = Lot.create!(code: 'CCC131313', start_date: 1.month.ago, limit_date: 1.week.ago, 
-                            minimum_bid_value: 300, minimum_bid_difference: 30, 
-                            by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br')
+      travel_to Time.current - 2.months do
+        past_lot = Lot.create!(code: 'CCC131313', start_date: 1.month.from_now, limit_date: 6.weeks.from_now, 
+                              minimum_bid_value: 300, minimum_bid_difference: 30, 
+                              by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br')
+      end
         
       # Act 
       login_as(admin)
