@@ -1,11 +1,24 @@
 # ==== USUÁRIOS:
 
 user = User.create!(name: 'Roberval', email: 'roberval@algumacoisa.com', registration_number: '70535074670', password: '111111')
+
+                      user.image.attach(io: File.open('app/assets/images/homem_1.jpeg'), 
+                      filename: 'homem_1.jpeg', content_type: 'image/jpeg')
+
 admin = User.create!(name: 'Sílvia', email: 'silvia@leilaodogalpao.com.br', registration_number: '70535075642', password: '111111')
+                      
+                      admin.image.attach(io: File.open('app/assets/images/mulher_1.jpeg'), 
+                      filename: 'mulher_1.jpeg', content_type: 'image/jpeg')
 
 user2 = User.create!(name: 'Carlos', email: 'carlos@company.com', registration_number: '43687476235', password: '111111')
+
+                      user2.image.attach(io: File.open('app/assets/images/homem_2.jpeg'), 
+                      filename: 'homem_2.jpeg', content_type: 'image/jpeg')
+
 admin2 = User.create!(name: 'Deia', email: 'deia@leilaodogalpao.com.br', registration_number: '63160693244', password: '111111')
 
+                      admin2.image.attach(io: File.open('app/assets/images/mulher_2.jpeg'), 
+                      filename: 'mulher_2.jpeg', content_type: 'image/jpeg')
 
 # ==== LOTES EXPIRADOS:
 
