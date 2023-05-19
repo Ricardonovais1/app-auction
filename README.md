@@ -140,7 +140,8 @@ CLASSES:
 
     atributos:
     
-    + valor (maior que lance mínimo e maior que no lance anterior, obedecendo a diferença mínima cadastrada)
+    + valor (maior que lance mínimo e maior que no lance anterior, 
+             obedecendo a diferença mínima cadastrada)
 
     Por associação aos models user e lot:
     + email (user)
