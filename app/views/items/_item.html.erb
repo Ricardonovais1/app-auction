@@ -1,5 +1,4 @@
-<h3><strong> <%= item.name %> </strong></h3>
-<br />
+<h3 class="mb-5 ms-2 text-success"><strong> <%= item.name %> </strong></h3>
 <p><strong><%= Item.human_attribute_name(:code) %>: </strong><%= link_to item.code, item %> </p>
 <p><strong><%= Item.human_attribute_name(:description) %>:</strong> <%= item.description %> </p>
 <p><strong><%= Item.human_attribute_name(:product_category_id) %>: </strong><%= item.product_category.name %> </p>
