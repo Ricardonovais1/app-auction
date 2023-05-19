@@ -8,7 +8,7 @@ describe 'Usuário visita a página inicial' do
     visit root_path
 
     # Assert
-    expect(page).to have_content 'Leilões de Estoque'
+    expect(page).to have_selector('img[alt="Logo do Site"]')  
   end
 
   it 'e vê lotes cadastrados' do 

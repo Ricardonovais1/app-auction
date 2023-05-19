@@ -79,20 +79,32 @@ cel = ProductCategory.create!(name: 'Celulares')
 item_a = Item.create!(name: 'Teclado Logitech', 
                       description: 'Lindo teclado preto Logitech', 
                       weight: 200, height: 3, width: 60, depth: 15, product_category_id: ace.id)
-                      # item_a.image.attach(io: File.open('app/assets/images/Teclado_logitech_1.jpg'), 
-                      # filename: 'Teclado_logitech_1.jpg', content_type: 'image/jpeg')
+
+                      item_a.image.attach(io: File.open('app/assets/images/Teclado_logitech_1.jpg'), 
+                      filename: 'Teclado_logitech_1.jpg', content_type: 'image/jpeg')
 
 item_b = Item.create!(name: 'Webcam HD 1080p', 
                       description: 'Segunda melhor câmera da Logitech', 
                       weight: 150, height: 10, width: 10, depth: 10, product_category_id: ace.id)
+
+                      item_b.image.attach(io: File.open('app/assets/images/Webcam-LT-920.jpg'), 
+                      filename: 'Webcam-LT-920.jpg', content_type: 'image/jpeg')
+
 item_c = Item.create!(name: 'Camera digital', 
                       description: 'AVI JPEG infravermelho operado por bateria filmadora de viagem', 
                       weight: 200, height: 3, width: 60, depth: 15, product_category_id: ace.id)
+
+                      item_c.image.attach(io: File.open('app/assets/images/camera1.jpg'), 
+                      filename: 'camera1.jpg', content_type: 'image/jpeg')
+
 item_c = Item.create!(name: 'Monitor Gamer LG', 
                       description: 'UltraWide LG 26WQ500-B 25,7” - Full HD 75Hz IPS 1ms HDMI FreeSync', 
                       weight: 150, height: 10, width: 10, depth: 10, product_category_id: ace.id )
 
+                      item_c.image.attach(io: File.open('app/assets/images/monitor-lg.webp'), 
+                      filename: 'monitor-lg.webp', content_type: 'image/webp')
+
 # ==== CPF's bloqueados
 
-# BlockedCpf.create!(cpf: '97598637075', blocked: true)
-# BlockedCpf.create!(cpf: '01828038059', blocked: true)
+BlockedCpf.create!(cpf: '97598637075', blocked: true)
+BlockedCpf.create!(cpf: '01828038059', blocked: true)

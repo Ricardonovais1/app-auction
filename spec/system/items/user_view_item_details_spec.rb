@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 describe 'Usuário visualiza detalhes do produto' do 
+  it 'se estiver logado' do
+    prod_cat = ProductCategory.create!(name: 'Alguma')
+    item = Item.create!(name: 'Mouse exbom', description: 'Mouse com fio', weight: 100, height: 3, depth: 8, width: 5, product_category_id: prod_cat.id )
+
+    visit item_path(item.id)
+    
+    expect(current_path).to eq new_user_session_path  
+  end
+
   it 'se estiver autenticado' do 
     prod_cat = ProductCategory.create!(name: 'Alguma')
     item = Item.create!(name: 'Mouse exbom', description: 'Mouse com fio', weight: 100, height: 3, depth: 8, width: 5, product_category_id: prod_cat.id )

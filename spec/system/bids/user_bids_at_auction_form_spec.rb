@@ -18,7 +18,7 @@ describe 'Usuário faz um lance' do
    
     # Assert
     expect(page).not_to have_button 'Fazer um lance'
-    expect(page).to have_content "Lances quando lote estiver ativo"
+    expect(page).to have_content "Lances para lotes ativos e usuários logados"
   end
 
 

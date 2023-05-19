@@ -1,6 +1,6 @@
-<div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
+<div class="mx-auto p-4 mt-4" style="width: 75%; background: #e9ecef">
 
-<h2 class="mb-5">Lotes expirados</h2>
+<h2 class="mb-5 ms-4">Lotes expirados</h2>
 
 <h3><%= 'Nenhum lote expirado' if @expired_lots.empty? %></h3>
 <div class="row">
@@ -9,8 +9,8 @@
 
     <% @expired_lots.each do |lot| %>
 
-      <div class="card col-3 ms-3 me-3 mb-3 p-0" style="width: 18rem;">
-        <div class="card">
+      <div class="card col-3 ms-4 me-4 mb-3 p-0" style="width: 20rem;">
+        <div class="card border rounded-3">
           <div class="card-body">
             <h5 class="card-title">Lote encerrado em:</h5>
             <p class="card-text"><%= I18n.l(lot.limit_date) %></p>

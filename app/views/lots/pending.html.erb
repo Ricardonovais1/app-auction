@@ -1,6 +1,6 @@
-  <div class="mx-auto p-4" style="width: 75%; background: #e9ecef">
+  <div class="mx-auto p-4 mt-4" style="width: 75%; background: #e9ecef">
 
-  <h2 class="mb-5">Lotes pendentes</h2>
+  <h2 class="mb-5 ms-4">Lotes pendentes</h2>
 
   <h3><%= 'Nenhum lote cadastrado' if @pending_lots.empty? %></h3>
   
@@ -12,7 +12,7 @@
 
             <% if lot.pending_approval? %>
 
-              <div class="card col-3 ms-3 me-3 mb-3 p-0" style="width: 18rem;">
+              <div class="card col-3 ms-4 me-4 mb-3 p-0" style="width: 20rem;">
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title">Previsão de abertura:</h5>

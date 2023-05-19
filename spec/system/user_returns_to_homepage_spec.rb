@@ -20,7 +20,7 @@ describe 'Usuário retorna à página inicial' do
     # Act 
     visit root_path
     within('nav') do 
-      click_on 'Leilões de Estoque'
+      click_on 'Logo do Site'
     end
     # Assert
     expect(current_path).to eq root_path

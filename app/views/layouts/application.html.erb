@@ -10,11 +10,13 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
   <header>
-      <div class="mx-auto p-4" style="width: 75%">
+      <div class="mx-auto p-4" style="max-width: 75%">
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid">
-            <h3><%= link_to 'Leilões de Estoque', root_path, class: 'navbar-brand text-success' %></h3>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between gap-4">
+          <div class="container-fluid d-flex justify-content-between gap-5">
+            <%= link_to root_path, class: 'navbar-brand' do %>
+                <%= image_tag('Legal.png', alt: 'Logo do Site', class: 'logo', style: 'width: 100px; height: auto;') %>
+            <% end %>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
