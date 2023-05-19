@@ -3,11 +3,10 @@ DESCRIÇÃO DO PROJETO:
 
 Aplicação web com Ruby on Rails que conecta o público em geral com o estoque de itens abandonados em um galpão. Usuários admin podem configurar lotes e aprovar, sendo que o usuário que cria o lote não pode aprovar o mesmo, mas sim outro admin. Usuários regulares (visitor), podem fazer lances. 
 
-DIAGRAMA VISUAL, POR CLASSES, DE TODAS AS TELAS DO APP:
+DIAGRAMA VISUAL, POR CLASSES, DE TODAS AS TELAS JÁ IMPLEMENTADAS DO APP:
 
 [Diagrama de telas por classe](https://encurtador.com.br/elqT1)
 
-![Diagrama Auction App](/auction_app.png)
 
 COMO TESTAR O PROJETO:
 
