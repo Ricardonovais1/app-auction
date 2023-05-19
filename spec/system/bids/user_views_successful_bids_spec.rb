@@ -55,37 +55,42 @@ describe 'Usuário visualiza lances vencedores' do
     user_d = User.create!(name: 'Sarah', email: 'sarah@exemplo.com.br', 
                         registration_number: '82485876061', password: 'password')
     
-                     
-    lot_a = Lot.create!(code: 'AAA000000', start_date: 1.day.from_now, limit_date: 2.week.from_now, 
-                            minimum_bid_value: 300, minimum_bid_difference: 30, status: :ended) 
-    lot_b = Lot.create!(code: 'ZZZ111111', start_date: 1.day.from_now, limit_date: 2.week.from_now, 
-                            minimum_bid_value: 100, minimum_bid_difference: 10, status: :ended) 
+    lot_a = nil
+    lot_b = nil
+    
+    travel_to 2.day.ago do                 
+      lot_a = Lot.create!(code: 'AAA000000', start_date: 3.day.from_now, limit_date: 2.week.from_now, 
+                              minimum_bid_value: 300, minimum_bid_difference: 30, status: :ended) 
+      lot_b = Lot.create!(code: 'ZZZ111111', start_date: 3.day.from_now, limit_date: 2.week.from_now, 
+                              minimum_bid_value: 100, minimum_bid_difference: 10, status: :ended) 
+    end
     
     
-    travel_to lot_a.limit_date + 2.days do 
+    travel_to 4.days.from_now do 
       bid_a_1 = Bid.create!(value: 500, lot_id: lot_a.id, user_id: user_a.id)
       bid_a_2 = Bid.create!(value: 600, lot_id: lot_a.id, user_id: user_b.id)
     
       bid_b_1 = Bid.create!(value: 789, lot_id: lot_b.id, user_id: user_c.id)
       bid_b_2 = Bid.create!(value: 999, lot_id: lot_b.id, user_id: user_d.id)
+    end
     
-    
-      # Act 
+    # Act 
+    travel_to 3.weeks.from_now do
       login_as(user_a)
       visit root_path
       within('nav') do
         click_on 'Arrematantes'
       end
   
-      # Assert
+    # Assert
       expect(page).to have_content "Ana"
       expect(page).to have_content "AAA000000"
       expect(page).to have_content "ana@exemplo.com.br"
       expect(page).to have_content "R$600,00"
       expect(page).to have_content "Sarah"
+      expect(page).to have_content "ZZZ111111"
       expect(page).to have_content "sarah@exemplo.com.br"
       expect(page).to have_content "R$999,00"
-      expect(page).to have_content "ZZZ111111"
     end
   end
 end

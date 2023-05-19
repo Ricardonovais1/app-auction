@@ -7,7 +7,7 @@ describe 'Usuário faz pegunta a respeito de um lote' do
     # Arrange 
     user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', registration_number: '70535073607', password: 'password')
     travel_to Time.current - 3.days do 
-      lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot = Lot.create!(code: 'ABC123987', start_date: 4.day.from_now, limit_date: 1.week.from_now, 
                         minimum_bid_value: 100, minimum_bid_difference: 10, 
                         by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br',
                         status: :approved)
@@ -26,7 +26,7 @@ describe 'Usuário faz pegunta a respeito de um lote' do
     # Arrange 
     user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', registration_number: '70535073607', password: 'password')
     travel_to Time.current - 3.days do 
-      lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot = Lot.create!(code: 'ABC123987', start_date: 4.day.from_now, limit_date: 1.week.from_now, 
                         minimum_bid_value: 100, minimum_bid_difference: 10, 
                         by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br',
                         status: :approved)
@@ -48,7 +48,7 @@ describe 'Usuário faz pegunta a respeito de um lote' do
     # Arrange 
     user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', registration_number: '70535073607', password: 'password')
     travel_to Time.current - 3.days do 
-      lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot = Lot.create!(code: 'ABC123987', start_date: 4.day.from_now, limit_date: 1.week.from_now, 
                         minimum_bid_value: 100, minimum_bid_difference: 10, 
                         by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br',
                         status: :approved)
@@ -91,7 +91,7 @@ describe 'Usuário faz pegunta a respeito de um lote' do
     admin = User.create!(name: 'Fernanda', email: 'fernanda@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
     user = User.create!(name: 'Sérgio', email: 'sergio@exemplo.com.br', registration_number: '87451252019', password: 'password') 
     travel_to Time.current - 3.days do 
-      lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot = Lot.create!(code: 'ABC123987', start_date: 4.day.from_now, limit_date: 1.week.from_now, 
                         minimum_bid_value: 100, minimum_bid_difference: 10, 
                         by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br',
                         status: :approved)
@@ -116,7 +116,7 @@ describe 'Usuário faz pegunta a respeito de um lote' do
     admin = User.create!(name: 'Fernanda', email: 'fernanda@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
     user = User.create!(name: 'Sérgio', email: 'sergio@exemplo.com.br', registration_number: '87451252019', password: 'password') 
     travel_to Time.current - 2.days do 
-    lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+    lot = Lot.create!(code: 'ABC123987', start_date: 3.day.from_now, limit_date: 1.week.from_now, 
                       minimum_bid_value: 100, minimum_bid_difference: 10, 
                       by: 'Fernanda', by_email: 'fernanda@leilaodogalpao.com.br',
                       status: :approved)
@@ -136,7 +136,7 @@ describe 'Usuário faz pegunta a respeito de um lote' do
     admin = User.create!(name: 'Fernanda', email: 'fernanda@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
     user = User.create!(name: 'Sérgio', email: 'sergio@exemplo.com.br', registration_number: '87451252019', password: 'password') 
     travel_to Time.current - 2.days do
-      lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot = Lot.create!(code: 'ABC123987', start_date: 3.day.from_now, limit_date: 1.week.from_now, 
                         minimum_bid_value: 100, minimum_bid_difference: 10, 
                         by: 'Fernanda', by_email: 'fernanda@leilaodogalpao.com.br',
                         status: :approved)
@@ -160,7 +160,7 @@ describe 'Usuário faz pegunta a respeito de um lote' do
     admin = User.create!(name: 'Fernanda', email: 'fernanda@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
     user = User.create!(name: 'Sérgio', email: 'sergio@exemplo.com.br', registration_number: '87451252019', password: 'password') 
     travel_to Time.current - 2.days do
-      lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot = Lot.create!(code: 'ABC123987', start_date: 3.days.from_now, limit_date: 1.week.from_now, 
                         minimum_bid_value: 100, minimum_bid_difference: 10, 
                         by: 'Fernanda', by_email: 'fernanda@leilaodogalpao.com.br',
                         status: :approved)
@@ -182,7 +182,7 @@ describe 'Usuário faz pegunta a respeito de um lote' do
     user = User.create!(name: 'Sérgio', email: 'sergio@exemplo.com.br', registration_number: '87451252019', password: 'password') 
     blocked_cpf = BlockedCpf.create!(cpf: '87451252019', blocked: true) 
     travel_to Time.current - 2.days do
-      lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot = Lot.create!(code: 'ABC123987', start_date: 3.day.from_now, limit_date: 1.week.from_now, 
                         minimum_bid_value: 100, minimum_bid_difference: 10, 
                         by: 'Fernanda', by_email: 'fernanda@leilaodogalpao.com.br',
                         status: :approved)

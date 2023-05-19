@@ -9,14 +9,14 @@ describe 'Usuário visualiza lotes' do
       future_lot = Lot.create!(code: 'AAA101010', start_date: '2090-10-20', limit_date: '2090-10-30', 
                                minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved)
 
-      travel_to Time.current - 1.week do
+      travel_to 1.week.ago do
         past_lot = Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 5.days.from_now, 
                                   minimum_bid_value: 300, minimum_bid_difference: 30)
         past_lot.save(validate: false)
       end
 
       travel_to Time.current - 2.days do
-        current_lot = Lot.create!(code: 'BBB131212', start_date: 1.days.from_now, limit_date: 1.month.from_now, 
+        current_lot = Lot.create!(code: 'BBB131212', start_date: 3.days.from_now, limit_date: 1.month.from_now, 
                                   minimum_bid_value: 200, minimum_bid_difference: 20, status: :approved)
       end
       

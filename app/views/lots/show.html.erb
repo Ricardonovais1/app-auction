@@ -4,10 +4,17 @@
   <h2 class="mb-5 display-6"><%= Lot.model_name.human %> <%= @lot.code.upcase %></h2> 
 
    <% if @lot.approved? && @lot.current? && user_signed_in? %>
-      <%= button_to "Fazer um lance a partir de R$#{@lot.bid_value_to_beat},00", bid_on_lot_lot_path(@lot.id), method: :post, class: "btn btn-primary mb-3 mt-2 me-2" %>
+      <%= button_to "Fazer um lance a partir de R$#{@lot.bid_value_to_beat},00", 
+              bid_on_lot_lot_path(@lot.id), 
+              method: :post, 
+              class: "btn btn-primary mb-3 mt-2 me-2" %>
     <% else %>
-      <h4>Para fazer lances entre com sua conta</h4>
-  <% end %>
+      <%= button_to "Lances quando lote estiver ativo/ Faça login",
+              bid_on_lot_lot_path(@lot.id),
+              method: :post,
+              class: "btn btn-secondary mb-3 mt-2 me-2",
+              disabled: true %>
+  <% end %><br />
 
   <% if @lot.expired? && @lot.bids.count == 0 %>
     <h3 class="bg-danger text-white" style="--bs-text-opacity: .75; padding: 1rem">Cancelado por falta de lances</h3><br />
