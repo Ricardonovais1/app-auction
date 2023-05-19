@@ -1,51 +1,38 @@
 require  'rails_helper'
-include ActiveSupport::Testing::TimeHelpers
-
 
 describe 'Usuário visualiza lances vencedores' do 
   it 'através do menu' do 
-    # Arrange 
-
-    # Act
     visit root_path
-    # Assert
+
     within('nav') do 
       expect(page).to have_content 'Arrematantes'
     end
   end
 
   it 'e precisa estar logado' do 
-    # Arrange 
-
-    # Act
     visit root_path
     within('nav') do
       click_on 'Arrematantes'
     end
 
-    # Assert
     expect(current_path).to eq new_user_session_path
   end
 
   it 'e visualiza a página' do 
-    # Arrange 
     user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', 
                         registration_number: '70535073607', password: 'password')
 
-    # Act
     login_as(user)
     visit root_path
     within('nav') do
       click_on 'Arrematantes'
     end
 
-    # Assert
     expect(current_path).to eq successfull_bids_lots_path
     expect(page).to have_content 'Lances vencedores'
   end
 
   it 'e visualiza arrematantes' do 
-    # Arrange 
     user_a = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', 
                         registration_number: '70535073607', password: 'password')
     user_b = User.create!(name: 'Ana', email: 'ana@exemplo.com.br', 
@@ -74,7 +61,6 @@ describe 'Usuário visualiza lances vencedores' do
       bid_b_2 = Bid.create!(value: 999, lot_id: lot_b.id, user_id: user_d.id)
     end
     
-    # Act 
     travel_to 3.weeks.from_now do
       login_as(user_a)
       visit root_path
@@ -82,7 +68,6 @@ describe 'Usuário visualiza lances vencedores' do
         click_on 'Arrematantes'
       end
   
-    # Assert
       expect(page).to have_content "Ana"
       expect(page).to have_content "AAA000000"
       expect(page).to have_content "ana@exemplo.com.br"
