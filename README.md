@@ -7,8 +7,6 @@ DESCRIÇÃO DO PROJETO:
 
 Trata-se do APP ludicamente apelidado de "LeGal - Leilão e Galpão". Ele conecta o público em geral com o estoque de itens abandonados em um galpão. Usuários admin podem configurar lotes e aprovar os mesmos, assim como fazer o gerenciamento de mensagens com os usuários coumuns (users). </p>
 
-[![Last Gist Commit](https://img.shields.io/github/gist/last-commit/:gistId)](https://gist.github.com/:gistId)
-
 DIAGRAMA VISUAL, POR CLASSES, DE TODAS AS TELAS JÁ IMPLEMENTADAS DO APP:
 
 :arrow_forward: [Diagrama de telas por classe](https://encurtador.com.br/elqT1)
@@ -26,10 +24,14 @@ DIAGRAMA VISUAL, POR CLASSES, DE TODAS AS TELAS JÁ IMPLEMENTADAS DO APP:
         - Email: roberval@algumacoisa.com
         - Senha: 111111
 
+:arrow_forward: GEMS UTILIZADAS:
+
+    Timecop - Para viajar no tempo no arquivo seeds. 
+
 
 CLASSES:
 
-user (user + admin):
+:raising_hand: USER (user + admin):
 
     atributos:
 
@@ -63,7 +65,7 @@ user (user + admin):
             TELA DE DETALHES - PERFIL (SHOW) - Ainda não implementada
             TELA DE EDIÇÃO DE USER (EDIT, UPDATE) - Ainda não implementada
 
-product_category 
+:ballot_box_with_check: PRODUCT_CATEGORY 
 
     atributos:
 
@@ -71,7 +73,7 @@ product_category
 
     TELA DE CADASTRO DE PRODUCT-CATEGORY (NEW, CREATE)
 
-item:
+:computer: ITEM:
 
     atributos:
 
@@ -91,7 +93,7 @@ item:
     TELA DE ITENS (INDEX)
     TELA DE EDIÇÃO DE ITEM (EDIT, UPDATE)
 
-lot:
+:hammer: LOT:
 
     atributos:
 
@@ -125,7 +127,7 @@ lot:
     TELA DE LOTES EXPIRADOS (EXPIRED)
     TELA DE LANCES VENCEDORES (SUCCESSFUL_BIDS)
 
-LOT_ITEM:
+:iphone: LOT_ITEM:
 
     atributos:
 
@@ -134,7 +136,7 @@ LOT_ITEM:
 
     Todos os atributos de items e lots, por associação.
 
-bid:
+:moneybag: BID:
 
     atributos:
     
@@ -148,7 +150,7 @@ bid:
 
     TELA DE CADASTRO DE LANCE (NEW, CREATE)
 
-question:
+:question: QUESTION:
 
     atributos:
 
@@ -165,7 +167,7 @@ question:
 
     NÃO TEM VIEW PRÓPRIA. USA A TELA SHOW DE LOT.
 
-answer 
+:mega: ANSWER: 
 
     atributos:
 
@@ -181,7 +183,7 @@ answer
 
     NÃO TEM VIEW PRÓPRIA. USA A TELA SHOW DE LOT.
 
-blocked_cpf 
+:lock: BLOCKED_CPF: 
 
     atributos:
 
@@ -195,6 +197,3 @@ blocked_cpf
         - Lances
         - Mensagens nos lotes
 
-GEMS UTILIZADAS:
-
-    - Timecop - Para viajar no tempo no arquivo seeds. 
