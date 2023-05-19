@@ -79,8 +79,6 @@ class LotsController < ApplicationController
     end
   end
 
- 
-
   private 
 
   def set_lot 

@@ -5,7 +5,9 @@ Aplicação web com Ruby on Rails que conecta o público em geral com o estoque 
 
 DIAGRAMA VISUAL, POR CLASSES, DE TODAS AS TELAS DO APP:
 
-[Diagrama de telas por classe](https://l1nk.dev/FUYJV)
+[Diagrama de telas por classe](https://encurtador.com.br/elqT1)
+
+![Diagrama Auction App](/auction_app.png)
 
 COMO TESTAR O PROJETO:
 
@@ -52,9 +54,9 @@ user (user + admin):
             - Responder 
             - Ocultar / tornar visível
             
-            TELA DE DETALHES - PERFIL (SHOW)
             TELA DE CADASTRO DE USER (NEW, CREATE)
-            TELA DE EDIÇÃO DE USER (EDIT, UPDATE)
+            TELA DE DETALHES - PERFIL (SHOW) - Ainda não implementada
+            TELA DE EDIÇÃO DE USER (EDIT, UPDATE) - Ainda não implementada
 
 product_category 
 
@@ -79,9 +81,9 @@ item:
     + categoria
     + código - alphanumérico - gerado automaticamente 
 
+    TELA DE CADASTRO DE ITEM (NEW, CREATE)
     TELA DE DETALHES (SHOW)
     TELA DE ITENS (INDEX)
-    TELA DE CADASTRO DE ITEM (NEW, CREATE)
     TELA DE EDIÇÃO DE ITEM (EDIT, UPDATE)
 
 lot:
@@ -110,10 +112,22 @@ lot:
     - Lotes pendentes de aprovação são exibidos na página 'Lotes pendentes'
     - Lotes expirados, por data limite atingida, são exibidos na página 'Lotes expirados'
 
+    TELA DE CADASTRO DE LOTE (NEW, CREATE)
     TELA DE DETALHES (SHOW)
     TELA DE LOTES (INDEX)
-    TELA DE CADASTRO DE LOTE (NEW, CREATE)
     TELA DE EDIÇÃO DE LOTE (EDIT, UPDATE)
+    TELA DE LOTES PENDENTES (PENDING)
+    TELA DE LOTES EXPIRADOS (EXPIRED)
+    TELA DE LANCES VENCEDORES (SUCCESSFUL_BIDS)
+
+LOT_ITEM:
+
+    atributos:
+
+    + lot_id 
+    + item_id
+
+    Todos os atributos de items e lots, por associação.
 
 bid:
 
