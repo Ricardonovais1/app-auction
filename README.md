@@ -1,14 +1,20 @@
 # README
+<h1 align="center"> Auction App - LeGal - Leilão & Galpão :blush:</h1>
+
 DESCRIÇÃO DO PROJETO:
 
-Aplicação web com Ruby on Rails que conecta o público em geral com o estoque de itens abandonados em um galpão. Usuários admin podem configurar lotes e aprovar, sendo que o usuário que cria o lote não pode aprovar o mesmo, mas sim outro admin. Usuários regulares (visitor), podem fazer lances. 
+<p align="justify"> Aplicação web desenvolvida com Ruby on Rails.
+
+Trata-se do APP ludicamente apelidado de "LeGal - Leilão e Galpão". Ele conecta o público em geral com o estoque de itens abandonados em um galpão. Usuários admin podem configurar lotes e aprovar os mesmos, assim como fazer o gerenciamento de mensagens com os usuários coumuns (users). </p>
+
+[![Last Gist Commit](https://img.shields.io/github/gist/last-commit/:gistId)](https://gist.github.com/:gistId)
 
 DIAGRAMA VISUAL, POR CLASSES, DE TODAS AS TELAS JÁ IMPLEMENTADAS DO APP:
 
-[Diagrama de telas por classe](https://encurtador.com.br/elqT1)
+:arrow_forward: [Diagrama de telas por classe](https://encurtador.com.br/elqT1)
 
 
-COMO TESTAR O PROJETO:
+:arrow_forward: COMO TESTAR O PROJETO:
 
     Após baixar e rodar o arquivo seeds.rb, 
 
