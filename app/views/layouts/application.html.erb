@@ -60,7 +60,7 @@
                     </li>  
                   <% end %> 
                   <li class="nav-item nav-link link-secondary">
-                    <span><p>Olá <%= current_user.name %>!</p></span>
+                    <span><p>Olá <%= current_user.user_first_name %>!</p></span>
                   </li>
                   <li class="nav-item nav-link link-secondary">
                     <%= link_to 'Meu perfil', user_path(current_user.id), class: "text-decoration-none link-secondary" %>

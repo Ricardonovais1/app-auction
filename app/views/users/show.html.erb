@@ -10,8 +10,11 @@
   <div>
     <p><strong>Nome: </strong><%= current_user.name %></p>
     <p><strong>Email: </strong><%= current_user.email %></p>
-    <p><strong>Email: </strong><%= current_user.email %></p>
+    <p><strong>Sobre: </strong><%= current_user.about %></p>
     <p><strong>CPF: </strong><%= current_user.registration_number %></p>
+  </div>
+  <div>
+    <%= button_to 'Editar perfil', edit_user_registration_path(@user), method: :get, class: "btn btn-success" %>
   </div>
 
 

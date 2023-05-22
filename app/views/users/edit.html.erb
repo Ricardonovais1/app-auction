@@ -1,22 +1,10 @@
 <div class="mx-auto p-4 bg-success bg-opacity-10 border border-3 border-success p-2 mb-2 border-opacity-50 rounded-4 mt-4" style="width: 75%; background: #e9ecef">
 
-  <% if @user.errors.any? %>
-    <div class="alert alert-danger">
-      <h4>Verifique os erros abaixo:</h4>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<h2 class="mb-5 display-6 text-success">Atualize seus dados:</h2>
 
-  <h2 class="mb-5 display-6 text-success">Criar conta</h2>
+<%= form_with method: @user do |f| %>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-
-    <div class="field input-group input-group-lg mt-4">
+     <div class="field input-group input-group-lg mt-4">
       <%= f.label :email, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %><br />
       <%= f.email_field :email, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
     </div>
@@ -28,7 +16,7 @@
 
     <div class="field input-group input-group-lg mt-4">
       <%= f.label :about, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %><br />
-      <%= f.text_field :about, class: "form-control", placeholder: 'Sobre mim', aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
+      <%= f.text_area :about, class: "form-control", placeholder: 'Sobre mim', aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" %>
     </div>
 
     <div class="field input-group input-group-lg mt-4">
@@ -55,8 +43,8 @@
     </div>
 
     <div class="actions d-grid">
-      <%= f.submit "Cadastrar", class: "btn btn-success mb-3 mt-5 btn-lg" , data: {turbo: false} %>
+      <%= f.submit "Salvar", class: "btn btn-success mb-3 mt-5 btn-lg" , data: {turbo: false} %>
     </div>
-  <% end %>
+  <% end %>%
 
 </div>

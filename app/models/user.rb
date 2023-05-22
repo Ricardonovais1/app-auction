@@ -102,12 +102,6 @@ class User < ApplicationRecord
     check_verifyer_digit_1(registration_number)
   end
 
-  # def cpf_must_not_be_blocked
-  #   if BlockedCpf.where(cpf: self.registration_number, blocked: true).exists?
-  #     errors.add(:registration_number, "está bloqueado")
-  #   end
-  # end
-
   def cpf_must_not_be_blocked(action)
     if BlockedCpf.where(cpf: self.registration_number, blocked: true).exists?
       case action
@@ -119,5 +113,9 @@ class User < ApplicationRecord
         errors.add(:registration_number, "bloqueado. Mensagens não permitidas")
       end
     end
+  end
+
+  def user_first_name
+    name.split(' ')[0]
   end
 end
