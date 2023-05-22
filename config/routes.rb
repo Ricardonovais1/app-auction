@@ -24,4 +24,5 @@ Rails.application.routes.draw do
     get 'search', on: :collection
   end
   resources :blocked_cpfs, only: [:new, :create] 
+  resources :users, only: [:show]
 end

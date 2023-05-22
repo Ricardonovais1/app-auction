@@ -39,12 +39,12 @@
                         Administrativo
                       </a>
                   <ul class="dropdown-menu">
-                    <li><%= link_to 'Categorias de produto', new_product_category_path, class: 'dropdown-item' %></li>
-                    <li><%= link_to 'Criar lote', new_lot_path, class: 'dropdown-item' %></li>
-                    <li><%= link_to 'Novo produto', new_item_path, class: 'dropdown-item' %></li>
-                    <li><%= link_to 'Lotes pendentes',pending_lots_path, class: 'dropdown-item' %></li>
-                    <li><%= link_to 'Lotes expirados', expired_lots_path, class: 'dropdown-item' %></li>
-                    <li><%= link_to 'Bloquear CPF', new_blocked_cpf_path, class: 'dropdown-item' %></li>
+                    <li><%= link_to 'Categorias de produto', new_product_category_path, class: 'dropdown-item link-secondary' %></li>
+                    <li><%= link_to 'Criar lote', new_lot_path, class: 'dropdown-item link-secondary' %></li>
+                    <li><%= link_to 'Novo produto', new_item_path, class: 'dropdown-item link-secondary' %></li>
+                    <li><%= link_to 'Lotes pendentes',pending_lots_path, class: 'dropdown-item link-secondary' %></li>
+                    <li><%= link_to 'Lotes expirados', expired_lots_path, class: 'dropdown-item link-secondary' %></li>
+                    <li><%= link_to 'Bloquear CPF', new_blocked_cpf_path, class: 'dropdown-item link-secondary' %></li>
                   </ul>
                   </li> 
                   <% end %>
@@ -61,6 +61,9 @@
                   <% end %> 
                   <li class="nav-item nav-link link-secondary">
                     <span><p>Olá <%= current_user.name %>!</p></span>
+                  </li>
+                  <li class="nav-item nav-link link-secondary">
+                    <%= link_to 'Meu perfil', user_path(current_user.id), class: "text-decoration-none link-secondary" %>
                   </li>
                 <% else %>
                   <li class="nav-item">
