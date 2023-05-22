@@ -39,7 +39,9 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @product_category = ProductCategory.find(params[:id]).name
+    # @product_category = ProductCategory.find(params[:product_category_id]).name
+    @product_category = @item.product_category.name
+
   end
 
   def search

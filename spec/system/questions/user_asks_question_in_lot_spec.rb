@@ -1,6 +1,4 @@
 require 'rails_helper'
-include ActiveSupport::Testing::TimeHelpers
-
 
 describe 'Usuário faz pegunta a respeito de um lote' do 
   it 'a partir da view show do lote' do 

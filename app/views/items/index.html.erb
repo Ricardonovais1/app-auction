@@ -5,20 +5,20 @@
   <% if @items.any? %>
 
 
-  <div class="card-deck d-flex"> 
-      <% @items.each do |item| %>
-        <div class="card ms-4 me-4" id="item_<%= item.id %>" style="width: 18rem;">
-            <% if item.image.attached? %>
-              <%= image_tag(item.image, class:"img-fluid rounded-start", style:"height: 200px; object-fit: cover;") %>
-            <% end %>          
-          <div class="card-body">
-            <h5 class="card-title"><strong><%= item.name %></strong></h5> 
-            <p class="card-text"><%= truncate(item.description, length: 30) %></p>
-            <%= link_to 'Ver detalhes', item_path(item), class: "btn btn-primary" %>
-          </div>
+  <div class="row"> 
+    <% @items.each do |item| %>
+      <div class="card col-3 ms-4 me-4 mb-3 mt-3 p-0 border border-success border-opacity-75 rounded-3" id="item_<%= item.id %>" style="width: 20rem;">
+          <% if item.image.attached? %>
+            <%= image_tag(item.image, class:"img-fluid rounded-start", style:"height: 200px; object-fit: cover;") %>
+          <% end %>          
+        <div class="card-body">
+          <h5 class="card-title"><strong><%= item.name %></strong></h5> 
+          <p class="card-text"><%= truncate(item.description, length: 30) %></p>
+          <%= link_to 'Ver detalhes', item_path(item), class: "btn btn-primary" %>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+  </div>
 
   <% else %>
     <p class="alert alert-warning mt-4" role="alert">Não há produtos cadastrados</p>
