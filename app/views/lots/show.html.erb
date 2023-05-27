@@ -3,7 +3,7 @@
 
   <h2 class="mb-5 display-6 text-success"><%= Lot.model_name.human %> <%= @lot.code.upcase %></h2> 
 
-   <% if @lot.approved? && @lot.current? && user_signed_in? %>
+   <% if @lot.approved? && @lot.current? && user_signed_in? && !current_user.admin? %>
       <%= button_to "Fazer um lance a partir de R$#{@lot.bid_value_to_beat},00", 
               bid_on_lot_lot_path(@lot.id), 
               method: :post, 
@@ -56,11 +56,12 @@
     <div class="mb-4">
       <h4 class="mb-2"><strong>Itens do lote:</strong></h4> 
 
-      <% @lot.lot_items.each do |i| %>
+      <% @lot.lot_items.each do |item| %>
         <div class="lot-items d-flex align-items-center gap-3">
-          <p class="mt-3"><strong><%= i.item.name %></strong> - cód. <%= i.item.code %></p> 
+          <p class="mt-3"><strong><%= item.item.name %></strong> - cód. <%= item.item.code %></p> 
           <% if !@lot.approved? %>
-            <%= button_to 'Remover', remove_lot_lot_item_path(@lot, i), method: :delete, class: "btn btn-light" %>
+            <%= button_to 'Remover', remove_lot_lot_item_path(@lot, item), method: :delete, class: "btn btn-light" %>
+            <%= button_to 'Detalhes', item_path(item.id), method: :get, class: "btn btn-light" %>
           <% end %>
         </div>
       <% end %>
@@ -92,17 +93,20 @@
   <div>
   <% if !@lot.expired? %>
 
-    <h3>Tem alguma dúvida? Pergunte aqui:</h3><br />
+    <% if user_signed_in? && !current_user.admin? %>
 
-    <%= form_with(model: [@lot, @question], url: block_by_cpf_lot_question_path(@lot), method: :post) do |f| %>
-      <div class="d-flex">
-        <%= f.text_area :body, class: "form-control", style: "width: 30vw;", placeholder: 'Escreva aqui' %>
-      </div>
-      <div >
-        <%= f.submit 'Enviar', class: 'btn btn-primary mt-2'%>
-    </div>
-      
+      <h3>Tem alguma dúvida? Pergunte aqui:</h3><br />
+
+      <%= form_with(model: [@lot, @question], url: block_by_cpf_lot_question_path(@lot), method: :post) do |f| %>
+        <div class="d-flex">
+          <%= f.text_area :body, class: "form-control", style: "width: 30vw;", placeholder: 'Escreva aqui' %>
+        </div>
+        <div >
+          <%= f.submit 'Enviar', class: 'btn btn-primary mt-2'%>
+        </div>
+      <% end %>
     <% end %>
+
 
     <% if @questions.any? %>
       <% @questions.each do |question| %>

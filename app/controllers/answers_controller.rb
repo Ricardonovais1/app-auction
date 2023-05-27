@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  
   def new 
     @lot = Lot.find(params[:lot_id])
     @question = Question.find(params[:question_id])

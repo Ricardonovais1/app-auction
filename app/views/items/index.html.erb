@@ -10,7 +10,8 @@
       <div class="card col-3 ms-4 me-4 mb-3 mt-3 p-0 border border-success border-opacity-75 rounded-3" id="item_<%= item.id %>" style="width: 20rem;">
           <% if item.image.attached? %>
             <%= image_tag(item.image, class:"img-fluid rounded-start", style:"height: 200px; object-fit: cover;") %>
-          <% end %>          
+          <% end %> 
+                   
         <div class="card-body">
           <h5 class="card-title"><strong><%= item.name %></strong></h5> 
           <p class="card-text"><%= truncate(item.description, length: 30) %></p>

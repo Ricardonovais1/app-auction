@@ -1,4 +1,5 @@
 class LotItemsController < ApplicationController 
+  before_action :check_admin_user, only: [:new]
   before_action :set_lot, only: [:new, :create, :remove]
 
   def new
@@ -25,5 +26,11 @@ class LotItemsController < ApplicationController
 
   def set_params 
     params.require(:lot_item).permit(:item_id)
+  end
+
+  def check_admin_user
+    unless user_signed_in? && current_user.admin?
+      redirect_to root_path, alert: 'Você não tem permissão para acessar esta página'
+    end
   end
 end

@@ -1,6 +1,27 @@
 require 'rails_helper'
 
 describe 'Usuário faz pegunta a respeito de um lote' do 
+  it 'só se não for admin' do 
+    # Arrange 
+    user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', registration_number: '70535073607', password: 'password')
+    admin = User.create!(name: 'Ana', email: 'ana@leilaodogalpao.com.br', registration_number: '50131270095', password: 'password')
+    travel_to Time.current - 3.days do 
+      lot = Lot.create!(code: 'ABC123987', start_date: 4.day.from_now, limit_date: 1.week.from_now, 
+                        minimum_bid_value: 100, minimum_bid_difference: 10, 
+                        by: 'Ricardo', by_email: 'ricardo@leilaodogalpao.com.br',
+                        status: :approved)
+    end
+
+    # Act 
+    login_as(admin)
+    visit root_path
+    click_on 'ABC123987'
+
+    # Assert
+    expect(page).not_to have_content 'Tem alguma dúvida?'
+  end
+
+
   it 'a partir da view show do lote' do 
     # Arrange 
     user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', registration_number: '70535073607', password: 'password')
