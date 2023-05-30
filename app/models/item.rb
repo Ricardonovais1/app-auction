@@ -15,8 +15,8 @@ class Item < ApplicationRecord
   validate :validate_image_extension
 
   def validate_image_extension
-    if image.attached? && !image.content_type.in?(%w(image/jpeg image/png))
-      errors.add(:image, 'deve ser um arquivo JPEG ou PNG')
+    if image.attached? && !image.content_type.in?(%w(image/jpeg image/png image/webp))
+      errors.add(:image, 'deve ser um arquivo JPEG, PNG ou WebP')
     end
   end
 

@@ -9,13 +9,13 @@ class BidsController < ApplicationController
   def create 
     @bid = Bid.new(set_params)
     @bid.user = current_user
-    @bid.lot = @lot
+    @bid.lot = @lot  
     
       if @bid.save
         redirect_to @lot, notice: "Lance realizado com sucesso."
       else
         flash.now[:alert] = 'Não foi possível realizar o lance.'
-        redirect_to @lot      
+        render 'new' 
       end
   end
 

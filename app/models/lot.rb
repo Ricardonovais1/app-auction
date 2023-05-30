@@ -94,9 +94,9 @@ class Lot < ApplicationRecord
   def bid_value_to_beat 
     min_value = minimum_bid_value
     last_bid = bids.last
-    if last_bid && last_bid.value >= min_value 
+    if last_bid && last_bid.value && last_bid.value >= min_value 
       min_value = last_bid.value + minimum_bid_difference
-    elsif last_bid && last_bid.value < min_value
+    elsif last_bid && last_bid.value && last_bid.value < min_value
       false
     end
     min_value 
