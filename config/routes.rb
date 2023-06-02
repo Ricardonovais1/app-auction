@@ -25,4 +25,10 @@ Rails.application.routes.draw do
   end
   resources :blocked_cpfs, only: [:new, :create] 
   resources :users, only: [:show, :edit, :update]
+
+  namespace :api do
+    namespace :v1 do
+      resources :lots, only: [:show, :index]
+    end 
+  end
 end
