@@ -15,7 +15,7 @@
 
   <h2 class="mb-5 display-6">Faça seu lance</h2>
 
-  <%= form_with(model: [@lot, @bid]) do |f| %>
+  <%= form_with(model: [@lot, @bid], data: { turbo: false }) do |f| %>
 
     <div class="input-group input-group-lg mt-4">
       <%= f.label :value, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %>

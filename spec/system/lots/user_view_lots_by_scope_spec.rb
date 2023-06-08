@@ -13,7 +13,7 @@ describe 'Usuário visualiza lotes' do
         past_lot.save(validate: false)
       end
 
-      current_lot = Lot.create!(code: 'BBB131212', start_date: 1.day.from_now, limit_date: 1.month.from_now, 
+      current_lot = Lot.create!(code: 'BBB131212', start_date: 2.day.from_now, limit_date: 1.month.from_now, 
                                 minimum_bid_value: 200, minimum_bid_difference: 20, status: :approved)
       
       
