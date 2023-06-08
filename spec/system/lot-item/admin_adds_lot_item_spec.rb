@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Usuário Admin adiciona novo item ao lote' do
   it 'só se estiver logado' do 
-    lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+    lot = Lot.create!(code: 'ABC123987', start_date: 2.day.from_now, limit_date: 1.week.from_now, 
                       minimum_bid_value: 100, minimum_bid_difference: 10, 
                       by: 'Ana', by_email: 'ana@leilaodogalpao.com.br') 
 
@@ -15,7 +15,7 @@ describe 'Usuário Admin adiciona novo item ao lote' do
   it 'só se for admin' do 
     # Arrange 
     user = User.create!(name: 'Ricardo', email: 'ricardo@exemplo.com.br', registration_number: '70535073607', password: 'password')
-    lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+    lot = Lot.create!(code: 'ABC123987', start_date: 2.day.from_now, limit_date: 1.week.from_now, 
                       minimum_bid_value: 100, minimum_bid_difference: 10, 
                       by: 'Ana', by_email: 'ana@leilaodogalpao.com.br') 
     # Act
@@ -30,7 +30,7 @@ describe 'Usuário Admin adiciona novo item ao lote' do
   it 'com sucesso' do 
     # Arrange 
     admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
-    lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+    lot = Lot.create!(code: 'ABC123987', start_date: 2.day.from_now, limit_date: 1.week.from_now, 
                       minimum_bid_value: 100, minimum_bid_difference: 10, 
                       by: 'Ana', by_email: 'ana@leilaodogalpao.com.br') 
     prod_cat = ProductCategory.create!(name: 'Alguma')
@@ -58,7 +58,7 @@ describe 'Usuário Admin adiciona novo item ao lote' do
   it 'e vê detalhes do produto a partir do lote' do 
     # Arrange 
     admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
-    lot = Lot.create!(code: 'ABC123987', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+    lot = Lot.create!(code: 'ABC123987', start_date: 2.day.from_now, limit_date: 1.week.from_now, 
                       minimum_bid_value: 100, minimum_bid_difference: 10, 
                       by: 'Ana', by_email: 'ana@leilaodogalpao.com.br') 
     prod_cat = ProductCategory.create!(name: 'Alguma')

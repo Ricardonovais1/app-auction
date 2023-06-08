@@ -4,7 +4,7 @@ describe 'LOT api' do
   context 'GET /api/v1/lots/1' do 
     it 'com sucesso' do 
       # Arrange 
-      lot = Lot.create!(code: 'AAA000000', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot = Lot.create!(code: 'AAA000000', start_date: 2.day.from_now, limit_date: 1.week.from_now, 
                         minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved) 
 
       # Act 
@@ -15,7 +15,7 @@ describe 'LOT api' do
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
       expect(json_response["code"]).to eq "AAA000000" 
-      expect(json_response["start_date"]).to eq I18n.l(1.day.from_now, format: '%Y-%m-%d')
+      expect(json_response["start_date"]).to eq I18n.l(2.day.from_now, format: '%Y-%m-%d')
       expect(json_response["limit_date"]).to eq I18n.l(1.week.from_now, format: '%Y-%m-%d')
       expect(json_response["minimum_bid_value"]).to eq 100
       expect(json_response["minimum_bid_difference"]).to eq 10
@@ -39,7 +39,7 @@ describe 'LOT api' do
       # Arrange 
       lot_1 = Lot.create!(code: 'CHC131313', start_date: 2.day.from_now, limit_date: 5.day.from_now, 
                           minimum_bid_value: 300, minimum_bid_difference: 30)
-      lot_2 = Lot.create!(code: 'BHB131212', start_date: 1.day.from_now, limit_date: 1.month.from_now, 
+      lot_2 = Lot.create!(code: 'BHB131212', start_date: 2.day.from_now, limit_date: 1.month.from_now, 
                           minimum_bid_value: 200, minimum_bid_difference: 20)
 
       # Act 
@@ -52,7 +52,7 @@ describe 'LOT api' do
       expect(json_response.class).to eq Array
       expect(json_response.length).to eq 2
       expect(json_response[0]["code"]).to eq 'BHB131212'
-      expect(json_response[0]["start_date"]).to eq I18n.l(1.day.from_now, format: '%Y-%m-%d')
+      expect(json_response[0]["start_date"]).to eq I18n.l(2.day.from_now, format: '%Y-%m-%d')
       expect(json_response[0]["limit_date"]).to eq I18n.l(1.month.from_now, format: '%Y-%m-%d')
       expect(json_response[1]["code"]).to eq 'CHC131313'
       expect(json_response[1]["start_date"]).to eq I18n.l(2.day.from_now, format: '%Y-%m-%d')
@@ -73,7 +73,7 @@ describe 'LOT api' do
       allow(Lot).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
       lot_1 = Lot.create!(code: 'CHC131313', start_date: 2.day.from_now, limit_date: 5.day.from_now, 
                           minimum_bid_value: 300, minimum_bid_difference: 30)
-      lot_2 = Lot.create!(code: 'BHB131212', start_date: 1.day.from_now, limit_date: 1.month.from_now, 
+      lot_2 = Lot.create!(code: 'BHB131212', start_date: 2.day.from_now, limit_date: 1.month.from_now, 
                           minimum_bid_value: 200, minimum_bid_difference: 20)
 
       # Act 
@@ -87,7 +87,7 @@ describe 'LOT api' do
   context 'POST /api/v1/lots' do 
     it 'com sucesso' do 
       # Arrange
-      lot_params = { lot: { code: 'AAA000000', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot_params = { lot: { code: 'AAA000000', start_date: 2.day.from_now, limit_date: 1.week.from_now, 
                             minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved } 
                     } 
       
@@ -99,7 +99,7 @@ describe 'LOT api' do
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
       expect(json_response["code"]).to eq 'AAA000000'
-      expect(json_response["start_date"]).to eq I18n.l(1.day.from_now, format: '%Y-%m-%d')
+      expect(json_response["start_date"]).to eq I18n.l(2.day.from_now, format: '%Y-%m-%d')
       expect(json_response["limit_date"]).to eq I18n.l(1.week.from_now, format: '%Y-%m-%d')
       expect(json_response["minimum_bid_value"]).to eq 100
       expect(json_response["minimum_bid_difference"]).to eq 10
@@ -141,7 +141,7 @@ describe 'LOT api' do
   context 'PATCH /api/v1/lots/1' do
     it 'edita diferença mínima entre lances com sucesso' do 
       # Arrange 
-      lot_params = { lot: { code: 'AAA000000', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot_params = { lot: { code: 'AAA000000', start_date: 2.day.from_now, limit_date: 1.week.from_now, 
                       minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved }
                     }
       post "/api/v1/lots", params: lot_params
@@ -156,14 +156,14 @@ describe 'LOT api' do
       json_response = JSON.parse(response.body)
       expect(json_response["minimum_bid_difference"]).to eq 20
       expect(json_response["code"]).to eq 'AAA000000'
-      expect(json_response["start_date"]).to eq I18n.l(1.day.from_now, format: '%Y-%m-%d')
+      expect(json_response["start_date"]).to eq I18n.l(2.day.from_now, format: '%Y-%m-%d')
       expect(json_response["limit_date"]).to eq I18n.l(1.week.from_now, format: '%Y-%m-%d')
       expect(json_response["minimum_bid_value"]).to eq 100
     end
 
     it 'falha edição do lote quando envia valor em branco' do 
       # Arrange 
-      lot_params = { lot:  {code: 'AAA000000', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot_params = { lot:  {code: 'AAA000000', start_date: 2.day.from_now, limit_date: 1.week.from_now, 
                             minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved} 
                     }
       post "/api/v1/lots", params: lot_params
@@ -185,7 +185,7 @@ describe 'LOT api' do
       lot = instance_double(Lot)
       allow(Lot).to receive(:find).and_return(lot)
       allow(lot).to receive(:update).and_raise(ActiveRecord::ActiveRecordError)
-      lot_params = { lot:  {code: 'AAA000000', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot_params = { lot:  {code: 'AAA000000', start_date: 2.day.from_now, limit_date: 1.week.from_now, 
                             minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved} 
                     }
       post "/api/v1/lots", params: lot_params
@@ -202,7 +202,7 @@ describe 'LOT api' do
   context 'DESTROY /api/v1/lots/1' do 
     it 'Deleta um lote com sucesso' do 
       # Arrange 
-      lot_params = { lot: { code: 'AAA000000', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot_params = { lot: { code: 'AAA000000', start_date: 2.day.from_now, limit_date: 1.week.from_now, 
                             minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved } 
                    }
       post "/api/v1/lots", params: lot_params
@@ -222,7 +222,7 @@ describe 'LOT api' do
       lot = instance_double(Lot)
       allow(Lot).to receive(:find).and_return(lot)
       allow(lot).to receive(:destroy).and_raise(ActiveRecord::ActiveRecordError)
-      lot_params = { lot: { code: 'AAA000000', start_date: 1.day.from_now, limit_date: 1.week.from_now, 
+      lot_params = { lot: { code: 'AAA000000', start_date: 2.day.from_now, limit_date: 1.week.from_now, 
                             minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved } 
                     }
       post "/api/v1/lots", params: lot_params

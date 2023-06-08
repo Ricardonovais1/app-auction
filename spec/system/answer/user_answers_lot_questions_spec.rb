@@ -5,7 +5,7 @@ describe 'Usuário responde pergunta no lote' do
     # Arrange 
     admin = User.create!(name: 'Fernanda', email: 'fernanda@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
     user = User.create!(name: 'Sérgio', email: 'sergio@exemplo.com.br', registration_number: '87451252019', password: 'password') 
-    lot = Lot.create!(code: 'ABC123987', start_date: 1.days.from_now, limit_date: 1.week.from_now, 
+    lot = Lot.create!(code: 'ABC123987', start_date: 2.days.from_now, limit_date: 1.week.from_now, 
                       minimum_bid_value: 100, minimum_bid_difference: 10, 
                       by: 'Fernanda', by_email: 'fernanda@leilaodogalpao.com.br',
                       status: :approved)
