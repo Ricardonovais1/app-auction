@@ -1,4 +1,9 @@
 class BlockedCpfsController < ApplicationController
+
+  def index 
+    redirect_to new_blocked_cpf_path
+  end
+
   def new 
     @blocked_cpf = BlockedCpf.new
     @blocked_cpfs = BlockedCpf.all

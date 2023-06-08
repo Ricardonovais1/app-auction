@@ -1,4 +1,4 @@
-<%= form_with model: @item do |f| %>
+<%= form_with model: @item, data: { turbo: false } do |f| %>
 
     <div class="input-group input-group-lg mt-4">
       <%= f.label :name, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
@@ -32,7 +32,9 @@
 
     <div class="input-group input-group-lg mt-4">
       <%= f.label :product_category_id, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %><br />
-      <%= f.collection_select :product_category_id, @product_categories, :id, :name, {}, { class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" } %>
+      <% if @product_categories %>
+        <%= f.collection_select :product_category_id, @product_categories, :id, :name, {}, { class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg" } %>
+      <% end %>    
     </div>
 
     <div class="input-group input-group-lg mt-4">

@@ -1,5 +1,9 @@
 class ProductCategoriesController < ApplicationController
 
+  def index 
+    redirect_to new_product_category_path
+  end
+
   def new 
     @product_category = ProductCategory.new
     @product_categories = ProductCategory.all

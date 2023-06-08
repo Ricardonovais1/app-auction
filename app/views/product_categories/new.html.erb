@@ -1,17 +1,20 @@
 <div class="mx-auto p-4 bg-success bg-opacity-10 border border-3 border-success p-2 mb-2 border-opacity-50 rounded-4 mt-4" style="width: 75%; background: #e9ecef">
 
  <% if @product_category.errors.any? %>
-    <ul>
+  <div class="alert alert-danger">
+    <h5>Verifique os erros abaixo:</h5>
+      <ul>
         <% @product_category.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>  
+          <li><%= msg %></li>  
         <% end %>
-    </ul>
+      </ul>
+  </div>
 <% end %>
 
 
   <h2 class="mb-5 ms-4 text-success">Nova categoria de produto</h2>
 
-  <%= form_with(model: @product_category) do |f| %>
+  <%= form_with model: @product_category, data: { turbo: false } do |f| %>
     <div class="input-group input-group-lg mt-4">
       <%= f.label :name, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %><br />
       <%= f.text_field :name, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>

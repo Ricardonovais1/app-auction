@@ -14,7 +14,6 @@
   <h2 class="mb-5 display-6 text-success">Criar conta</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="field input-group input-group-lg mt-4">
       <%= f.label :email, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %><br />

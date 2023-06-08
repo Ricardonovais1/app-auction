@@ -13,7 +13,7 @@
           <% end %> 
                    
         <div class="card-body">
-          <h5 class="card-title"><strong><%= item.name %></strong></h5> 
+          <h5 class="card-title text-success"><strong><%= item.name %></strong></h5> 
           <p class="card-text"><%= truncate(item.description, length: 30) %></p>
           <%= link_to 'Ver detalhes', item_path(item), class: "btn btn-primary" %>
         </div>

@@ -3,6 +3,10 @@ class LotsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :expired, :pending, :successfull_bids, :edit]
   before_action :check_admin_user, only: [:new, :expired, :pending, :edit]
 
+  def index 
+    redirect_to new_lot_path
+  end 
+
   def successfull_bids
     @expired_lots = Lot.expired
   end

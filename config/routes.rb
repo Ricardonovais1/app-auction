@@ -19,11 +19,11 @@ Rails.application.routes.draw do
     get 'successfull_bids', on: :collection
     post 'bid_on_lot', on: :member
   end
-  resources :product_categories, only: [:new, :create]
+  resources :product_categories, only: [:index, :new, :create]
   resources :items, only: [:index, :new, :create, :show, :edit, :update] do 
     get 'search', on: :collection
   end
-  resources :blocked_cpfs, only: [:new, :create] 
+  resources :blocked_cpfs, only: [:index, :new, :create] 
   resources :users, only: [:show, :edit, :update]
 
   namespace :api do
