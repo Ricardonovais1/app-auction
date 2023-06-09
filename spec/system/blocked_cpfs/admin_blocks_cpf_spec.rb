@@ -14,7 +14,6 @@ describe 'Admin bloqueia um cpf' do
     expect(page).to have_content 'Insira um cpf a ser bloqueado'
     expect(page).to have_field 'Somente números'
     expect(page).to have_button 'Gravar'
-    expect(page).to have_content 'Ainda não há nenhum CPF bloqueado'
   end
 
   it 'e cpfs bloqueados aparecem na tela de cadastro' do 

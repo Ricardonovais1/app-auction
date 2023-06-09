@@ -169,7 +169,20 @@
   <div class="d-flex gap-1">
     <%= link_to 'Tela inicial', root_path, class: "btn btn-success mb-3 mt-2 me-2"  %>
     <% if user_signed_in? && current_user.admin? %>
-      <%= link_to 'Editar lote', edit_lot_path(@lot), class: "btn btn-success mb-3 mt-2 me-2"  %>
+      <% if @lot.pending_approval?  %>
+        <%= link_to 'Editar lote', edit_lot_path(@lot), class: "btn btn-success mb-3 mt-2 me-2"  %>
+      <% elsif @lot.approved? %>
+        <p>
+          <button class="btn btn-secondary mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-message" aria-expanded="false" aria-controls="collapseExample">
+            Editar lote
+          </button>
+        </p>
+        <div class="collapse" id="collapse-message">
+          <div class="card card-body bg-transparent">
+            Lote já aprovado
+          </div>
+        </div>
+      <% end %>
     <% end %>
   <div>
   

@@ -1,7 +1,9 @@
 class LotsController < ApplicationController
-  before_action :set_lot, only: [:show, :approved, :pending_approval, :remove, :edit, :update, :bid_on_lot]
+  before_action :set_lot,            only: [:show, :approved, :pending_approval, :remove, :edit, :update, :bid_on_lot]
   before_action :authenticate_user!, only: [:new, :expired, :pending, :successfull_bids, :edit]
-  before_action :check_admin_user, only: [:new, :expired, :pending, :edit]
+  before_action :check_admin_user,   only: [:new, :expired, :pending, :edit]
+  before_action :check_lot_approval, only: [:edit]
+  before_action :check_lot_creator,  only: [:edit]
 
   def index 
     redirect_to new_lot_path
@@ -103,6 +105,18 @@ class LotsController < ApplicationController
   def check_admin_user
     unless current_user.admin?
       redirect_to root_path, alert: 'Você não tem permissão para acessar esta página'
+    end
+  end
+
+  def check_lot_approval
+    unless @lot.pending_approval?
+      redirect_to @lot, alert: 'Lote já aprovado'
+    end
+  end
+
+  def check_lot_creator 
+    unless @lot.by_email == current_user.email
+      redirect_to @lot, alert: 'Apenas o autor do lote pode editá-lo'
     end
   end
 end

@@ -2,6 +2,5 @@ class LotItem < ApplicationRecord
   belongs_to :item
   belongs_to :lot
 
-  # validates :item_id, uniqueness: { scope: :lot_id }
-  validates :item_id, uniqueness: true
+  validates :item_id, uniqueness: true, presence: true, numericality: { greater_than: 0 }
 end

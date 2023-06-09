@@ -64,4 +64,64 @@ describe 'Usuário edita lote' do
     expect(current_path).to eq lot_path(lote.id)
     expect(page).not_to have_button 'Editar lote'
   end
-end
+
+  it 'botão editar desabilitado se lote estiver aprovado' do
+    admin = User.create!(name: 'Rafael', email: 'rafael@leilaodogalpao.com.br', registration_number: '05182085087', password: 'password')
+    lote = Lot.create!(code: 'LPF892645', start_date: 3.days.from_now, limit_date: 1.month.from_now,
+                       minimum_bid_value: 1000, minimum_bid_difference: 50, 
+                       by: 'Rafael', by_email: 'rafael@leilaodogalpao.com.br', status: :approved)
+    
+    login_as admin 
+    visit root_path 
+    click_on 'LPF892645'
+    click_on 'Editar lote'
+
+    expect(current_path).to eq lot_path(lote)
+    expect(page).to have_content 'Lote já aprovado'
+  end
+
+  it 'lote já aprovado tem a rota protegida' do 
+    admin = User.create!(name: 'Rafael', email: 'rafael@leilaodogalpao.com.br', registration_number: '05182085087', password: 'password')
+    lote = Lot.create!(code: 'LPF892645', start_date: 3.days.from_now, limit_date: 1.month.from_now,
+                       minimum_bid_value: 1000, minimum_bid_difference: 50, 
+                       by: 'Rafael', by_email: 'rafael@leilaodogalpao.com.br', status: :approved)
+    
+    login_as admin
+    visit edit_lot_path(lote.id)
+
+    expect(current_path).to eq lot_path(lote)
+    expect(page).to have_content 'Lote já aprovado'
+  end
+
+  it 'somente se for quem criou o lote' do
+    admin_creator = User.create!(name: 'Rafael', email: 'rafael@leilaodogalpao.com.br', registration_number: '05182085087', password: 'password')
+    admin_editor = User.create!(name: 'Sandra', email: 'sandra@leilaodogalpao.com.br', registration_number: '47782844029', password: 'password')
+    lote = Lot.create!(code: 'LPF892645', start_date: 3.days.from_now, limit_date: 1.month.from_now,
+                       minimum_bid_value: 1000, minimum_bid_difference: 50, 
+                       by: 'Rafael', by_email: 'rafael@leilaodogalpao.com.br')
+    login_as admin_editor
+    visit root_path
+    within('nav') do
+      click_on 'Administrativo'
+      click_on 'Lotes pendentes'
+    end
+    click_on 'LPF892645'
+    click_on 'Editar lote'
+
+    expect(current_path).to eq lot_path(lote)
+    expect(page).to have_content 'Apenas o autor do lote pode editá-lo'
+  end
+
+  it 'somente se for quem criou o lote 2 (proteção do rota)' do
+    admin_creator = User.create!(name: 'Rafael', email: 'rafael@leilaodogalpao.com.br', registration_number: '05182085087', password: 'password')
+    admin_editor = User.create!(name: 'Sandra', email: 'sandra@leilaodogalpao.com.br', registration_number: '47782844029', password: 'password')
+    lote = Lot.create!(code: 'LPF892645', start_date: 3.days.from_now, limit_date: 1.month.from_now,
+                       minimum_bid_value: 1000, minimum_bid_difference: 50, 
+                       by: 'Rafael', by_email: 'rafael@leilaodogalpao.com.br')
+    login_as admin_editor
+    visit edit_lot_path(lote)
+
+    expect(current_path).to eq lot_path(lote)
+    expect(page).to have_content 'Apenas o autor do lote pode editá-lo'
+  end
+end 

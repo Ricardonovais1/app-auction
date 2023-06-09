@@ -1,6 +1,7 @@
 class LotItemsController < ApplicationController 
-  before_action :check_admin_user, only: [:new]
-  before_action :set_lot, only: [:new, :create, :remove]
+  before_action :check_admin_user,  only: [:new]
+  before_action :set_lot,           only: [:new, :create, :remove]
+  before_action :check_lot_creator, only: [:new]
 
   def new
     @lot_item = LotItem.new
@@ -8,8 +9,12 @@ class LotItemsController < ApplicationController
   end
 
   def create 
-    @lot.lot_items.create(set_params)
-    redirect_to @lot, notice: "Item adicionado com sucesso"
+    if @lot.lot_items.create(set_params)
+      redirect_to @lot, notice: "Item adicionado com sucesso"
+    else 
+      flash.now[:alert] = 'Você não selecionou nenhum item' 
+      render :new
+    end
   end
 
   def remove
@@ -31,6 +36,12 @@ class LotItemsController < ApplicationController
   def check_admin_user
     unless user_signed_in? && current_user.admin?
       redirect_to root_path, alert: 'Você não tem permissão para acessar esta página'
+    end
+  end
+
+  def check_lot_creator
+    unless @lot.by_email == current_user.email
+      redirect_to @lot, notice: 'Apenas o criador do lote pode adicionar ítens'
     end
   end
 end

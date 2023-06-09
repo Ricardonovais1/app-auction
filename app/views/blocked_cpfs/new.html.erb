@@ -1,15 +1,6 @@
 <div class="mx-auto p-4 bg-success bg-opacity-10 border border-3 border-success p-2 mb-2 border-opacity-50 rounded-4 mt-4" style="width: 75%; background: #e9ecef">
 
-<% if @blocked_cpf.errors.any? %>
-  <div class="alert alert-danger">
-    <h5>Verifique os erros abaixo:</h5>
-      <ul>
-        <% @blocked_cpf.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>  
-        <% end %>
-      </ul>
-  </div>
-<% end %>
+<%= render 'shared/form_errors', { obj: @blocked_cpf } %>
 
 <h2 class="mb-5 ms-2 text-success">Insira um cpf a ser bloqueado</h2>
 
