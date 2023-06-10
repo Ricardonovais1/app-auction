@@ -22,30 +22,60 @@
     <h3 class="bg-success text-white" style="--bs-text-opacity: .75; padding: 1rem"><strong>Arrematante: </strong><%= @lot.successful_bidder %></h3><br />
   <% end %>
 
-  <p><strong><%= Lot.human_attribute_name(:code) %>:</strong> <%= @lot.code.upcase %> </p>
-  <p><strong><%= Lot.human_attribute_name(:start_date) %>:</strong> <%= I18n.l(@lot.start_date) %> </p>
-  <p><strong><%= Lot.human_attribute_name(:limit_date) %>:</strong> <%= I18n.l(@lot.limit_date) %> </p>
-  <p><strong><%= Lot.human_attribute_name(:minimum_bid_value) %> inicial:</strong> R$<%= @lot.minimum_bid_value %>,00 </p>
-  <p><strong><%= Lot.human_attribute_name(:minimum_bid_difference) %>:</strong> R$<%= @lot.minimum_bid_difference %>,00 </p>
+  <table class="table table-success table-striped mb-5">
+     <tbody>
+      <tr>
+        <td><strong><%= Lot.human_attribute_name(:code) %></strong></td>
+        <td><%= @lot.code.upcase %></td>
+      </tr>
+      <tr>
+        <td><strong><%= Lot.human_attribute_name(:start_date) %></strong></td>
+        <td><%= I18n.l(@lot.start_date) %></td>
+      </tr>
+      <tr>
+        <td><strong><%= Lot.human_attribute_name(:limit_date) %></strong></td>
+        <td><%= I18n.l(@lot.limit_date) %></td>
+      </tr>
+      <tr>
+        <td><strong><%= Lot.human_attribute_name(:minimum_bid_value) %> inicial</strong></td>
+        <td>R$<%= @lot.minimum_bid_value %>,00 </td>
+      </tr>
+      <tr>
+        <td><strong><%= Lot.human_attribute_name(:minimum_bid_difference) %></strong></td>
+        <td>R$<%= @lot.minimum_bid_difference %>,00 </td>
+      </tr>
+      <% if !@lot.expired? %>
+        <tr>
+          <td><strong><%= Lot.human_attribute_name(:minimum_bid_value) %> atual</strong>
+          <td>R$<%= @lot.bid_value_to_beat %>,00 </td>
+        </tr>
+      <% end %>
+      <% if !@lot.expired? || !@lot.current? %>
+        <tr>
+          <td><strong>Lances feitos:</strong></td>
+          <td><%= @lot.bids.count %></td>
+        </tr>
+      <% end %>
+      <% if @lot.pending_approval? %>
+        <tr>
+          <td class="text-danger"><strong>Situação</strong></td>
+          <td class="text-danger">Aguardando aprovação</td>
+        </tr>
+      <% elsif @lot.expired? %> 
+        <tr>
+          <td class="text-danger"><strong>Situação</strong></td>
+          <td class="text-danger">Lote expirado</td>
+        </tr> 
+      <% elsif @lot.approved? %>
+        <tr>
+          <td class="text-primary"><strong>Situação</strong></td>
+          <td class="text-primary">Lote aprovado</td>
+        </tr> 
+      <% end %>
+     </tbody>
+  </table>
+
   
-  <% if !@lot.expired? %>
-    <p><strong><%= Lot.human_attribute_name(:minimum_bid_value) %> atual:</strong> R$<%= @lot.bid_value_to_beat %>,00 </p>
-  <% end %>
-
-  <% if !@lot.expired? || !@lot.current? %>
-    <p><strong>Lances feitos:</strong> <%= @lot.bids.count %></p>
-  <% end %>
-
-  <% if @lot.current? || @lot.future? %>
-    <p><strong><%= Lot.human_attribute_name(:status) %>:</strong> <%= I18n.t(@lot.status) %></p><br />
-  <% end %>
-
-  <% if @lot.future? %>
-    <p class="text-primary"><strong>Data de início: <%= I18n.l(@lot.start_date) %> </strong><br />
-  <% elsif @lot.expired? %>
-    <p class="text-danger"><strong><%= Lot.model_name.human  %> expirado</strong></p><br />
-  <% end %>
-
   <% if !@lot.approved? && @lot.future? %>
     <div>
       <%= link_to 'Adicionar item', new_lot_lot_item_path(lot_id: @lot.id) %>

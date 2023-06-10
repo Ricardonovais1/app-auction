@@ -82,7 +82,7 @@ describe 'Usuário faz um lance' do
 
       # Assert
       expect(page).to have_content 'Lance realizado com sucesso.'
-      expect(page).to have_content "Valor mínimo para lance atual: R$210,00"
+      expect(page).to have_content "Valor mínimo para lance atual R$210,00"
       expect(page).to have_content "Fazer um lance a partir de R$210,00"  
     end
   end
@@ -105,7 +105,7 @@ describe 'Usuário faz um lance' do
 
       # Assert
       expect(page).to have_content 'Lance realizado com sucesso.'
-      expect(page).to have_content "Valor mínimo para lance atual: R$115,00"
+      expect(page).to have_content "Valor mínimo para lance atual R$115,00"
     end
   end
 

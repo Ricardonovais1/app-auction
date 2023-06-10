@@ -20,11 +20,10 @@ describe 'Usuário edita lote' do
     click_on 'Salvar'
 
     expect(page).to have_content 'Lote atualizado com sucesso'
-    expect(page).to have_content 'Código: LPF892645'
-    
-    expect(page).to have_content 'Valor mínimo para lance inicial: R$1200,00'
-    expect(page).to have_content 'Menor diferença entre lances: R$60,00'
-    expect(page).to have_content 'Situação do lote: Aguardando aprovação'
+    expect(page).to have_content 'Código LPF892645'
+    expect(page).to have_content 'Valor mínimo para lance inicial R$1200,00'
+    expect(page).to have_content 'Menor diferença entre lances R$60,00'
+    expect(page).to have_content 'Aguardando aprovação'
     expect(page).to have_content 'Criado por: Rafael | rafael@leilaodogalpao.com.br'
   end
 

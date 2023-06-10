@@ -40,12 +40,12 @@ describe 'usuário admin cadastra lote' do
     # Assert
     expect(current_path).to eq lot_path(Lot.last)
     expect(page).to have_content 'Lote cadastrado com sucesso'
-    expect(page).to have_content 'Código: DKP111222'
-    expect(page).to have_content 'Data de início: 20/12/2029'
-    expect(page).to have_content 'Data limite para lances: 20/01/2030'
-    expect(page).to have_content 'Valor mínimo para lance inicial: R$100,00'
-    expect(page).to have_content 'Menor diferença entre lances: R$10,00'
-    expect(page).to have_content 'Situação do lote: Aguardando aprovação'
+    expect(page).to have_content 'Código DKP111222'
+    expect(page).to have_content 'Data de início 20/12/2029'
+    expect(page).to have_content 'Data limite para lances 20/01/2030'
+    expect(page).to have_content 'Valor mínimo para lance inicial R$100,00'
+    expect(page).to have_content 'Menor diferença entre lances R$10,00'
+    expect(page).to have_content 'Situação Aguardando aprovação'
     expect(page).to have_content 'Criado por: Ricardo | ricardo@leilaodogalpao.com.br'
   end
 

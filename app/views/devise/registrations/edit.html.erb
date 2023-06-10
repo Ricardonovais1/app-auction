@@ -1,13 +1,12 @@
 
 <div class="mx-auto p-4 bg-success bg-opacity-10 border border-3 border-success p-2 mb-2 border-opacity-50 rounded-4 mt-4" style="width: 75%; background: #e9ecef">
 
+<%= render 'shared/form_errors', { obj: @user } %>
 
-
-<h2 class="mb-5 display-6 text-success">Atualize seus dados</h2>
+<h2 class="mb-5 text-success">Atualize seus dados</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
+  
   <div class="field input-group input-group-lg mt-4">
       <%= f.label :email, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %><br />
       <%= f.email_field :email, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
@@ -46,15 +45,14 @@
     <%= f.password_field :current_password, class: "form-control", placeholder: "Precisamos de sua senha atual para salvar alerações", autocomplete: "current-password" %>
   </div>
 
-  <div class="field input-group input-group-lg mt-4">
+  <div class="field input-group input-group-lg mt-4 d-grid">
     <%= f.submit "Salvar", class: "btn btn-success mb-3 mt-5 btn-lg" %>
   </div>
 <% end %>
+<div class="d-flex gap-3">
+  <div><%= button_to "Cancelar minha conta", registration_path(resource_name), data: { confirm: "Tem certeza?", turbo_confirm: "Tem certeza?" }, method: :delete, class: "btn btn-secondary mb-3 mt-5 btn-lg" %></div>
+  <%= link_to "Voltar", :back, class: "btn btn-secondary mb-3 mt-5 btn-lg" %>
+</div>
 
-<h3>Cancelar minha conta</h3>
-
-<div>Deletar perfil? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
 
 </div>

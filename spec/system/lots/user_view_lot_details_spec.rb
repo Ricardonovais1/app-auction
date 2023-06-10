@@ -14,11 +14,11 @@ describe 'Usuário vê a tela de detalhes do lote' do
     end
 
     # Assert
-    expect(page).to have_content 'Código: AAA000000'
-    expect(page).to have_content "Data de início: 20/10/2090" 
-    expect(page).to have_content "Data limite para lances: 30/10/2090" 
-    expect(page).to have_content "Valor mínimo para lance inicial: R$100,00"
-    expect(page).to have_content "Menor diferença entre lances: R$10,00"
+    expect(page).to have_content 'Código AAA000000'
+    expect(page).to have_content "Data de início 20/10/2090" 
+    expect(page).to have_content "Data limite para lances 30/10/2090" 
+    expect(page).to have_content "Valor mínimo para lance inicial R$100,00"
+    expect(page).to have_content "Menor diferença entre lances R$10,00"
   end
 
   it 'e volta para a tela inicial' do 
@@ -51,11 +51,11 @@ describe 'Usuário vê a tela de detalhes do lote' do
       click_on 'AAA000000'
     end
     # Assert
-    expect(page).to have_content 'Código: AAA000000'
-    expect(page).to have_content "Data de início: 20/10/2090" 
-    expect(page).to have_content "Data limite para lances: 30/10/2090" 
-    expect(page).to have_content "Valor mínimo para lance inicial: R$100,00"
-    expect(page).to have_content "Menor diferença entre lances: R$10,00"
+    expect(page).to have_content 'Código AAA000000'
+    expect(page).to have_content "Data de início 20/10/2090" 
+    expect(page).to have_content "Data limite para lances 30/10/2090" 
+    expect(page).to have_content "Valor mínimo para lance inicial R$100,00"
+    expect(page).to have_content "Menor diferença entre lances R$10,00"
     expect(page).not_to have_content 'Criado por: Ricardo | ricardo@leilaodogalpao.com.br'
   end
 

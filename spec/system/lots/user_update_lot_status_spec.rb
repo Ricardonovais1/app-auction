@@ -33,7 +33,7 @@ describe 'Admin muda status do lote para ativo' do
     click_on 'Aprovar lote'
 
     # Assert
-    expect(page).to have_content 'Situação do lote: Aprovado'
+    expect(page).to have_content 'Situação Lote aprovado'
   end
 
   # it 'e botão de marcar pendente volta status para pendente de aprovação' do 
@@ -98,7 +98,7 @@ describe 'Admin muda status do lote para ativo' do
 
     # Assert
     expect(page).not_to have_button 'Aprovar lote'
-    expect(page).to have_content 'Situação do lote: Aguardando aprovação'
+    expect(page).to have_content 'Situação Aguardando aprovação'
   end
 
   it 'e não é mais possível adicionar items ao lote' do 
