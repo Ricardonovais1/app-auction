@@ -9,10 +9,9 @@
   <%= form_with(model: [@lot, @lot_item]) do |f| %>
     <div class="input-group input-group-lg mt-4">
       <%= f.label :item_id, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %>
-      <%= f.collection_select :item_id, @lot.available_items, :id, :name, { include_blank: "Selecione um produto", disabled: "Selecione um produto" }, {class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg"} %>
+      <%= f.collection_select(:item_id, @lot.available_items, :id, :name, { prompt: 'Selecione' }, {class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg"}) %>
     </div><br />
     <div class="d-grid">
       <%= f.submit 'Gravar', class: "btn btn-success mb-3 mt-5 btn-lg"  %>
     </div>
   <% end %>
-</div>

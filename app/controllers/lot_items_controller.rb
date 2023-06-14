@@ -12,6 +12,7 @@ class LotItemsController < ApplicationController
     if @lot.lot_items.create(set_params)
       redirect_to @lot, notice: "Item adicionado com sucesso"
     else 
+      @items = Item.all
       flash.now[:alert] = 'Você não selecionou nenhum item' 
       render :new
     end
@@ -30,7 +31,7 @@ class LotItemsController < ApplicationController
   end
 
   def set_params 
-    params.require(:lot_item).permit(:item_id)
+    params.require(:lot_item).permit(:item_id, :lot_id)
   end
 
   def check_admin_user
