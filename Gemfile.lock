@@ -274,6 +274,7 @@ DEPENDENCIES
   rack-cors (~> 2.0, >= 2.0.1)
   rails (~> 7.0.4, >= 7.0.4.3)
   rspec-rails
+  rspec-support (~> 3.12, >= 3.12.0)
   sassc
   sassc-rails
   selenium-webdriver

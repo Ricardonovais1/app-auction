@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      favorite:
+        one: 'Favorito'
+        other: 'Favoritos'
+    attributes:
+      favorite:
+        lot_id: 'Lote'
+        user_id: 'Usuário'

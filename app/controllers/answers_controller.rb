@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class AnswersController < ApplicationController
-  
-  def new 
+  def new
     @lot = Lot.find(params[:lot_id])
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build
@@ -8,21 +9,20 @@ class AnswersController < ApplicationController
 
   def create
     @lot = Lot.find(params[:lot_id])
-    @question = Question.find(params[:question_id]) 
+    @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
     @answer.user = current_user
-    if @answer.save 
+    if @answer.save
       redirect_to @lot, notice: 'Resposta enviada com sucesso'
-    else  
+    else
       flash[:alert] = 'Não foi possível enviar a resposta'
       render @lot
     end
   end
 
-  private 
+  private
 
   def answer_params
-    params.require(:answer).permit(:reply)    
+    params.require(:answer).permit(:reply)
   end
-
-end 
+end

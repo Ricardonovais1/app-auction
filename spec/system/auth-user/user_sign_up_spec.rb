@@ -1,10 +1,12 @@
-require 'rails_helper' 
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 describe 'Usuário cria sua conta' do
   it 'com sucesso' do
-    # Arrange 
+    # Arrange
 
-    # Act 
+    # Act
     visit root_path
     click_on 'Entrar'
     click_on 'Criar conta'
@@ -13,24 +15,24 @@ describe 'Usuário cria sua conta' do
     fill_in 'Email', with: 'ric@email.com'
     fill_in 'Senha', with: 'password'
     fill_in 'Confirme sua senha', with: 'password'
-    attach_file 'Imagem', Rails.root.join("spec/support/img/homem_3.jpeg")
+    attach_file 'Imagem', Rails.root.join('spec/support/img/homem_3.jpeg')
     click_on 'Cadastrar'
-    
+
     # Assert
-   
-    expect(page).to have_content 'Ótimo! Você realizou seu registro com sucesso.' 
-    within('nav') do 
+
+    expect(page).to have_content 'Ótimo! Você realizou seu registro com sucesso.'
+    within('nav') do
       expect(page).not_to have_content 'Entrar'
       expect(page).not_to have_content 'Criar lote'
       expect(page).to have_content 'Sair'
       expect(page).to have_content 'ric@email.com'
-    end 
+    end
   end
 
-  it 'como admin' do 
-    # Arrange 
+  it 'como admin' do
+    # Arrange
 
-    # Act 
+    # Act
     visit root_path
     click_on 'Entrar'
     click_on 'Criar conta'
@@ -40,10 +42,10 @@ describe 'Usuário cria sua conta' do
     fill_in 'Senha', with: 'password'
     fill_in 'Confirme sua senha', with: 'password'
     click_on 'Cadastrar'
-    
+
     # Assert
-    expect(page).to have_content 'Ótimo! Você realizou seu registro com sucesso.' 
-    within('nav') do 
+    expect(page).to have_content 'Ótimo! Você realizou seu registro com sucesso.'
+    within('nav') do
       expect(page).not_to have_content 'Entrar'
       expect(page).to have_content 'Criar lote'
       expect(page).to have_content 'Sair'

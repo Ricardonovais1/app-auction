@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Item < ApplicationRecord
   belongs_to :product_category
 
@@ -15,12 +17,12 @@ class Item < ApplicationRecord
   validate :validate_image_extension
 
   def validate_image_extension
-    if image.attached? && !image.content_type.in?(%w(image/jpeg image/png image/webp))
-      errors.add(:image, 'deve ser um arquivo JPEG, PNG ou WebP')
-    end
+    return unless image.attached? && !image.content_type.in?(%w[image/jpeg image/png image/webp])
+
+    errors.add(:image, 'deve ser um arquivo JPEG, PNG ou WebP')
   end
 
-  def generate_code 
+  def generate_code
     self.code = SecureRandom.alphanumeric(10).upcase
   end
 

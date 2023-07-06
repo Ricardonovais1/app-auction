@@ -1,64 +1,65 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe 'Usuário visualiza lotes' do 
-  context 'em andamento e futuros' do 
-    it 'na página inicial' do 
-      # Arrange 
-      future_lot = Lot.create!(code: 'AAA101010', start_date: '2090-10-20', limit_date: '2090-10-30', 
-                               minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved)
+describe 'Usuário visualiza lotes' do
+  context 'em andamento e futuros' do
+    it 'na página inicial' do
+      # Arrange
+      Lot.create!(code: 'AAA101010', start_date: '2090-10-20', limit_date: '2090-10-30',
+                  minimum_bid_value: 100, minimum_bid_difference: 10, status: :approved)
 
       travel_to 1.week.ago do
-        past_lot = Lot.create!(code: 'CCC131313', start_date: 2.day.from_now, limit_date: 5.day.from_now, 
-                                  minimum_bid_value: 300, minimum_bid_difference: 30)
+        past_lot = Lot.create!(code: 'CCC131313', start_date: 2.day.from_now, limit_date: 5.day.from_now,
+                               minimum_bid_value: 300, minimum_bid_difference: 30)
         past_lot.save(validate: false)
       end
 
-      current_lot = Lot.create!(code: 'BBB131212', start_date: 2.day.from_now, limit_date: 1.month.from_now, 
-                                minimum_bid_value: 200, minimum_bid_difference: 20, status: :approved)
-      
-      
-      
-      # Act 
+      Lot.create!(code: 'BBB131212', start_date: 2.day.from_now, limit_date: 1.month.from_now,
+                  minimum_bid_value: 200, minimum_bid_difference: 20, status: :approved)
+
+      # Act
       visit root_path
 
-      # Assert 
+      # Assert
       expect(page).to have_content 'AAA101010'
       expect(page).to have_content 'BBB131212'
       expect(page).not_to have_content 'CCC131313'
     end
   end
 
-  context 'expirados' do 
-    it 'e precisa estar logado' do 
-      travel_to Time.current - 2.months do 
-        past_lot = Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 1.week.from_now, 
-                              minimum_bid_value: 300, minimum_bid_difference: 30)
+  context 'expirados' do
+    it 'e precisa estar logado' do
+      travel_to Time.current - 2.months do
+        Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 1.week.from_now,
+                    minimum_bid_value: 300, minimum_bid_difference: 30)
       end
-      
+
       visit expired_lots_path
 
       expect(current_path).to eq new_user_session_path
-    end 
+    end
 
-    it 'e precisa estar logado como admin' do 
-      travel_to Time.current - 2.months do 
-        past_lot = Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 1.week.from_now, 
-                              minimum_bid_value: 300, minimum_bid_difference: 30)
+    it 'e precisa estar logado como admin' do
+      travel_to Time.current - 2.months do
+        Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 1.week.from_now,
+                    minimum_bid_value: 300, minimum_bid_difference: 30)
       end
-      user = User.create!(name: 'Ricardo', email: 'ricardo@algumservidor.com.br', registration_number: '70535073607', password: 'password')
+      user = User.create!(name: 'Ricardo', email: 'ricardo@algumservidor.com.br', registration_number: '70535073607',
+                          password: 'password')
 
       login_as(user)
       visit expired_lots_path
 
       expect(current_path).to eq root_path
       expect(page).to have_content 'Você não tem permissão para acessar esta página'
-    end 
+    end
 
-    it 'pelo menu' do 
-      # Arrange 
-      travel_to Time.current - 2.months do 
-        past_lot = Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 1.week.from_now, 
-                              minimum_bid_value: 300, minimum_bid_difference: 30)
+    it 'pelo menu' do
+      # Arrange
+      travel_to Time.current - 2.months do
+        Lot.create!(code: 'CCC131313', start_date: 2.days.from_now, limit_date: 1.week.from_now,
+                    minimum_bid_value: 300, minimum_bid_difference: 30)
       end
       admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br',
                            registration_number: '70535073607', password: 'password')

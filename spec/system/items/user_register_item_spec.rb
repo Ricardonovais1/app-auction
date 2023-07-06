@@ -1,16 +1,19 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe 'Usuário cria um novo ítem' do 
-  it 'com sucesso' do 
-    # Arrange 
-    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
-    pc = ProductCategory.create!(name: 'Alguma')
-    
+describe 'Usuário cria um novo ítem' do
+  it 'com sucesso' do
+    # Arrange
+    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607',
+                         password: 'password')
+    ProductCategory.create!(name: 'Alguma')
+
     allow(SecureRandom).to receive(:alphanumeric).and_return('AXD45SIO87')
-    # Act 
+    # Act
     login_as(admin)
     visit root_path
-    within('nav') do 
+    within('nav') do
       click_on 'Administrativo'
       click_on 'Novo produto'
     end
@@ -21,7 +24,7 @@ describe 'Usuário cria um novo ítem' do
     fill_in 'Profundidade', with: 20
     fill_in 'Largura', with: 60
     select 'Alguma', from: 'Categoria'
-    attach_file 'Imagem', Rails.root.join("spec/support/img/campus_code_logo.png")
+    attach_file 'Imagem', Rails.root.join('spec/support/img/campus_code_logo.png')
     click_on 'Salvar'
 
     # Assert
@@ -35,15 +38,16 @@ describe 'Usuário cria um novo ítem' do
     expect(page).to have_css("img[src*='campus_code_logo']")
   end
 
-  it 'sem preencher os campos' do 
-    # Arrange 
-    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
-    
+  it 'sem preencher os campos' do
+    # Arrange
+    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607',
+                         password: 'password')
+
     allow(SecureRandom).to receive(:alphanumeric).and_return('AXD45SIO87')
-    # Act 
+    # Act
     login_as(admin)
     visit root_path
-    within('nav') do 
+    within('nav') do
       click_on 'Administrativo'
       click_on 'Novo produto'
     end

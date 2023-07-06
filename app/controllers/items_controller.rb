@@ -1,38 +1,39 @@
-class ItemsController < ApplicationController
+# frozen_string_literal: true
 
-  before_action :set_item, only: [:show, :edit, :update]
-  before_action :authenticate_user!, only: [:new, :search, :show, :edit]
+class ItemsController < ApplicationController
+  before_action :set_item, only: %i[show edit update]
+  before_action :authenticate_user!, only: %i[new search show edit]
   before_action :check_admin_user, only: [:new]
 
-  def index 
+  def index
     @items = Item.all
   end
 
-  def new 
+  def new
     @item = Item.new
     @product_categories = ProductCategory.all
   end
 
-  def create 
-    @item = Item.new(set_params) 
+  def create
+    @item = Item.new(set_params)
     @product_categories = ProductCategory.all
 
-    if @item.save 
+    if @item.save
       redirect_to @item, notice: 'Produto cadastrado com sucesso'
-    else 
+    else
       flash.now[:alert] = 'Houve um problema para cadastrar o produto'
-      render 'new' 
+      render 'new'
     end
   end
 
-  def edit 
+  def edit
     @product_categories = ProductCategory.all
   end
 
-  def update 
+  def update
     if @item.update(set_params)
-      redirect_to @item, notice: "Produto atualizado com sucesso"
-    else  
+      redirect_to @item, notice: 'Produto atualizado com sucesso'
+    else
       flash.now[:notice] = 'Não foi possível atualizar o produto'
       render 'edit'
     end
@@ -40,36 +41,35 @@ class ItemsController < ApplicationController
 
   def show
     @product_category = @item.product_category.name
-
   end
 
   def search
     @query = params[:query]
     @items_code = Item.where('code LIKE ?', "%#{@query}%")
-              .or(Item.where('name LIKE :query', query: "%#{@query}%"))
+                      .or(Item.where('name LIKE :query', query: "%#{@query}%"))
   end
 
-  private 
+  private
 
   def set_item
     @item = Item.find(params[:id])
   end
 
-  def set_params 
-    params.require(:item).permit(:name, 
-                                :description,
-                                :weight,
-                                :height,
-                                :depth,
-                                :width,
-                                :code,
-                                :product_category_id,
-                                :image)
+  def set_params
+    params.require(:item).permit(:name,
+                                 :description,
+                                 :weight,
+                                 :height,
+                                 :depth,
+                                 :width,
+                                 :code,
+                                 :product_category_id,
+                                 :image)
   end
 
-  def check_admin_user 
-    unless current_user.admin?
-      redirect_to root_path, alert: "Você não tem permissão para acessar esta página"
-    end
+  def check_admin_user
+    return if current_user.admin?
+
+    redirect_to root_path, alert: 'Você não tem permissão para acessar esta página'
   end
 end

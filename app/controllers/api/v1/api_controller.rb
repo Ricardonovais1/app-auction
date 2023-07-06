@@ -1,15 +1,21 @@
-class Api::V1::ApiController < ActionController::API 
-  rescue_from ActiveRecord::QueryCanceled, with: :return_500
-  rescue_from ActiveRecord::ActiveRecordError, with: :return_500
-  rescue_from ActiveRecord::RecordNotFound, with: :return_404
+# frozen_string_literal: true
 
-  private 
+module Api
+  module V1
+    class ApiController < ActionController::API
+      rescue_from ActiveRecord::QueryCanceled, with: :return_500
+      rescue_from ActiveRecord::ActiveRecordError, with: :return_500
+      rescue_from ActiveRecord::RecordNotFound, with: :return_404
 
-  def return_500
-    render status: 500, json: "{}"
-  end
+      private
 
-  def return_404
-    render status: 404, json: "{}"
+      def return_500
+        render status: 500, json: '{}'
+      end
+
+      def return_404
+        render status: 404, json: '{}'
+      end
+    end
   end
 end

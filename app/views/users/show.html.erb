@@ -2,26 +2,34 @@
 
 
   <h2 class="mb-5 display-6 text-success">Meu perfil</h2>
-  <div class="d-flex flex-wrap row">
-    <div class="col-3", style="min-width: 300px;">
-      <% if @user.image.attached? %>
-        <%= image_tag(@user.image, class:"img-fluid rounded mb-5 ratio ratio-1x1", style:"", size: "400x400") %>
-      <% end %>
-    </div>
-    <div class="col-9">
-      <div>
-        <p><strong>Nome: </strong><%= current_user.name %></p>
-        <p><strong>Email: </strong><%= current_user.email %></p>
-        <p><strong>Sobre: </strong><%= current_user.about %></p>
-        <p><strong>CPF: </strong><%= current_user.registration_number %></p>
+   <div class="", style="min-width: 300px;">
+        <% if @user.image.attached? %>
+          <%= image_tag(@user.image, class:"img-fluid rounded mb-5 ratio ratio-1x1", style:"max-width: 200px", size: "300x300") %>
+        <% end %>
       </div>
-      <div class="mt-4">
-        <%= button_to 'Editar perfil', edit_user_registration_path(@user), method: :get, class: "btn btn-success" %>
+  <div class="d-flex gap-3">
+    <div class="d-flex flex-wrap row col-4">
+      <h4 class="mb-4 text-success">Meus dados</h4>
+      <div class="">
+        <div>
+          <p><strong>Nome: </strong><%= @user.name %></p>
+          <p><strong>Email: </strong><%= @user.email %></p>
+          <p><strong>Sobre: </strong><%= @user.about %></p>
+          <p><strong>CPF: </strong><%= @user.registration_number %></p>
+        </div>
+        <div class="mt-4">
+          <%= button_to 'Editar perfil', edit_user_registration_path(@user), method: :get, class: "btn btn-success" %>
+        </div>
       </div>
-    </div>
-   
   </div>
-  
-
-
+  <div>
+    <h4 class="mb-4 text-success">Lotes favoritos</h4>
+    <% if @user.favorite_lots.empty? %>
+      <p><i>Você não possui lotes marcados como favoritos</i></p>
+    <% end %>
+    <% @user.favorite_lots.each do |lot| %>
+      <p><%= link_to lot.code, lot_path(lot) %> - Data limite: <%= l(lot.limit_date) %></p>
+    <% end %>
+  </div>
+  </div>
 </div>

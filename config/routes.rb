@@ -1,15 +1,20 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
-  root to: "home#index"
-  resources :lots, only: [:index, :show, :new, :create, :edit, :update] do 
-    resources :questions, only: [:new, :create, :show] do 
+
+  root to: 'home#index'
+
+  resources :lots, only: %i[index show new create edit update] do
+    resources :questions, only: %i[new create show] do
       post 'block_by_cpf', on: :member
-      resources :answers, only: [:new, :create]
+      resources :answers, only: %i[new create]
       get 'hidden', on: :member
       get 'visible', on: :member
     end
-    resources :bids, only: [:new, :create] 
-    resources :lot_items, only: [:new, :create, :destroy] do 
+    resources :favorites, only: %i[create destroy]
+    resources :bids, only: %i[new create]
+    resources :lot_items, only: %i[new create destroy] do
       delete 'remove', on: :member
     end
     get 'expired', on: :collection
@@ -19,16 +24,20 @@ Rails.application.routes.draw do
     get 'successfull_bids', on: :collection
     post 'bid_on_lot', on: :member
   end
-  resources :product_categories, only: [:index, :new, :create]
-  resources :items, only: [:index, :new, :create, :show, :edit, :update] do 
+
+  resources :product_categories, only: %i[index new create]
+
+  resources :items, only: %i[index new create show edit update] do
     get 'search', on: :collection
   end
-  resources :blocked_cpfs, only: [:index, :new, :create] 
-  resources :users, only: [:show, :edit, :update]
+
+  resources :blocked_cpfs, only: %i[index new create]
+
+  resources :users, only: %i[show edit update]
 
   namespace :api do
     namespace :v1 do
-      resources :lots, only: [:show, :index, :create, :update, :destroy]
-    end 
+      resources :lots, only: %i[show index create update destroy]
+    end
   end
 end

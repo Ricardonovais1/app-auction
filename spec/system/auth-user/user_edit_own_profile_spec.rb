@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe 'Usuário edita seu perfil' do 
-  it 'com sucesso' do 
-    user = User.create!(name: 'Ricardo', email: 'ricardo@qualquerprovedor.com.br', registration_number: '70535073607', password: 'password')
-     
+describe 'Usuário edita seu perfil' do
+  it 'com sucesso' do
+    user = User.create!(name: 'Ricardo', email: 'ricardo@qualquerprovedor.com.br', registration_number: '70535073607',
+                        password: 'password')
+
     login_as user
     visit root_path
-    within('nav') do 
+    within('nav') do
       click_on 'Meu perfil'
     end
     click_on 'Editar perfil'
@@ -14,7 +17,7 @@ describe 'Usuário edita seu perfil' do
     fill_in 'Sobre mim', with: 'Natural de Belo Horizonte, gerente técnico da indústria de computadores XPTO'
     fill_in 'Senha atual', with: 'password'
     click_on 'Salvar'
-    within('nav') do 
+    within('nav') do
       click_on 'Meu perfil'
     end
 

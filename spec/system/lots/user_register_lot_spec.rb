@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'usuário admin cadastra lote' do
-  it 'a partir do menu' do 
-    # Arrange 
-    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
+  it 'a partir do menu' do
+    # Arrange
+    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607',
+                         password: 'password')
 
-    # Act 
+    # Act
     login_as(admin)
     visit root_path
     within('nav') do
@@ -20,13 +23,14 @@ describe 'usuário admin cadastra lote' do
     expect(page).to have_field 'Menor diferença entre lances'
   end
 
-  it 'com sucesso' do 
-    # Arrange 
-    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
+  it 'com sucesso' do
+    # Arrange
+    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607',
+                         password: 'password')
 
-    # Act 
+    # Act
     login_as(admin)
-    visit root_path 
+    visit root_path
     within('nav') do
       click_on 'Criar lote'
     end
@@ -49,13 +53,14 @@ describe 'usuário admin cadastra lote' do
     expect(page).to have_content 'Criado por: Ricardo | ricardo@leilaodogalpao.com.br'
   end
 
-  it 'deixando campos em branco' do 
-    # Arrange 
-    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
+  it 'deixando campos em branco' do
+    # Arrange
+    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br', registration_number: '70535073607',
+                         password: 'password')
 
-    # Act 
+    # Act
     login_as(admin)
-    visit root_path 
+    visit root_path
     within('nav') do
       click_on 'Criar lote'
     end
@@ -83,5 +88,3 @@ describe 'usuário admin cadastra lote' do
     expect(page).to have_content 'Código não possui o tamanho esperado (9 caracteres)'
   end
 end
-
-       

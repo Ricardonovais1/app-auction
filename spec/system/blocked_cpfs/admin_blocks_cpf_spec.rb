@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Admin bloqueia um cpf' do
-  it 'chegando à página própria pelo menu' do 
-    admin = User.create!(name: 'Fernanda', email: 'fernanda@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
+  it 'chegando à página própria pelo menu' do
+    admin = User.create!(name: 'Fernanda', email: 'fernanda@leilaodogalpao.com.br', registration_number: '70535073607',
+                         password: 'password')
 
     login_as admin
     visit root_path
@@ -16,8 +19,9 @@ describe 'Admin bloqueia um cpf' do
     expect(page).to have_button 'Gravar'
   end
 
-  it 'e cpfs bloqueados aparecem na tela de cadastro' do 
-    admin = User.create!(name: 'Fernanda', email: 'fernanda@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
+  it 'e cpfs bloqueados aparecem na tela de cadastro' do
+    admin = User.create!(name: 'Fernanda', email: 'fernanda@leilaodogalpao.com.br', registration_number: '70535073607',
+                         password: 'password')
 
     login_as admin
     visit root_path
@@ -31,13 +35,14 @@ describe 'Admin bloqueia um cpf' do
     expect(page).to have_content 'CPF bloqueado com sucesso'
     expect(page).not_to have_content 'Ainda não há nenhum CPF bloqueado'
     expect(page).to have_content "CPF's bloqueados"
-    expect(page).to have_content "14964827003"
+    expect(page).to have_content '14964827003'
   end
 
-  it 'e usuário tenta criar conta com cpf bloqueado' do 
-    admin = User.create!(name: 'Fernanda', email: 'fernanda@leilaodogalpao.com.br', registration_number: '70535073607', password: 'password')
+  it 'e usuário tenta criar conta com cpf bloqueado' do
+    admin = User.create!(name: 'Fernanda', email: 'fernanda@leilaodogalpao.com.br', registration_number: '70535073607',
+                         password: 'password')
     cpf_to_block = '14964827003'
-    
+
     login_as admin
     visit root_path
     within('nav') do
@@ -52,17 +57,17 @@ describe 'Admin bloqueia um cpf' do
     expect(blocked_cpf.blocked).to be true
 
     click_on 'Sair'
-    within('nav') do 
+    within('nav') do
       click_on 'Entrar/ Cadastrar'
     end
     click_on 'Criar conta'
-    fill_in 'Email', with: "ariel@email.com.br"
-    fill_in 'Nome', with: "Ariel"
-    fill_in 'CPF', with: "14964827003"
-    fill_in 'Senha', with: "password"
-    fill_in 'Confirme sua senha', with: "password"
+    fill_in 'Email', with: 'ariel@email.com.br'
+    fill_in 'Nome', with: 'Ariel'
+    fill_in 'CPF', with: '14964827003'
+    fill_in 'Senha', with: 'password'
+    fill_in 'Confirme sua senha', with: 'password'
     click_on 'Cadastrar'
-    
+
     expect(page).to have_content 'CPF está bloqueado'
   end
 end
