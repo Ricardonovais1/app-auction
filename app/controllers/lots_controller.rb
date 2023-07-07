@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class LotsController < ApplicationController
   before_action :set_lot,            only: %i[show approved pending_approval remove edit update bid_on_lot]
   before_action :authenticate_user!, only: %i[new expired pending successfull_bids edit]
@@ -45,7 +43,7 @@ class LotsController < ApplicationController
   def bid_on_lot
     cpf = current_user.registration_number if user_signed_in?
 
-    if BlockedCpf.where(cpf:, blocked: true).exists?
+    if BlockedCpf.where(cpf: cpf, blocked: true).exists?
       flash[:alert] = 'CPF bloqueado. Lance não permitido'
       redirect_to lot_path(params[:id])
     else
@@ -108,18 +106,21 @@ class LotsController < ApplicationController
     return if current_user.admin?
 
     redirect_to root_path, alert: 'Você não tem permissão para acessar esta página'
+
   end
 
   def check_lot_approval
     return if @lot.pending_approval?
 
     redirect_to @lot, alert: 'Lote já aprovado'
+
   end
 
   def check_lot_creator
     return if @lot.by_email == current_user.email
 
     redirect_to @lot, alert: 'Apenas o autor do lote pode editá-lo'
+
   end
 
   def favorite_option(lot)
