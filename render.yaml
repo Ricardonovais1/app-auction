@@ -11,3 +11,11 @@ services:
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
+      - key: DATABASE_URL
+        fromDatabase: sqlite3
+        property: connectionString
+  - type: redid
+    name: redis
+    ipAllowList: []
+    plan: starter
+    maxmemoryPolicy: noeviction
