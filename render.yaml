@@ -1,0 +1,13 @@
+databases:
+  - name: sqlite3
+    ipAllowList: []
+
+services:
+  - type: web
+    name: rails
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: bundle exec rails s
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
