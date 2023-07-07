@@ -15,8 +15,8 @@ services:
         valueFromDatabase:
           name: sqlite3
           property: connectionString
-      - key: MY_CUSTOM_VAR
-        value: "example-value"
+      - key: RUBY-VERSION
+        value: 3.1.2
   - type: redis
     name: redis
     ipAllowList: []
