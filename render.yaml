@@ -14,7 +14,7 @@ services:
       - key: DATABASE_URL
         fromDatabase: sqlite3
         property: connectionString
-  - type: redid
+  - type: redis
     name: redis
     ipAllowList: []
     plan: starter
