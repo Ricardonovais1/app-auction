@@ -15,6 +15,8 @@ services:
         valueFromDatabase:
           name: sqlite3
           property: connectionString
+      - key: MY_CUSTOM_VAR
+        value: "example-value"
   - type: redis
     name: redis
     ipAllowList: []
