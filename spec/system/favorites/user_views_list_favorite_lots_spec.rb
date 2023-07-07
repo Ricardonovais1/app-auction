@@ -3,6 +3,17 @@
 require 'rails_helper'
 
 describe 'Usuário visualiza lista de favoritos' do
+  it 'apenas se não for admin' do
+    admin = User.create!(name: 'Ricardo', email: 'ricardo@leilaodogalpao.com.br',
+                         registration_number: '70535073607', password: 'password')
+
+    login_as admin
+    visit user_path(admin)
+
+    expect(page).not_to have_content 'Lotes favoritos'
+    expect(page).not_to have_content 'Você não possui lotes marcados como favoritos'
+  end
+
   it 'na sua página de perfil' do
     user = User.create!(name: 'Ricardo', email: 'ricardo@amigoviolao.com',
                         registration_number: '70535073607', password: 'password')

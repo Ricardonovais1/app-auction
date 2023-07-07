@@ -1,7 +1,7 @@
 <div class="mx-auto p-4 bg-success bg-opacity-10 border border-3 border-success p-2 mb-2 border-opacity-50 rounded-4 mt-4" style="width: 75%; background: #e9ecef">
 
 
-  <h2 class="mb-5 display-6 text-success">Meu perfil</h2>
+  <h3 class="mb-5 display-6 text-success">Meu perfil</h3>
    <div class="", style="min-width: 300px;">
         <% if @user.image.attached? %>
           <%= image_tag(@user.image, class:"img-fluid rounded mb-5 ratio ratio-1x1", style:"max-width: 200px", size: "300x300") %>
@@ -23,12 +23,14 @@
       </div>
   </div>
   <div>
-    <h4 class="mb-4 text-success">Lotes favoritos</h4>
-    <% if @user.favorite_lots.empty? %>
-      <p><i>Você não possui lotes marcados como favoritos</i></p>
-    <% end %>
-    <% @user.favorite_lots.each do |lot| %>
-      <p><%= link_to lot.code, lot_path(lot) %> - Data limite: <%= l(lot.limit_date) %></p>
+    <% if !current_user&.admin? %>
+      <h4 class="mb-4 text-success">Lotes favoritos</h4>
+      <% if @user.favorite_lots.empty? %>
+        <p><i>Você não possui lotes marcados como favoritos</i></p>
+      <% end %>
+      <% @user.favorite_lots.each do |lot| %>
+        <p><%= link_to lot.code, lot_path(lot) %> - Data limite: <%= l(lot.limit_date) %></p>
+      <% end %>
     <% end %>
   </div>
   </div>

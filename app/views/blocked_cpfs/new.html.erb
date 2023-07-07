@@ -2,7 +2,7 @@
 
 <%= render 'shared/form_errors', { obj: @blocked_cpf } %>
 
-<h2 class="mb-5 ms-2 text-success">Insira um cpf a ser bloqueado</h2>
+<h3 class="mb-5 ms-2 text-success">Insira um cpf a ser bloqueado</h3>
 
 <%= form_with model: @blocked_cpf, data: { turbo: false } do |f| %>
   <div class="input-group input-group-lg mt-4">

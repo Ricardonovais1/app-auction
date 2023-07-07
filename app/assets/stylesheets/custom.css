@@ -2,6 +2,19 @@
   display: none;
 }
 
-body {
-  background-color: green;
+.custom-nav-item {
+  font-size: .9rem;
+  padding-top: .5rem;
+}
+
+.search-field-width {
+  width: 10rem;
+}
+
+.user-image {
+  margin-top: .3rem;
+}
+
+.label-text {
+  font-size: .9rem;
 }

@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between gap-4">
+          <div class="container-fluid d-flex justify-content-between gap-5">
+            <%= link_to root_path, class: 'navbar-brand' do %>
+                <%= image_tag('Legal-1.png', alt: 'Logo do Site', class: 'logo', style: 'width: 5rem; height: auto;') %>
+            <% end %>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown custom-nav-item">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menu
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to 'Home', root_path, class: 'nav-link', 'aria-current': 'page'%></li>
+                        <li><%= link_to 'Produtos', items_path, class: 'nav-link', 'aria-current': 'page' %></li>
+                        <li><%= link_to 'Arrematantes', successfull_bids_lots_path, class: 'nav-link', 'aria-current': 'page' %></li>
+                      </ul>
+                  </li>
+                <% if user_signed_in? %>
+                  <% if current_user.admin? %>
+                    <li class="nav-item dropdown custom-nav-item">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Administrativo
+                      </a>
+                        <ul class="dropdown-menu">
+                          <li><%= link_to 'Categorias de produto', new_product_category_path, class: 'dropdown-item link-secondary custom-nav-item' %></li>
+                          <li><%= link_to 'Criar lote', new_lot_path, class: 'dropdown-item link-secondary custom-nav-item' %></li>
+                          <li><%= link_to 'Novo produto', new_item_path, class: 'dropdown-item link-secondary custom-nav-item' %></li>
+                          <li><%= link_to 'Lotes pendentes',pending_lots_path, class: 'dropdown-item link-secondary custom-nav-item' %></li>
+                          <li><%= link_to 'Lotes expirados', expired_lots_path, class: 'dropdown-item link-secondary custom-nav-item' %></li>
+                          <li><%= link_to 'Bloquear CPF', new_blocked_cpf_path, class: 'dropdown-item link-secondary custom-nav-item' %></li>
+                        </ul>
+                  </li>
+                  <% end %>
+                  <li class="sair nav-item ms-auto custom-nav-item">
+                    <%= link_to 'Sair', destroy_user_session_path, 'data-turbo-method': :delete, class: "nav-link text-decoration-none text-secondary" %>
+                  </li>
+                  <% if current_user.image.attached? %>
+                    <li class="nav-item nav-link link-success user-image">
+                      <%= image_tag url_for(current_user.image), alt: current_user.name, class: 'rounded-circle', size: '25x25' %>
+                    </li>
+                  <% end %>
+                  <li class="nav-item nav-link link-secondary">
+                    <span><p class="custom-nav-item">Olá <%= current_user.user_first_name %>!</p></span>
+                  </li>
+                  <li class="nav-item nav-link link-secondary">
+                    <span><p class="custom-nav-item"><%= link_to 'Meu perfil', user_path(current_user.id), class: "text-decoration-none link-secondary" %></p></span>
+                  </li>
+                <% else %>
+                  <li class="nav-item custom-nav-item">
+                    <%= link_to 'Entrar/ Cadastrar', new_user_session_path, class: "nav-link text-decoration-none text-secondary" %>
+                  </li>
+                <% end %>
+              </ul>
+              <%= form_with(url: search_items_path, method: :get, html: { class: "d-flex" }) do |f| %>
+                <%= f.text_field :query, class: "form-control me-2 custom-nav-item search-field-width", placeholder: "Buscar produto" %>
+                <%= f.submit 'Buscar', class: "btn btn-outline-success custom-nav-item" %>
+              <% end %>
+            </div>
+          </div>
+      </nav>

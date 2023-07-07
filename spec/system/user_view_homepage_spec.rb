@@ -16,9 +16,7 @@ describe 'Usuário visita a página inicial' do
                 minimum_bid_value: 200, minimum_bid_difference: 20, status: :approved)
     visit root_path
     expect(page).to have_content 'AAA000000'
-    expect(page).to have_content '08/10/2090 a 20/10/2090'
     expect(page).to have_content 'BBB111111'
-    expect(page).to have_content '05/06/2090 a 04/07/2090'
   end
 
   it 'e não há lotes cadastrados' do

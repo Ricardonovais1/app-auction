@@ -23,7 +23,6 @@ describe 'Usuário faz login' do
     within('nav') do
       expect(page).not_to have_content 'Entrar/ Cadastrar'
       expect(page).to have_content 'Sair'
-      expect(page).to have_content user.email
     end
   end
 

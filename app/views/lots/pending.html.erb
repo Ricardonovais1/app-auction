@@ -1,34 +1,29 @@
-  <div class="mx-auto p-4 bg-success bg-opacity-10 border border-3 border-success p-2 mb-2 border-opacity-50 rounded-4 mt-4" style="width: 75%; background: #e9ecef">
-
-  <h2 class="mb-5 ms-4 text-success">Lotes pendentes</h2>
+  <div class="mx-auto p-4 bg-success bg-opacity-10 border border-3 border-success p-2 border-opacity-50 rounded-4 mt-4" style="width: 75%; background: #e9ecef">
+  <h3 class="mb-5 ms-4 text-success">Lotes pendentes</h3>
 
   <h3><%= 'Nenhum lote cadastrado' if @pending_lots.empty? %></h3>
-  
-  <div class="row">
-    <% if current_user && current_user.admin? %> 
-        <% if @pending_lots.any? %> 
 
-          <% @pending_lots.each do |lot| %>
-
-            <% if lot.pending_approval? %>
-
-              <div class="card col-3 ms-4 me-4 mb-3 p-0" style="width: 20rem;">
-                <div class="card">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+    <% if current_user && current_user.admin? %>
+      <% if @pending_lots.any? %>
+        <% @pending_lots.each do |lot| %>
+          <% if lot.pending_approval? %>
+            <div class="col mb-3">
+              <div class="card">
+                <div class="card border border-secondary border-opacity-50 rounded-3">
                   <div class="card-body">
-                    <h5 class="card-title">Previsão de abertura:</h5>
+                    <h6 class="card-title">Previsão de abertura:</h6>
                     <p class="card-text"><%= I18n.l(lot.start_date) %></p>
                     <%= link_to "#{lot.code}", lot_path(lot), class: "btn btn-warning mb-3 mt-2"  %>
-                    <p class="card-text"><%= I18n.l(lot.start_date) %> a <%= I18n.l(lot.limit_date) %></p>
                   </div>
                 </div>
               </div>
-            
-            <% end %>
-            
+            </div>
           <% end %>
-
         <% end %>
+      <% end %>
     <% end %>
   </div>
-  </div>
+</div>
+
 
