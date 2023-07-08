@@ -5,12 +5,12 @@
 <h3 class="mb-5 ms-2 text-success">Insira um cpf a ser bloqueado</h3>
 
 <%= form_with model: @blocked_cpf, data: { turbo: false } do |f| %>
-  <div class="input-group input-group-lg mt-4">
-    <%= f.label :cpf, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg"  %>
-    <%= f.text_field :cpf, placeholder: "Somente números", class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
+  <div class="input-group input-group-default mt-4">
+    <%= f.label :cpf, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-default"  %>
+    <%= f.text_field :cpf, placeholder: "Somente números", class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-default", autofocus: true %>
   </div>
   <div class="d-grid">
-    <%= f.submit 'Gravar', class: "btn btn-success mb-3 mt-5 btn-lg" %>
+    <%= f.submit 'Gravar', class: "btn btn-success mb-3 mt-5 btn-default" %>
   </div>
 <% end %>
 

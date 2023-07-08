@@ -1,10 +1,10 @@
 <div class="mx-auto p-4 bg-success bg-opacity-10 border border-3 border-success p-2 mb-2 border-opacity-50 rounded-4 mt-4" style="width: 75%; background: #e9ecef">
 
 
-  <h3 class="mb-5 display-6 text-success">Meu perfil</h3>
+  <h2 class="mb-3 text-success">Meu perfil</h2>
    <div class="", style="min-width: 300px;">
         <% if @user.image.attached? %>
-          <%= image_tag(@user.image, class:"img-fluid rounded mb-5 ratio ratio-1x1", style:"max-width: 200px", size: "300x300") %>
+          <%= image_tag(@user.image, class:"img-fluid rounded mb-3 ratio ratio-1x1", style:"max-width: 200px", size: "300x300") %>
         <% end %>
       </div>
   <div class="d-flex gap-3">

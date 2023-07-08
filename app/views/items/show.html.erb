@@ -9,7 +9,7 @@
     </div>
     <div class="col-md-8 d-flex align-items-center justify-content-center">
       <div class="card-body">
-        <h2 class="card-title mb-4 text-success"> <%= @item.name%></h2>
+        <h3 class="card-title mb-4 text-success"> <%= @item.name%></h3>
         <p class="card-text"><strong><%= Item.human_attribute_name(:description) %>: </strong><%= @item.description %></p>
         <p class="card-text"><strong><%= Item.human_attribute_name(:product_category_id) %>: </strong><%= @product_category %></p>
         <p class="card-text"><strong><%= Item.human_attribute_name(:weight) %>: </strong><%= @item.weight %>g</p>

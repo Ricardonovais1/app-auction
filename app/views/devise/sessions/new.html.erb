@@ -5,14 +5,14 @@
   <h3 class="mb-5 text-success">Entre com sua conta</h3>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field input-group input-group-lg mt-4" >
+    <div class="field input-group input-group-default mt-4" >
       <%= f.label :email, class: "input-group-text fw-bold w-25 label-text" %><br />
-      <%= f.email_field :email, class: "form-control", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
+      <%= f.email_field :email, class: "form-control", aria_describedby: "inputGroup-sizing-default", autofocus: true %>
     </div>
 
-    <div class="field input-group input-group-lg mt-4" >
+    <div class="field input-group input-group-default mt-4" >
       <%= f.label :password, class: "input-group-text fw-bold w-25 label-text" %><br />
-      <%= f.password_field :password, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autocomplete: "current-password" %>
+      <%= f.password_field :password, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-default", autocomplete: "current-password" %>
     </div>
 
     <% if devise_mapping.rememberable? %>
@@ -23,7 +23,7 @@
     <% end %>
 
     <div class="actions d-grid">
-      <%= f.submit "Entrar", class: "btn btn-success mb-3 mt-5 btn-lg" , data: {turbo: false} %>
+      <%= f.submit "Entrar", class: "btn btn-success mb-3 mt-5 btn-default" , data: {turbo: false} %>
     </div>
   <% end %>
 

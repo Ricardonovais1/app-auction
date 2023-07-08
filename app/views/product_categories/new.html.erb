@@ -3,22 +3,22 @@
  <%= render 'shared/form_errors', { obj: @product_category} %>
 
 
-  <h3 class="mb-5 ms-4 text-success">Nova categoria de produto</h3>
+  <h3 class="mb-5 text-success">Nova categoria de produto</h3>
 
   <%= form_with model: @product_category, data: { turbo: false } do |f| %>
-    <div class="input-group input-group-lg mt-4">
-      <%= f.label :name, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-lg" %><br />
-      <%= f.text_field :name, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-lg", autofocus: true %>
+    <div class="input-group input-group-default mt-4">
+      <%= f.label :name, class: "input-group-text fw-bold w-25", id: "inputGroup-sizing-default" %><br />
+      <%= f.text_field :name, class: "form-control", aria_label: "Sizing example input", aria_describedby: "inputGroup-sizing-default", autofocus: true %>
     </div>
     <div class="d-grid">
-      <%= f.submit "Salvar", class: "btn btn-success mb-3 mt-5 btn-lg" %>
+      <%= f.submit "Salvar", class: "btn btn-success mb-3 mt-5 btn-default" %>
     </div>
 
   <% end %>
 
   <% if !@product_categories.empty? %>
 
-    <h3>Categorias de produto cadastradas:</h3>
+    <h3 class="mb-5 text-success">Categorias de produto cadastradas:</h3>
     <ul>
       <% @product_categories.each do |category| %>
         <li><%= category.name %></li>
