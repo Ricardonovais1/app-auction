@@ -9,14 +9,14 @@ services:
     buildCommand: "./bin/render-build.sh"
     startCommand: bundle exec rails s
     envVars:
+      - key: RUBY-VERSION
+        value: 3.1.2
       - key: RAILS_MASTER_KEY
         sync: false
       - key: DATABASE_URL
         valueFromDatabase:
           name: sqlite3
           property: connectionString
-      - key: RUBY-VERSION
-        value: 3.1.2
   - type: redis
     name: redis
     ipAllowList: []
