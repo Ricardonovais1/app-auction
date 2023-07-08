@@ -17,6 +17,7 @@ services:
         valueFromDatabase:
           name: sqlite3
           property: connectionString
+      - fromGroup: staging
   - type: redis
     name: redis
     ipAllowList: []
