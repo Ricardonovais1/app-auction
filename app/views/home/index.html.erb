@@ -1,4 +1,11 @@
-<div class="mx-auto p-4 bg-success bg-opacity-10 border border-3 border-success p-2 mb-2 border-opacity-50 rounded-4 mt-4" style="max-width: 75%;">
+<% content_for :head do %>
+  <div class="d-flex justify-content-center align-items-center">
+    <%= image_tag "Leilão.png", alt: "Banner do site Leilão do galpão", class: "w-75" %>
+  </div>
+<% end %>
+
+
+<div>
 
   <h3 class="mb-5 ms-4 text-success">Lotes em andamento</h3>
 
@@ -36,7 +43,7 @@
 
 <br /><br />
 
-<div class="mx-auto p-4 bg-success bg-opacity-10 border border-3 p-2 mb-2 border-success border-opacity-75 rounded-4" style="max-width: 75%;">
+<div>
 
   <h3 class="mb-5 ms-4 text-success">Lotes futuros</h3>
 

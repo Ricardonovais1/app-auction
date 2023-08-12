@@ -5,8 +5,8 @@ require 'rails_helper'
 describe 'Usuário faz login' do
   it 'com sucesso' do
     # Arrange
-    user = User.create!(name: 'Ricardo', email: 'ricardo@amigoviolao.com', registration_number: '70535073607',
-                        password: 'password')
+    User.create!(name: 'Ricardo', email: 'ricardo@amigoviolao.com', registration_number: '70535073607',
+                 password: 'password')
 
     # Act
     visit root_path

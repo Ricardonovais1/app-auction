@@ -4,15 +4,14 @@ pt-BR:
   ended: 'Finalizado'
   activerecord:
     models:
-      lot:  
+      lot:
         one: 'Lote'
         other: 'Lotes'
     attributes:
-      lot: 
+      lot:
         code: 'Código'
         start_date: 'Data de início'
         limit_date: 'Data limite para lances'
         minimum_bid_value: 'Valor mínimo para lance'
         minimum_bid_difference: 'Menor diferença entre lances'
         status: 'Situação do lote'
-       
